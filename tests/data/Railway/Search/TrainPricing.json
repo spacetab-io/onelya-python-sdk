@@ -1,0 +1,130 @@
+{
+  "RoutePolicy": "Internal",
+  "OriginCode": null,
+  "OriginStationCode": "2000000",
+  "DestinationCode": null,
+  "DestinationStationCode": "2004000",
+  "Trains": [
+    {
+      "HasElectronicRegistration": true,
+      "HasDynamicPricingCars": false,
+      "HasTwoStoreyCars": false,
+      "Carriers": [
+        "ГРАНД"
+      ],
+      "CarGroups": [
+        {
+          "CarType": "Luxury",
+          "CarTypeName": "СВ",
+          "PlaceQuantity": 0,
+          "LowerPlaceQuantity": 48,
+          "UpperPlaceQuantity": 8,
+          "LowerSidePlaceQuantity": 0,
+          "UpperSidePlaceQuantity": 0,
+          "MalePlaceQuantity": 0,
+          "FemalePlaceQuantity": 0,
+          "EmptyCabinQuantity": 0,
+          "MixedCabinQuantity": 0,
+          "MinPrice": 5380.9,
+          "MaxPrice": 11080.2,
+          "Carriers": [
+            "ГРАНД"
+          ],
+          "CarDescriptions": null,
+          "ServiceClasses": null,
+          "ServiceCosts": null,
+          "IsBeddingSelectionPossible": false,
+          "HasElectronicRegistration": false,
+          "HasGenderCabins": false,
+          "HasPlaceNumeration": false,
+          "HasPlacesNearPlayground": false,
+          "HasPlacesNearPets": false,
+          "HasPlacesNearBabies": false,
+          "Discounts": [],
+          "InfoRequestSchema": "StandardExcludingInvalids",
+          "TotalPlaceQuantity": 0,
+          "PlaceReservationTypes": [
+            "TwoPlacesAtOnce"
+          ]
+        },
+        {
+          "CarType": "Compartment",
+          "CarTypeName": "Купе",
+          "PlaceQuantity": 0,
+          "LowerPlaceQuantity": 64,
+          "UpperPlaceQuantity": 64,
+          "LowerSidePlaceQuantity": 0,
+          "UpperSidePlaceQuantity": 0,
+          "MalePlaceQuantity": 0,
+          "FemalePlaceQuantity": 0,
+          "EmptyCabinQuantity": 0,
+          "MixedCabinQuantity": 0,
+          "MinPrice": 2899.0,
+          "MaxPrice": 3628.5,
+          "Carriers": [
+            "ГРАНД"
+          ],
+          "CarDescriptions": null,
+          "ServiceClasses": null,
+          "ServiceCosts": null,
+          "IsBeddingSelectionPossible": false,
+          "HasElectronicRegistration": false,
+          "HasGenderCabins": false,
+          "HasPlaceNumeration": false,
+          "HasPlacesNearPlayground": false,
+          "HasPlacesNearPets": false,
+          "HasPlacesNearBabies": false,
+          "Discounts": [],
+          "InfoRequestSchema": "StandardExcludingInvalids",
+          "TotalPlaceQuantity": 0,
+          "PlaceReservationTypes": [
+            "Usual"
+          ]
+        }
+      ],
+      "Id": 1,
+      "TrainNumber": "054Ч",
+      "TrainNumberToGetRoute": "054Ч",
+      "DisplayTrainNumber": "054Ч",
+      "TrainDescription": "СК",
+      "TrainName": "ГРАНД",
+      "TransportType": "Train",
+      "OriginName": "МОСКВА ОКТ",
+      "OriginStationCode": "2000000",
+      "DestinationName": "С-ПЕТЕР-ГЛ",
+      "DestinationStationCode": "2004000",
+      "DestinationNames": [
+        "С-ПЕТЕР-ГЛ"
+      ],
+      "DepartureDateTime": "2016-11-01T23:40:00",
+      "ArrivalDateTime": "2016-11-02T08:36:00",
+      "ArrivalDateTimes": [
+        "2016-11-02T08:36:00"
+      ],
+      "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
+      "DepartureStopTime": 0,
+      "ArrivalStopTime": 0,
+      "TripDuration": 536,
+      "TripDistance": 0,
+      "IsSuburban": false,
+      "IsComponent": false,
+      "CarServices": null,
+      "IsSaleForbidden": false
+    }
+  ],
+  "DepartureTimeDescription": "Moscow",
+  "ArrivalTimeDescription": "Moscow",
+  "IsFromUkrain": false,
+  "ClientFeeCalculation": {
+    "Charge": 100.0,
+    "Profit": 0.0
+  },
+  "AgentFeeCalculation": {
+    "Charge": 100.0,
+    "Profit": 0.0
+  },
+  "NotAllTrainsReturned": false,
+  "StationClarifying": null,
+  "BookingSystem": "Express3",
+  "Id": 0
+}
