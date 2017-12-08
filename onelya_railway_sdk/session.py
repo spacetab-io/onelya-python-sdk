@@ -19,6 +19,8 @@ class Session(object):
         self.requests_session.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.requests_session.auth = HTTPBasicAuth(self.username, self.password)
 
+        self.__check_auth()
+
     def make_api_request(self, method, data):
         data = self.__send_api_request(method, data)
 
@@ -30,5 +32,8 @@ class Session(object):
         url = '{}{}'.format(Session.API_URL, method)
         response = self.requests_session.post(url, data=json.dumps(data))
         return response.json()
+
+    def __check_auth(self):
+        self.make_api_request('Info/V1/References/TransportNodes', {})
 
 
