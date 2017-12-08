@@ -6,7 +6,7 @@ from datetime import datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
 from onelya_railway_sdk.wrapper.types import CarGrouping
-from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo
+from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo, CarPricingReq, CarGroupPriceInfo, PricingTariffType
 
 
 class MockSession(object):
@@ -31,6 +31,7 @@ class TestAPI(unittest.TestCase):
         self.pos = os.environ.get('POS', None)
 
         self.destination = '2004000'
+        self.destination_code = None
 
     def test_wrong_auth(self):
         self.assertRaises(OnelyaAPIError, lambda:  API('username', 'password', 'pos'))
@@ -39,6 +40,11 @@ class TestAPI(unittest.TestCase):
     def test_railway_train_pricing(self):
         api = API(self.username, self.password, self.pos)
         self.assertTrue(self.destination == api.railway.search.train_pricing('Москва', self.destination, datetime.now().strftime('%Y-%m-%dT%X'), 12, 24, CarGrouping.GROUP).destination_station_code)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_railway_car_pricing(self):
+        api = API(self.username, self.password, self.pos)
+        self.assertTrue(self.destination_code == api.railway.search.car_pricing('2000000', self.destination_code, datetime.now().strftime('%Y-%m-%dT%X'), '054Ч', None, PricingTariffType.FULL).destination_code)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
@@ -49,3 +55,6 @@ class TestAPI(unittest.TestCase):
 
     def test_empty_json_for_train_price_info(self):
         self.assertTrue(TrainPriceInfo({}).json_data == {})
+
+    def test_empty_json_for_car_group_price_info(self):
+        self.assertTrue(CarGroupPriceInfo({}).json_data == {})

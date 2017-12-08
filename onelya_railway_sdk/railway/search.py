@@ -20,6 +20,20 @@ class Search(object):
         response = req.get()
         return TrainPricing(response)
 
+    def car_pricing(self, origin_code, destination_code, departure_date, train_number, car_type, tariff_type):
+        """Getting CarPricing
+        :param origin_code:
+        :param destination_code:
+        :param departure_date:
+        :param train_number:
+        :param car_type:
+        :param tariff_type:
+        :return: TrainPricing object
+        """
+        req = CarPricingReq(self.session, origin_code, destination_code, departure_date, train_number, car_type, tariff_type)
+        response = req.get()
+        return CarPricing(response)
+
 
 class TrainPricing(object):
     def __init__(self, json_data):
@@ -89,5 +103,58 @@ class TrainPricingReq(object):
                 "CarGrouping": self.car_grouping
         }
         return self.session.make_api_request(TrainPricingReq.METHOD, json_data)
+
+
+class CarPricing(object):
+    def __init__(self, json_data):
+        self.origin_code = json_data.get('OriginCode', None)
+        self.destination_code = json_data.get('DestinationCode', None)
+        self.cars = self.__get_cars(json_data.get('Cars', None))
+        self.route_policy = json_data.get('RoutePolicy', None)
+        self.train_info = self.__get_train_info(json_data.get('TrainInfo', None))
+        self.is_from_ukrain = json_data.get('IsFromUkrain', None)
+        self.allowerd_document_types = json_data.get('AllowedDocumentTypes', None)
+        self.cars = json_data.get('ClientFeeCalculation', None)
+        self.cars = json_data.get('AgentFeeCalculation', None)
+        self.cars = json_data.get('BookingSystem', None)
+
+        self.json_data = json_data
+
+    @staticmethod
+    def __get_cars(cars):
+        if cars is not None:
+            return [CarPriceInfo(item) for item in cars]
+        return None
+
+    @staticmethod
+    def __get_train_info(train):
+        if train is not None:
+            return TrainInfo(train)
+        return None
+
+
+class CarPricingReq(object):
+    METHOD = 'Railway/V1/Search/CarPricing'
+
+    def __init__(self, session, origin_code, destination_code, departure_date, train_number, car_type, tariff_type):
+        self.session = session
+
+        self.origin_code = origin_code
+        self.destination_code = destination_code
+        self.departure_date = departure_date
+        self.train_number = train_number
+        self.car_type = car_type
+        self.tariff_type = tariff_type
+
+    def get(self):
+        json_data = {
+                "OriginCode": self.origin_code,
+                "DestinationCode": self.destination_code,
+                "DepartureDate": self.departure_date,
+                "TrainNumber": self.train_number,
+                "CarType": self.car_type,
+                "TariffType": self.tariff_type
+        }
+        return self.session.make_api_request(CarPricingReq.METHOD, json_data)
 
 

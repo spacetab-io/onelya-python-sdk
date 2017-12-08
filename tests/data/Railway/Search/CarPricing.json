@@ -1,0 +1,95 @@
+{
+  "OriginCode": null,
+  "DestinationCode": null,
+  "Cars": [
+    {
+      "CarType": "Luxury",
+      "CarSubType": null,
+      "CarTypeName": "СВ",
+      "CarNumber": "08",
+      "ServiceClass": "1Б",
+      "InternationalServiceClass": "",
+      "CarDescription": "У1",
+      "ServiceClassTranscript": null,
+      "FreePlaces": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 17, 18",
+      "PlaceQuantity": 16,
+      "IsTwoStorey": false,
+      "Services": [
+        "Meal"
+      ],
+      "MinPrice": 5911.4,
+      "MaxPrice": 5911.4,
+      "ServiceCost": 0.0,
+      "PlaceReservationType": "Usual",
+      "Carrier": "ГРАНД",
+      "HasGenderCabins": false,
+      "RzhdCardTypes": [],
+      "TrainNumber": "054Ч",
+      "ArrivalDateTime": "2016-11-02T08:36:00",
+      "HasNoInterchange": false,
+      "HasPlaceNumeration": true,
+      "IsBeddingSelectionPossible": false,
+      "HasElectronicRegistration": true,
+      "HasDynamicPricing": false,
+      "HasPlacesNearBabies": false,
+      "HasPlacesNearPlayground": false,
+      "HasPlacesNearPets": false,
+      "IsAdditionalPassengerAllowed": false,
+      "IsChildTariffTypeAllowed": false,
+      "CarPlaceType": "Lower",
+      "Discounts": [],
+      "IsSaleForbidden": false,
+      "IsThreeHoursReservationAvailable": false,
+      "Road": null,
+      "PassengerSpecifyingRules": "Standard"
+    }
+  ],
+  "RoutePolicy": "Internal",
+  "TrainInfo": {
+    "TrainNumber": "054Ч",
+    "TrainNumberToGetRoute": "054Ч",
+    "DisplayTrainNumber": "054Ч",
+    "TrainDescription": "СК",
+    "TrainName": "ГРАНД",
+    "TransportType": "Train",
+    "OriginName": "МОСКВА ОКТ",
+    "OriginStationCode": "2000000",
+    "DestinationName": "С-ПЕТЕР-ГЛ",
+    "DestinationStationCode": "2004000",
+    "DestinationNames": [
+      "С-ПЕТЕР-ГЛ"
+    ],
+    "DepartureDateTime": "2016-11-01T23:40:00",
+    "ArrivalDateTime": "2016-11-02T08:36:00",
+    "ArrivalDateTimes": [
+      "2016-11-02T08:36:00"
+    ],
+    "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
+    "DepartureStopTime": 0,
+    "ArrivalStopTime": 0,
+    "TripDuration": 536,
+    "TripDistance": 0,
+    "IsSuburban": false,
+    "IsComponent": false,
+    "CarServices": null,
+    "IsSaleForbidden": false
+  },
+  "IsFromUkrain": false,
+  "AllowedDocumentTypes": [
+    "RussianPassport",
+    "BirthCertificate",
+    "ForeignPassport",
+    "RussianForeignPassport",
+    "MilitaryCard",
+    "SailorPassport"
+  ],
+  "ClientFeeCalculation": {
+    "Charge": 100.0,
+    "Profit": 0.0
+  },
+  "AgentFeeCalculation": {
+    "Charge": 100.0,
+    "Profit": 0.0
+  },
+  "BookingSystem": "Express3"
+}
