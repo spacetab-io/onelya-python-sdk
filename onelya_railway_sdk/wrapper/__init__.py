@@ -1,6 +1,48 @@
 from .types import *
 
 
+class TrainPriceInfo(object):
+    def __init__(self, json_data):
+        self.has_electronic_registration = json_data.get('HasElectronicRegistration', None)
+        self.has_dynamic_pricing_cars = json_data.get('HasDynamicPricingCars', None)
+        self.has_two_storey_cars = json_data.get('HasTwoStoreyCars', None)
+        self.carriers = json_data.get('Carriers', [])
+        self.car_groups = self.__get_cars_group_price_info(json_data.get('CarGroups', []))
+        self.id = json_data.get('Id', None)
+        self.train_number = json_data.get('TrainNumber', None)
+        self.train_number_to_get_route = json_data.get('TrainNumberToGetRoute', None)
+        self.display_train_number = json_data.get('DisplayTrainNumber', None)
+        self.train_description = json_data.get('TrainDescription', None)
+        self.train_name = json_data.get('TrainName', None)
+        self.transport_type = json_data.get('TransportType', None)
+        self.origin_name = json_data.get('OriginName', None)
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_name = json_data.get('DestinationName', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.destination_names = json_data.get('DestinationNames', None)
+        self.departure_date_time = json_data.get('DepartureDateTime', None)
+        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+        self.arrival_date_times = json_data.get('ArrivalDateTimes', None)
+        self.departure_date_from_forming_station = json_data.get('DepartureDateFromFormingStation', None)
+        self.departure_stop_time = json_data.get('DepartureStopTime', None)
+        self.arrival_stop_time = json_data.get('ArrivalStopTime', None)
+        self.trip_duration = json_data.get('TripDuration', None)
+        self.trip_distance = json_data.get('TripDistance', None)
+        self.is_suburban = json_data.get('IsSuburban', None)
+        self.is_component = json_data.get('IsComponent', None)
+        self.car_services = json_data.get('CarServices', None)
+        self.is_sale_forbidden = json_data.get('IsSaleForbidden', None)
+
+    @staticmethod
+    def __get_cars_group_price_info(cars_groups):
+        if cars_groups is not None:
+            cars = []
+            for item in cars_groups:
+                cars.append(CarGroupPriceInfo(item))
+            return cars
+        return None
+
+
 class CarGroupPriceInfo(object):
     def __init__(self, json_data):
         self.car_type = json_data.get('CarType', None)
