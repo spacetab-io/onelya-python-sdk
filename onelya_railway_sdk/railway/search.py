@@ -111,6 +111,8 @@ class TrainPriceInfo(object):
         self.car_services = json_data.get('CarServices', None)
         self.is_sale_forbidden = json_data.get('IsSaleForbidden', None)
 
+        self.json_data = json_data
+
     @staticmethod
     def __get_cars_group_price_info(cars_groups):
         if cars_groups is not None:

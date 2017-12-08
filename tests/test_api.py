@@ -6,6 +6,7 @@ from datetime import datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
 from onelya_railway_sdk.wrapper.types import CarGrouping
+from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo
 
 
 class MockSession(object):
@@ -42,3 +43,9 @@ class TestAPI(unittest.TestCase):
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError(error_data).message_params is None)
+
+    def test_empty_json_for_train_pricing(self):
+        self.assertTrue(TrainPricing({}).json_data == {})
+
+    def test_empty_json_for_train_price_info(self):
+        self.assertTrue(TrainPriceInfo({}).json_data == {})
