@@ -1,3 +1,4 @@
+from onelya_railway_sdk.utils import set_datetime
 
 
 class TrainPricingReq(object):
@@ -8,7 +9,7 @@ class TrainPricingReq(object):
 
         self.origin = origin
         self.destination = destination
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
         self.time_from = time_from
         self.time_to = time_to
         self.car_grouping = car_grouping
@@ -33,7 +34,7 @@ class CarPricingReq(object):
 
         self.origin_code = origin_code
         self.destination_code = destination_code
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
         self.train_number = train_number
         self.car_type = car_type
         self.tariff_type = tariff_type
@@ -57,7 +58,7 @@ class ScheduleReq(object):
         self.session = session
         self.origin = origin
         self.destination = destination
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
         self.time_from = time_from
         self.time_to = time_to
 
@@ -80,7 +81,7 @@ class TrainRouteReq(object):
         self.train_number = train_number
         self.origin = origin
         self.destination = destination
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
 
     def get(self):
         json_data = {
@@ -99,7 +100,7 @@ class RoutesReq(object):
         self.session = session
         self.origin = origin
         self.destination = destination
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
         self.min_change_time = min_change_time
         self.max_change_time = max_change_time
         self.first_change_only = first_change_only
@@ -124,7 +125,7 @@ class RoutePricingReq(object):
 
         self.origin_code = origin_code
         self.destination_code = destination_code
-        self.departure_date = departure_date
+        self.departure_date = set_datetime(departure_date)
 
     def get(self):
         json_data = {
@@ -144,7 +145,7 @@ class SearchMealReq(object):
         self.car_type = car_type
         self.carrier_code = carrier_code
         self.meal_group = meal_group
-        self.departure_date_time = departure_date_time
+        self.departure_date_time = set_datetime(departure_date_time)
         self.country_code = country_code
 
     def get(self):

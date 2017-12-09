@@ -1,5 +1,5 @@
-from onelya_railway_sdk.utils import get_array, get_item
-
+from onelya_railway_sdk.utils import get_array, get_item, get_datetime, get_datetime_array
+from datetime import datetime
 
 class Discount(object):
     def __init__(self, json_data):
@@ -59,10 +59,10 @@ class TrainPriceInfo(object):
         self.destination_name = json_data.get('DestinationName', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
         self.destination_names = json_data.get('DestinationNames', None)
-        self.departure_date_time = json_data.get('DepartureDateTime', None)
-        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
-        self.arrival_date_times = json_data.get('ArrivalDateTimes', None)
-        self.departure_date_from_forming_station = json_data.get('DepartureDateFromFormingStation', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
+        self.arrival_date_times = get_datetime_array(json_data.get('ArrivalDateTimes', None))
+        self.departure_date_from_forming_station = get_datetime(json_data.get('DepartureDateFromFormingStation', None))
         self.departure_stop_time = json_data.get('DepartureStopTime', None)
         self.arrival_stop_time = json_data.get('ArrivalStopTime', None)
         self.trip_duration = json_data.get('TripDuration', None)
@@ -131,7 +131,7 @@ class CarPriceInfo(object):
         self.has_gender_cabins = json_data.get('HasGenderCabins', None)
         self.rzhd_card_types = json_data.get('RzhdCardTypes', None)
         self.train_number = json_data.get('TrainNumber', None)
-        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.has_no_interchange = json_data.get('HasNoInterchange', None)
         self.has_place_numeration = json_data.get('HasPlaceNumeration', None)
         self.is_bedding_selection_possible = json_data.get('IsBeddingSelectionPossible', None)
@@ -165,10 +165,10 @@ class TrainInfo(object):
         self.destination_name = json_data.get('DestinationName', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
         self.destination_names = json_data.get('DestinationNames', None)
-        self.departure_date_time = json_data.get('DepartureDateTime', None)
-        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
-        self.arrival_date_times = json_data.get('ArrivalDateTimes', None)
-        self.departure_date_from_forming_station = json_data.get('DepartureDateFromFormingStation', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
+        self.arrival_date_times = get_datetime_array(json_data.get('ArrivalDateTimes', None))
+        self.departure_date_from_forming_station = get_datetime(json_data.get('DepartureDateFromFormingStation', None))
         self.departure_stopTime = json_data.get('DepartureStopTime', None)
         self.arrivalStopTime = json_data.get('ArrivalStopTime', None)
         self.trip_duration = json_data.get('TripDuration', None)
@@ -197,7 +197,7 @@ class ScheduleInfo(object):
         self.trip_duration = json_data.get('TripDuration', None)
         self.trip_distance = json_data.get('TripDistance', None)
         self.regularity = json_data.get('Regularity', None)
-        self.start_sales_date_time = json_data.get('StartSalesDateTime', None)
+        self.start_sales_date_time = get_datetime(json_data.get('StartSalesDateTime', None))
 
         self.json_data = json_data
 
@@ -232,8 +232,8 @@ class Route(object):
         self.origin_station_code = json_data.get('OriginStationCode', None)
         self.destination_code = json_data.get('DestinationCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
-        self.departure_date_time = json_data.get('DepartureDateTime', None)
-        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.travel_time = json_data.get('TravelTime', None)
         self.change_time = json_data.get('ChangeTime', None)
         self.route_parts = get_array(json_data.get('RouteParts', None), RoutePart)
@@ -248,8 +248,8 @@ class RoutePart(object):
         self.origin_station_code = json_data.get('OriginStationCode', None)
         self.destination_city_code = json_data.get('DestinationCityCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
-        self.departure_date_time = json_data.get('DepartureDateTime', None)
-        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
 
         self.json_data = json_data
 
