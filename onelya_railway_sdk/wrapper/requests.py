@@ -50,3 +50,23 @@ class CarPricingReq(object):
         return self.session.make_api_request(CarPricingReq.METHOD, json_data)
 
 
+class ScheduleReq(object):
+    METHOD = 'Railway/V1/Search/Schedule'
+
+    def __init__(self, session, origin, destination, departure_date, time_from, time_to):
+        self.session = session
+        self.origin = origin
+        self.destination = destination
+        self.departure_date = departure_date
+        self.time_from = time_from
+        self.time_to = time_to
+
+    def get(self):
+        json_data = {
+                "Origin": self.origin,
+                "Destination": self.destination,
+                "DepartureDate": self.departure_date,
+                "TimeFrom": self.time_from,
+                "TimeTo": self.time_to
+        }
+        return self.session.make_api_request(ScheduleReq.METHOD, json_data)

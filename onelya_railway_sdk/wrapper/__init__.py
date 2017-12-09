@@ -178,3 +178,24 @@ class TrainInfo(object):
 
         self.json_data = json_data
 
+
+class ScheduleInfo(object):
+    def __init__(self, json_data):
+        self.train_number = json_data.get('TrainNumber', None)
+        self.train_numberToGetRoute = json_data.get('TrainNumberToGetRoute', None)
+        self.train_name = json_data.get('TrainName', None)
+        self.origin_name = json_data.get('OriginName', None)
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_name = json_data.get('DestinationName', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.departure_time = json_data.get('DepartureTime', None)
+        self.departure_stop_time = json_data.get('DepartureStopTime', None)
+        self.arrival_time = json_data.get('ArrivalTime', None)
+        self.arrival_stop_time = json_data.get('ArrivalStopTime', None)
+        self.trip_duration = json_data.get('TripDuration', None)
+        self.trip_distance = json_data.get('TripDistance', None)
+        self.regularity = json_data.get('Regularity', None)
+        self.start_sales_date_time = json_data.get('StartSalesDateTime', None)
+
+        self.json_data = json_data
+

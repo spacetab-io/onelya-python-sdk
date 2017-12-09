@@ -1,0 +1,26 @@
+{
+  "OriginStationCode": "2000000",
+  "DestinationStationCode": "2004000",
+  "RoutePolicy": "Internal",
+  "Schedules": [
+    {
+      "TrainNumber": "054Ч",
+      "TrainNumberToGetRoute": "054Ч",
+      "TrainName": "ГРАНД",
+      "OriginName": "МОСКВА ОКТ",
+      "OriginStationCode": "2000000",
+      "DestinationName": "С-ПЕТЕР-ГЛ",
+      "DestinationStationCode": "2004000",
+      "DepartureTime": "23:40",
+      "DepartureStopTime": 0,
+      "ArrivalTime": "08:36",
+      "ArrivalStopTime": 0,
+      "TripDuration": 536,
+      "TripDistance": 0,
+      "Regularity": "по 10.12 еж",
+      "StartSalesDateTime": null
+    }
+  ],
+  "StationClarifying": null,
+  "NotAllTrainsReturned": false
+}

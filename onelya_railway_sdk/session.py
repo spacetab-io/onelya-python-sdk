@@ -22,7 +22,7 @@ class Session(object):
         self.last_response_data = None
         self.last_request_data = None
 
-        self.__check_auth()
+        self.check_auth()
 
     def make_api_request(self, method, data):
         """Making a request and checking response
@@ -50,7 +50,7 @@ class Session(object):
         response = self.requests_session.post(url, data=json.dumps(data))
         return response.json()
 
-    def __check_auth(self):
-        self.make_api_request('Info/V1/References/TransportNodes', {})
+    def check_auth(self):
+        self.make_api_request('Railway/V1/Search/TrainPricing', {})
 
 

@@ -1,6 +1,7 @@
 from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq
-from onelya_railway_sdk.wrapper import FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, CarPriceInfo
+from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq, ScheduleReq
+from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo,
+                                        CarPriceInfo, ScheduleInfo)
 
 
 class Search(object):
@@ -36,6 +37,19 @@ class Search(object):
         response = req.get()
         return CarPricing(response)
 
+    def schedule(self, origin, destination, departure_date, time_from, time_to):
+        """Getting Schedule
+        :param origin:
+        :param destination:
+        :param departure_date:
+        :param time_from:
+        :param time_to:
+        :return: Schedule object
+        """
+        req = ScheduleReq(self.session, origin, destination, departure_date, time_from, time_to)
+        response = req.get()
+        return Schedule(response)
+
 
 class TrainPricing(object):
     def __init__(self, json_data):
@@ -57,9 +71,6 @@ class TrainPricing(object):
 
         self.json_data = json_data
 
-    def __str__(self):
-        return 'TrainPricing: {self.id}'.format(self=self)
-
 
 class CarPricing(object):
     def __init__(self, json_data):
@@ -77,3 +88,13 @@ class CarPricing(object):
         self.json_data = json_data
 
 
+class Schedule(object):
+    def __init__(self, json_data):
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.route_policy = json_data.get('RoutePolicy', None)
+        self.schedules = get_array(json_data.get('Schedules', None), ScheduleInfo)
+        self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
+        self.not_all_train_returned = json_data.get('NotAllTrainsReturned', None)
+
+        self.json_data = json_data
