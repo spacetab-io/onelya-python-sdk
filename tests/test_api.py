@@ -117,5 +117,7 @@ class TestAPI(unittest.TestCase):
                     var = var_item.__getattribute__(self.get_var_name(key))
                     if type(var) is list:
                         self.check_data_with_list(var, data_item[key])
+                    elif type(var) is dict:
+                        self.assertTrue(var == data_item[key])
                     else:
                         self.assertTrue(data_item[key] == var_item.__getattribute__(self.get_var_name(key)))
