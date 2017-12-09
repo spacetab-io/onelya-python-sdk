@@ -30,7 +30,7 @@ class PlaceReservationType:
 class BookingSystem:
     EXPRESS_3 = 'Express3'
     EXPRESS_2 = 'Express2'
-    TEEMA = 'Teem'
+    TEEM = 'Teem'
 
 
 class RoutePolicy:
@@ -105,6 +105,7 @@ class CarService:
     PETS_CARRIAGE = 'PetsCarriage'
     PLACES_FOR_PASSENGER_WITH_BABY = 'PlacesForPassengerWithBaby'
     TRANSFER = 'Transfer'
+
 
 class CarPlaceType:
     NOVALUE = 'NoValue'

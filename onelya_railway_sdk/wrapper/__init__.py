@@ -1,4 +1,4 @@
-from .types import *
+from onelya_railway_sdk.utils import get_array
 
 
 class Discount(object):
@@ -11,8 +11,8 @@ class Discount(object):
 
 class FeeCalculation(object):
     def __init__(self, json_data):
-        self.charge = json_data.get('Charge', 0)
-        self.profit = json_data.get('Profit', 0)
+        self.charge = json_data.get('Charge', None)
+        self.profit = json_data.get('Profit', None)
 
         self.json_data = json_data
 
@@ -45,8 +45,8 @@ class TrainPriceInfo(object):
         self.has_electronic_registration = json_data.get('HasElectronicRegistration', None)
         self.has_dynamic_pricing_cars = json_data.get('HasDynamicPricingCars', None)
         self.has_two_storey_cars = json_data.get('HasTwoStoreyCars', None)
-        self.carriers = json_data.get('Carriers', [])
-        self.car_groups = self.__get_cars_group_price_info(json_data.get('CarGroups', []))
+        self.carriers = json_data.get('Carriers', None)
+        self.car_groups = get_array(json_data.get('CarGroups', None), CarGroupPriceInfo)
         self.id = json_data.get('Id', None)
         self.train_number = json_data.get('TrainNumber', None)
         self.train_number_to_get_route = json_data.get('TrainNumberToGetRoute', None)
@@ -74,15 +74,6 @@ class TrainPriceInfo(object):
 
         self.json_data = json_data
 
-    @staticmethod
-    def __get_cars_group_price_info(cars_groups):
-        if cars_groups is not None:
-            cars = []
-            for item in cars_groups:
-                cars.append(CarGroupPriceInfo(item))
-            return cars
-        return None
-
 
 class CarGroupPriceInfo(object):
     def __init__(self, json_data):
@@ -97,8 +88,8 @@ class CarGroupPriceInfo(object):
         self.female_place_quantity = json_data.get('FemalePlaceQuantity', None)
         self.empty_cabin_quantity = json_data.get('EmptyCabinQuantity', None)
         self.mixed_cabin_quantity = json_data.get('MixedCabinQuantity', None)
-        self.min_price = json_data.get('MinPrice', 0)
-        self.max_price = json_data.get('MaxPrice', 0)
+        self.min_price = json_data.get('MinPrice', None)
+        self.max_price = json_data.get('MaxPrice', None)
         self.carriers = json_data.get('Carriers', None)
         self.car_descriptions = json_data.get('CarDescriptions', None)
         self.service_classes = json_data.get('ServiceClasses', None)
@@ -110,18 +101,12 @@ class CarGroupPriceInfo(object):
         self.has_places_near_playground = json_data.get('HasPlacesNearPlayground', None)
         self.has_places_near_pets = json_data.get('HasPlacesNearPets', None)
         self.has_places_near_babies = json_data.get('HasPlacesNearBabies', None)
-        self.discounts = self.__get_discounts(json_data.get('Discounts', None))
+        self.discounts = get_array(json_data.get('Discounts', None), Discount)
         self.info_request_schema = json_data.get('InfoRequestSchema', None)
         self.total_place_quantity = json_data.get('TotalPlaceQuantity', None)
         self.place_reservation_types = json_data.get('PlaceReservationTypes', None)
 
         self.json_data = json_data
-
-    @staticmethod
-    def __get_discounts(discounts):
-        if discounts is not None:
-            return [Discount(item) for item in discounts]
-        return None
 
 
 class CarPriceInfo(object):
@@ -137,8 +122,8 @@ class CarPriceInfo(object):
         self.free_places = json_data.get('FreePlaces', None)
         self.place_quantity = json_data.get('PlaceQuantity', None)
         self.service = json_data.get('Services', None)
-        self.min_price = json_data.get('MinPrice', 0)
-        self.max_price = json_data.get('MaxPrice', 0)
+        self.min_price = json_data.get('MinPrice', None)
+        self.max_price = json_data.get('MaxPrice', None)
         self.service_cost = json_data.get('ServiceCost', None)
         self.place_reservation_type = json_data.get('PlaceReservationType', None)
         self.carrier = json_data.get('Carrier', None)
@@ -157,18 +142,12 @@ class CarPriceInfo(object):
         self.is_additional_passenger_allowed = json_data.get('IsAdditionalPassengerAllowed', None)
         self.is_child_tariff_type_allowed = json_data.get('IsChildTariffTypeAllowed', None)
         self.car_place_type = json_data.get('CarPlaceType', None)
-        self.discounts = self.__get_discounts(json_data.get('Discounts', None))
+        self.discounts = get_array(json_data.get('Discounts', None), Discount)
         self.is_three_hours_reservation_available = json_data.get('IsThreeHoursReservationAvailable', None)
         self.road = json_data.get('Road', None)
         self.passenger_specifying_rules = json_data.get('PassengerSpecifyingRules', None)
 
         self.json_data = json_data
-
-    @staticmethod
-    def __get_discounts(discounts):
-        if discounts is not None:
-            return [Discount(item) for item in discounts]
-        return None
 
 
 class TrainInfo(object):
@@ -199,8 +178,3 @@ class TrainInfo(object):
 
         self.json_data = json_data
 
-    @staticmethod
-    def __get_discounts(discounts):
-        if discounts is not None:
-            return [Discount(item) for item in discounts]
-        return None

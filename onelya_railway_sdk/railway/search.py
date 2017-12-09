@@ -1,5 +1,6 @@
-from onelya_railway_sdk.wrapper import *
-from onelya_railway_sdk.wrapper.requests import *
+from onelya_railway_sdk.utils import get_array, get_item
+from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq
+from onelya_railway_sdk.wrapper import FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, CarPriceInfo
 
 
 class Search(object):
@@ -42,14 +43,14 @@ class TrainPricing(object):
         self.origin_station_code = json_data.get('OriginStationCode', None)
         self.destination_code = json_data.get('DestinationCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
-        self.trains = self.__get_trains_price_info(json_data.get('Trains', None))
+        self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
         self.departure_time_descriptions = json_data.get('DepartureTimeDescriptions', None)
         self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
-        self.client_fee_calculation = self.__get_fee_calculation(json_data.get('ClientFeeCalculation', None))
-        self.agent_fee_calculation = self.__get_fee_calculation(json_data.get('AgentFeeCalculation', None))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
-        self.station_clarifying = self.__get_station_clarifying(json_data.get('StationClarifying', None))
+        self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
         self.booking_system = json_data.get('BookingSystem', None)
         self.id = json_data.get('Id', None)
         self.route_policy = json_data.get('RoutePolicy', None)
@@ -59,35 +60,14 @@ class TrainPricing(object):
     def __str__(self):
         return 'TrainPricing: {self.id}'.format(self=self)
 
-    @staticmethod
-    def __get_trains_price_info(trains_price_info):
-        if trains_price_info is not None:
-            trains = []
-            for item in trains_price_info:
-                trains.append(TrainPriceInfo(item))
-            return trains
-        return None
-
-    @staticmethod
-    def __get_fee_calculation(fee_calcualtion):
-        if fee_calcualtion is not None:
-            return FeeCalculation(fee_calcualtion)
-        return None
-
-    @staticmethod
-    def __get_station_clarifying(station_claryfying):
-        if station_claryfying is not None:
-            return StationClarifying(station_claryfying)
-        return None
-
 
 class CarPricing(object):
     def __init__(self, json_data):
         self.origin_code = json_data.get('OriginCode', None)
         self.destination_code = json_data.get('DestinationCode', None)
-        self.cars = self.__get_cars(json_data.get('Cars', None))
+        self.cars = get_array(json_data.get('Cars', None), CarPriceInfo)
         self.route_policy = json_data.get('RoutePolicy', None)
-        self.train_info = self.__get_train_info(json_data.get('TrainInfo', None))
+        self.train_info = get_item(json_data.get('TrainInfo', None), TrainInfo)
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
         self.allowed_document_types = json_data.get('AllowedDocumentTypes', None)
         self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
@@ -96,14 +76,4 @@ class CarPricing(object):
 
         self.json_data = json_data
 
-    @staticmethod
-    def __get_cars(cars):
-        if cars is not None:
-            return [CarPriceInfo(item) for item in cars]
-        return None
 
-    @staticmethod
-    def __get_train_info(train):
-        if train is not None:
-            return TrainInfo(train)
-        return None

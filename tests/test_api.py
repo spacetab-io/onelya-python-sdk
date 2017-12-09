@@ -5,8 +5,9 @@ import unittest
 from datetime import datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
-from onelya_railway_sdk.wrapper.types import CarGrouping
-from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo, CarPricingReq, CarGroupPriceInfo, PricingTariffType
+from onelya_railway_sdk.wrapper import CarGroupPriceInfo
+from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType
+from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo
 
 
 class MockSession(object):
