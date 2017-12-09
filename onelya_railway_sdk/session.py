@@ -23,11 +23,11 @@ class Session(object):
         self.last_request_data = None
 
     def make_api_request(self, method, data):
-        data = self.__send_api_request(method, data)
-        self.last_response_data = data
+        response = self.__send_api_request(method, data)
+        self.last_response_data = response
 
-        if 'Code' in data:
-            raise OnelyaAPIError(data)
+        if 'Code' in response:
+            raise OnelyaAPIError(method, response, data)
         return data
 
     def __send_api_request(self, method, data):
