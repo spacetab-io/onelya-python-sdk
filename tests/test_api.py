@@ -48,23 +48,34 @@ class TestAPI(unittest.TestCase):
         self.empty_destination = None
 
     @mock.patch('requests.Session', MockWrongAUthSession)
-    def test_wrong_auth(self):
+    def test_json_wrong_auth(self):
         self.assertRaises(OnelyaAPIError, lambda:  API('username', 'password', 'pos'))
 
     @mock.patch('requests.Session', MockSession)
-    def test_railway_train_pricing(self):
+    def test_json_railway_train_pricing(self):
         api = API(self.username, self.password, self.pos)
-        self.assertTrue(self.destination == api.railway.search.train_pricing('Москва', self.destination, datetime.now().strftime('%Y-%m-%dT%X'), 12, 24, CarGrouping.GROUP).destination_station_code)
+        train_pricing = api.railway.search.train_pricing('Москва', self.destination, datetime.now().strftime('%Y-%m-%dT%X'), 12, 24, CarGrouping.GROUP)
+
+        self.assert_json_with_class(train_pricing)
+
+        self.assertTrue(self.destination == train_pricing.destination_station_code)
 
     @mock.patch('requests.Session', MockSession)
-    def test_railway_car_pricing(self):
+    def test_json_railway_car_pricing(self):
         api = API(self.username, self.password, self.pos)
-        self.assertTrue(self.empty_destination == api.railway.search.car_pricing('2000000', self.empty_destination, datetime.now().strftime('%Y-%m-%dT%X'), '054Ч', None, PricingTariffType.FULL).destination_code)
+        car_pricing = api.railway.search.car_pricing('2000000', self.empty_destination, datetime.now().strftime('%Y-%m-%dT%X'), '054Ч', None, PricingTariffType.FULL)
+
+        self.assert_json_with_class(car_pricing)
+
+        self.assertTrue(self.empty_destination == car_pricing.destination_code)
 
     @mock.patch('requests.Session', MockSession)
     def test_railway_schedule(self):
         api = API(self.username, self.password, self.pos)
-        self.assertTrue(self.destination == api.railway.search.schedule('2000000', self.destination, None, 12, 24).destination_station_code)
+        schedule = api.railway.search.schedule('2000000', self.destination, None, 12, 24)
+        self.assert_json_with_class(schedule)
+
+        self.assertTrue(self.destination == schedule.destination_station_code)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
@@ -78,3 +89,33 @@ class TestAPI(unittest.TestCase):
 
     def test_empty_json_for_schedule(self):
         self.assertTrue(Schedule({}).json_data == {})
+
+    @staticmethod
+    def get_var_name(json_key):
+        var_name = json_key
+        var_name = (var_name[0].lower() if var_name[0].isupper() else var_name[0]) + var_name[1:]
+        var_name = ''.join([item if not item.isupper() else ('_%s' % item.lower()) for item in var_name])
+        return var_name
+
+    def assert_json_with_class(self, wrapper):
+        for key in wrapper.json_data.keys():
+            var = wrapper.__getattribute__(self.get_var_name(key))
+            if type(var) not in(bool, int, str, type(None)):
+                if type(var) is list:
+                    self.check_data_with_list(var, wrapper.json_data[key])
+                elif type(var) is dict:
+                    self.assertTrue(var == wrapper.json_data[key])
+                else:
+                    self.assertTrue(var.json_data == wrapper.json_data[key])
+
+    def check_data_with_list(self, wrapper_array, data):
+        for var_item, data_item in zip(wrapper_array, data):
+            if type(data_item) is not dict:
+                self.assertTrue(var_item == data_item)
+            else:
+                for key in data_item.keys():
+                    var = var_item.__getattribute__(self.get_var_name(key))
+                    if type(var) is list:
+                        self.check_data_with_list(var, data_item[key])
+                    else:
+                        self.assertTrue(data_item[key] == var_item.__getattribute__(self.get_var_name(key)))
