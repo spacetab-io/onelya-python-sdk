@@ -58,7 +58,7 @@ class TrainPricing(object):
         self.destination_code = json_data.get('DestinationCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
         self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
-        self.departure_time_descriptions = json_data.get('DepartureTimeDescriptions', None)
+        self.departure_time_description = json_data.get('DepartureTimeDescription', None)
         self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
@@ -95,6 +95,6 @@ class Schedule(object):
         self.route_policy = json_data.get('RoutePolicy', None)
         self.schedules = get_array(json_data.get('Schedules', None), ScheduleInfo)
         self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
-        self.not_all_train_returned = json_data.get('NotAllTrainsReturned', None)
+        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
 
         self.json_data = json_data
