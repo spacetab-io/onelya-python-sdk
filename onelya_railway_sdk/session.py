@@ -23,12 +23,6 @@ class Session(object):
         self.last_request_data = None
 
     def make_api_request(self, method, data):
-        """Making a request and checking response
-
-        :param method:
-        :param data:
-        :return: json data or raise OnelyaAPIError
-        """
         data = self.__send_api_request(method, data)
         self.last_response_data = data
 
@@ -37,12 +31,6 @@ class Session(object):
         return data
 
     def __send_api_request(self, method, data):
-        """Sending request to Onelya
-
-        :param method:
-        :param data:
-        :return: json data
-        """
         url = '{}{}'.format(Session.API_URL, method)
         self.last_request_data = data
         response = self.requests_session.post(url, data=json.dumps(data), timeout=120)

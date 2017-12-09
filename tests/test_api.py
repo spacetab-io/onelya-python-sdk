@@ -4,9 +4,9 @@ import mock
 import unittest
 from datetime import datetime
 from onelya_railway_sdk.api import API
+from onelya_railway_sdk.wrapper.types import CarType
 from onelya_railway_sdk.exceptions import OnelyaAPIError
-from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo, Schedule
-from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
+from onelya_railway_sdk.railway_search.wrapper import TrainPricing, TrainPriceInfo, Schedule
 
 
 class MockSession(object):
@@ -16,7 +16,8 @@ class MockSession(object):
         self.mock_json = None
 
     def post(self, url, data=None, timeout=None):
-        self.mock_json = json.loads(open('tests/data/{}.json'.format(url[url.index('.ru/') + len('.ru/'):].replace('/V1', '')), 'r', encoding='utf8').read())
+        self.mock_json = json.loads(open('tests/data/{}.json'.format(url[url.index('.ru/') + len('.ru/'):].
+                                                                     replace('/V1', '')), 'r', encoding='utf8').read())
         return self
 
     def json(self):
@@ -36,7 +37,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_train_pricing(self):
         api = API(self.username, self.password, self.pos)
-        train_pricing = api.railway.search.train_pricing('Москва', self.destination, datetime.now(), 12, 24, CarGrouping.GROUP)
+        train_pricing = api.railway_search.train_pricing('Москва', self.destination, datetime.now(), 12, 24)
 
         self.assert_json_with_class(train_pricing)
 
@@ -45,7 +46,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_car_pricing(self):
         api = API(self.username, self.password, self.pos)
-        car_pricing = api.railway.search.car_pricing('2000000', self.empty_destination, datetime.now(), '054Ч', None, PricingTariffType.FULL)
+        car_pricing = api.railway_search.car_pricing('2000000', self.empty_destination, datetime.now(), '054Ч')
 
         self.assert_json_with_class(car_pricing)
 
@@ -54,7 +55,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_railway_schedule(self):
         api = API(self.username, self.password, self.pos)
-        schedule = api.railway.search.schedule('2000000', self.destination, None, 12, 24)
+        schedule = api.railway_search.schedule('Москва', '2000000', 12, 24)
         self.assert_json_with_class(schedule)
 
         self.assertTrue(self.destination == schedule.destination_station_code)
@@ -62,7 +63,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_train_route(self):
         api = API(self.username, self.password, self.pos)
-        train_route = api.railway.search.train_route('054', 'Москва', '2004000', datetime.now())
+        train_route = api.railway_search.train_route('054', 'Москва', '2004000', datetime.now())
         self.assert_json_with_class(train_route)
 
         self.assertEquals(type(train_route.routes), list)
@@ -70,7 +71,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_rotes(self):
         api = API(self.username, self.password, self.pos)
-        routes = api.railway.search.routes('2000000', '2004000', datetime.now(), 60, 360, True)
+        routes = api.railway_search.routes('2000000', '2004000', datetime.now())
         self.assert_json_with_class(routes)
 
         self.assertEquals(type(routes.routes), list)
@@ -78,7 +79,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_rote_pricing(self):
         api = API(self.username, self.password, self.pos)
-        rote_pricing = api.railway.search.route_pricing('2000000', '2078750', datetime.now())
+        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', datetime.now())
         self.assert_json_with_class(rote_pricing)
 
         self.assertEquals(type(rote_pricing.routes), list)
@@ -86,7 +87,8 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_rote_pricing(self):
         api = API(self.username, self.password, self.pos)
-        search_meal = api.railway.search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2', datetime.now(), 'sample string 4')
+        search_meal = api.railway_search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2',
+                                                     'sample string 4')
         self.assert_json_with_class(search_meal)
 
         self.assertEquals(type(search_meal.meal_options), list)
@@ -140,8 +142,9 @@ class TestAPI(unittest.TestCase):
                     else:
                         value = self.get_value(var)
                         self.assertTrue(data_item[key] == value)
-
-    def get_value(self, var):
+                        
+    @staticmethod
+    def get_value(var):
         value = var
         if type(value) == datetime:
             value = value.strftime('%Y-%m-%dT%X')

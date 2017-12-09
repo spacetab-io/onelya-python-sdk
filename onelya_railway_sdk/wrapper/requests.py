@@ -1,159 +1,52 @@
-from onelya_railway_sdk.utils import set_datetime
+from datetime import datetime
+from ..utils import set_datetime
 
 
-class TrainPricingReq(object):
-    METHOD = 'Railway/V1/Search/TrainPricing'
-
-    def __init__(self, session, origin, destination, departure_date, time_from, time_to, car_grouping):
+class RequestWrapper(object):
+    def __init__(self, session):
         self.session = session
 
-        self.origin = origin
-        self.destination = destination
-        self.departure_date = set_datetime(departure_date)
-        self.time_from = time_from
-        self.time_to = time_to
-        self.car_grouping = car_grouping
+    def make_request(self, method_name, **kwargs):
+        json_data = self.__get_json_data(False, **kwargs)
+        return self.__send_request(method_name, json_data)
 
-    def get(self):
-        json_data = {
-                'Origin': self.origin,
-                'Destination': self.destination,
-                'DepartureDate': self.departure_date,
-                'TimeFrom': self.time_from,
-                'TimeTo': self.time_to,
-                'CarGrouping': self.car_grouping
-        }
-        return self.session.make_api_request(TrainPricingReq.METHOD, json_data)
+    def __get_json_data(self, recursive, **kwargs):
+        json_data = {}
+        for key in kwargs.keys():
+            item = kwargs[key]
+            onelya_key = self.__get_onelya_key(key)
+            if type(item) in [str, int, type(None), bool]:
+                json_data[onelya_key] = item
+            elif type(item) is dict:
+                json_data[onelya_key] = self.__get_json_data(False, **item)
+            elif type(item) is list:
+                json_data[onelya_key] = [self.__get_json_data(True, **{'Key': list_item}) for list_item in item]
+            elif type(item) is datetime:
+                json_data[onelya_key] = set_datetime(item)
+            else:
+                object_name = self.__get_onelya_key(key)
+                if json_data.get(object_name, None) is None:
+                    json_data[object_name] = {}
+                for object_attribute in item.__dict__.keys():
+                    object_attribute_name = self.__get_onelya_key(object_attribute)
+                    json_data[object_name][object_attribute_name] = \
+                        self.__get_json_data(True, **{object_attribute_name: item.__getattribute__(object_attribute)})
+            if recursive:
+                return json_data[key]
+        return json_data
 
+    def __send_request(self, method_name, json_data):
+        return self.session.make_api_request(method_name, json_data)
 
-class CarPricingReq(object):
-    METHOD = 'Railway/V1/Search/CarPricing'
-
-    def __init__(self, session, origin_code, destination_code, departure_date, train_number, car_type, tariff_type):
-        self.session = session
-
-        self.origin_code = origin_code
-        self.destination_code = destination_code
-        self.departure_date = set_datetime(departure_date)
-        self.train_number = train_number
-        self.car_type = car_type
-        self.tariff_type = tariff_type
-
-    def get(self):
-        json_data = {
-                'OriginCode': self.origin_code,
-                'DestinationCode': self.destination_code,
-                'DepartureDate': self.departure_date,
-                'TrainNumber': self.train_number,
-                'CarType': self.car_type,
-                'TariffType': self.tariff_type
-        }
-        return self.session.make_api_request(CarPricingReq.METHOD, json_data)
-
-
-class ScheduleReq(object):
-    METHOD = 'Railway/V1/Search/Schedule'
-
-    def __init__(self, session, origin, destination, departure_date, time_from, time_to):
-        self.session = session
-        self.origin = origin
-        self.destination = destination
-        self.departure_date = set_datetime(departure_date)
-        self.time_from = time_from
-        self.time_to = time_to
-
-    def get(self):
-        json_data = {
-                'Origin': self.origin,
-                'Destination': self.destination,
-                'DepartureDate': self.departure_date,
-                'TimeFrom': self.time_from,
-                'TimeTo': self.time_to
-        }
-        return self.session.make_api_request(ScheduleReq.METHOD, json_data)
-
-
-class TrainRouteReq(object):
-    METHOD = 'Railway/V1/Search/TrainRoute'
-
-    def __init__(self, session, train_number, origin, destination, departure_date):
-        self.session = session
-        self.train_number = train_number
-        self.origin = origin
-        self.destination = destination
-        self.departure_date = set_datetime(departure_date)
-
-    def get(self):
-        json_data = {
-                'TrainNumber': self.train_number,
-                'Origin': self.origin,
-                'Destination': self.destination,
-                'DepartureDate': self.departure_date
-        }
-        return self.session.make_api_request(TrainRouteReq.METHOD, json_data)
-
-
-class RoutesReq(object):
-    METHOD = 'Railway/V1/Search/Routes'
-
-    def __init__(self, session, origin, destination, departure_date, min_change_time, max_change_time, first_change_only):
-        self.session = session
-        self.origin = origin
-        self.destination = destination
-        self.departure_date = set_datetime(departure_date)
-        self.min_change_time = min_change_time
-        self.max_change_time = max_change_time
-        self.first_change_only = first_change_only
-
-    def get(self):
-        json_data = {
-                'Origin': self.origin,
-                'Destination': self.destination,
-                'DepartureDate': self.departure_date,
-                'MinChangeTime': self.min_change_time,
-                'MaxChangeTime': self.max_change_time,
-                'FirstChangeOnly': self.first_change_only
-        }
-        return self.session.make_api_request(RoutesReq.METHOD, json_data)
-
-
-class RoutePricingReq(object):
-    METHOD = 'Railway/V1/Search/RoutePricing'
-
-    def __init__(self, session, origin_code, destination_code, departure_date):
-        self.session = session
-
-        self.origin_code = origin_code
-        self.destination_code = destination_code
-        self.departure_date = set_datetime(departure_date)
-
-    def get(self):
-        json_data = {
-                'OriginCode': self.origin_code,
-                'DestinationCode': self.destination_code,
-                'DepartureDate': self.departure_date
-        }
-        return self.session.make_api_request(RoutePricingReq.METHOD, json_data)
-
-
-class SearchMealReq(object):
-    METHOD = 'Railway/V1/Search/SearchMeal'
-
-    def __init__(self, session, car_type, carrier_code, meal_group, departure_date_time, country_code):
-        self.session = session
-
-        self.car_type = car_type
-        self.carrier_code = carrier_code
-        self.meal_group = meal_group
-        self.departure_date_time = set_datetime(departure_date_time)
-        self.country_code = country_code
-
-    def get(self):
-        json_data = {
-                'OriginCode': self.car_type,
-                'DestinationCode': self.carrier_code,
-                'DepartureDate': self.meal_group,
-                'DepartureDateTime': self.departure_date_time,
-                'CountryCode': self.country_code
-        }
-        return self.session.make_api_request(SearchMealReq.METHOD, json_data)
+    @staticmethod
+    def __get_onelya_key(key):
+        new_key = key[0].upper()
+        i = 1
+        while i < len(key):
+            if key[i] == '_':
+                new_key += key[i + 1].upper()
+                i += 1
+            else:
+                new_key += key[i]
+            i += 1
+        return new_key

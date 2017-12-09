@@ -1,5 +1,5 @@
-from onelya_railway_sdk.utils import get_array, get_item, get_datetime, get_datetime_array
-from datetime import datetime
+from ..utils import get_array, get_item, get_datetime, get_datetime_array
+
 
 class Discount(object):
     def __init__(self, json_data):
