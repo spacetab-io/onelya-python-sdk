@@ -1,0 +1,29 @@
+{
+  "Routes": [
+    {
+      "RouteStops": [
+        {
+          "StationName": "МОСКВА (МОСКВА ОКТ)",
+          "CityName": "МОСКВА",
+          "DepartureTime": "23:40",
+          "ArrivalTime": "",
+          "RouteStopType": "Departure",
+          "StopDuration": 0,
+          "TimeDescription": "NoValue"
+        },
+        {
+          "StationName": "С-ПЕТЕРБУР (С-ПЕТЕР-ГЛ)",
+          "CityName": "С-ПЕТЕРБУР",
+          "DepartureTime": "",
+          "ArrivalTime": "08:36",
+          "RouteStopType": "Arrival",
+          "StopDuration": 0,
+          "TimeDescription": "NoValue"
+        }
+      ],
+      "Name": "ОСНОВНОЙ МАРШРУТ",
+      "OriginName": "МОСКВА ОКТ",
+      "DestinationName": "С-ПЕТЕР-ГЛ"
+    }
+  ]
+}

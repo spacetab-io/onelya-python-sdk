@@ -70,3 +70,23 @@ class ScheduleReq(object):
                 "TimeTo": self.time_to
         }
         return self.session.make_api_request(ScheduleReq.METHOD, json_data)
+
+
+class TrainRouteReq(object):
+    METHOD = 'Railway/V1/Search/TrainRoute'
+
+    def __init__(self, session, train_number, origin, destination, departure_date):
+        self.session = session
+        self.train_number = train_number
+        self.origin = origin
+        self.destination = destination
+        self.departure_date = departure_date
+
+    def get(self):
+        json_data = {
+                "TrainNumber": self.train_number,
+                "Origin": self.origin,
+                "Destination": self.destination,
+                "DepartureDate": self.departure_date
+        }
+        return self.session.make_api_request(TrainRouteReq.METHOD, json_data)

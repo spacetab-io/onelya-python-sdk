@@ -201,3 +201,26 @@ class ScheduleInfo(object):
 
         self.json_data = json_data
 
+
+class Routes(object):
+    def __init__(self, json_data):
+        self.name = json_data.get('Name', None)
+        self.origin_name = json_data.get('OriginName', None)
+        self.destination_name = json_data.get('DestinationName', None)
+        self.route_stops = get_array(json_data.get('RouteStops', None), RouteStopInfo)
+
+        self.json_data = json_data
+
+
+class RouteStopInfo(object):
+    def __init__(self, json_data):
+        self.station_name = json_data.get('StationName', None)
+        self.city_name = json_data.get('CityName', None)
+        self.departure_time = json_data.get('DepartureTime', None)
+        self.arrival_time = json_data.get('ArrivalTime', None)
+        self.route_stop_type = json_data.get('RouteStopType', None)
+        self.stop_duration = json_data.get('StopDuration', None)
+        self.time_description = json_data.get('TimeDescription', None)
+        self.station_time_description = json_data.get('StationTimeDescription', None)
+
+        self.json_data = json_data

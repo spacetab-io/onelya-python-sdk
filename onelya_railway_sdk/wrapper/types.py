@@ -46,6 +46,13 @@ class StationTimeDescription:
     GREENWICH = 'Greenwich'
 
 
+class RouteStopType:
+    NO_VALUE = 'NoValue'
+    DEPARTURE = 'Departure'
+    ARRIVAL = 'Arrival'
+    INTERMEDIATE = 'Intermediate'
+
+
 class CarType:
     UNKNOWN = 'Unknown'
     SHARED = 'Shared'

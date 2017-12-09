@@ -1,7 +1,7 @@
 from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq, ScheduleReq
+from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq, ScheduleReq, TrainRouteReq
 from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo,
-                                        CarPriceInfo, ScheduleInfo)
+                                        CarPriceInfo, ScheduleInfo, Routes)
 
 
 class Search(object):
@@ -50,6 +50,11 @@ class Search(object):
         response = req.get()
         return Schedule(response)
 
+    def train_route(self, train_number, origin, destination, departure_date):
+        req = TrainRouteReq(self.session, train_number, origin, destination, departure_date)
+        response = req.get()
+        return TrainRoute(response)
+
 
 class TrainPricing(object):
     def __init__(self, json_data):
@@ -96,5 +101,12 @@ class Schedule(object):
         self.schedules = get_array(json_data.get('Schedules', None), ScheduleInfo)
         self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
         self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
+
+        self.json_data = json_data
+
+
+class TrainRoute(object):
+    def __init__(self, json_data):
+        self.routes = get_array(json_data.get('Routes', None), Routes)
 
         self.json_data = json_data
