@@ -1,4 +1,4 @@
-from onelya_railway_sdk.utils import get_array
+from onelya_railway_sdk.utils import get_array, get_item
 
 
 class Discount(object):
@@ -253,4 +253,43 @@ class RoutePart(object):
 
         self.json_data = json_data
 
+
+class TrainPricingResponse(object):
+    def __init__(self, json_data):
+        self.origin_code = json_data.get('OriginCode', None)
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_code = json_data.get('DestinationCode', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
+        self.departure_time_description = json_data.get('DepartureTimeDescription', None)
+        self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
+        self.is_from_ukrain = json_data.get('IsFromUkrain', None)
+        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
+        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
+
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
+        self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
+        self.booking_system = json_data.get('BookingSystem', None)
+        self.id = json_data.get('Id', None)
+        self.route_policy = json_data.get('RoutePolicy', None)
+
+        self.json_data = json_data
+
+
+class RouteReferenced(object):
+    def __init__(self, json_data):
+        self.route_parts = get_array(json_data.get('RouteParts', None), RoutePartReferenced)
+
+        self.json_data = json_data
+
+
+class RoutePartReferenced(object):
+    def __init__(self, json_data):
+        self.pricing_id = json_data.get('PricingId', None)
+        self.train_id = json_data.get('TrainId', None)
+
+        self.json_data = json_data
 

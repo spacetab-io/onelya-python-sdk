@@ -114,3 +114,23 @@ class RoutesReq(object):
                 "FirstChangeOnly": self.first_change_only
         }
         return self.session.make_api_request(RoutesReq.METHOD, json_data)
+
+
+class RoutePricingReq(object):
+    METHOD = 'Railway/V1/Search/RoutePricing'
+
+    def __init__(self, session, origin_code, destination_code, departure_date):
+        self.session = session
+
+        self.origin_code = origin_code
+        self.destination_code = destination_code
+        self.departure_date = departure_date
+
+    def get(self):
+        json_data = {
+                "OriginCode": self.origin_code,
+                "DestinationCode": self.destination_code,
+                "DepartureDate": self.departure_date
+        }
+        return self.session.make_api_request(RoutePricingReq.METHOD, json_data)
+

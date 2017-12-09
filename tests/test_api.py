@@ -75,6 +75,14 @@ class TestAPI(unittest.TestCase):
 
         self.assertEquals(type(routes.routes), list)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_rote_pricing(self):
+        api = API(self.username, self.password, self.pos)
+        rote_pricing = api.railway.search.route_pricing('2000000', '2078750', '2017-05-10T00:00:00')
+        self.assert_json_with_class(rote_pricing)
+
+        self.assertEquals(type(rote_pricing.routes), list)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError(error_data).message_params is None)
