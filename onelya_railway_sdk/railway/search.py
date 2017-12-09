@@ -1,7 +1,7 @@
 from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq, ScheduleReq, TrainRouteReq
-from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo,
-                                        CarPriceInfo, ScheduleInfo, Routes)
+from onelya_railway_sdk.wrapper.requests import TrainPricingReq, CarPricingReq, ScheduleReq, TrainRouteReq, RoutesReq
+from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
+                                        CarPriceInfo, ScheduleInfo, TrainRouteRoute)
 
 
 class Search(object):
@@ -51,9 +51,30 @@ class Search(object):
         return Schedule(response)
 
     def train_route(self, train_number, origin, destination, departure_date):
+        """Getting TrainRoute
+        :param train_number:
+        :param origin:
+        :param destination:
+        :param departure_date:
+        :return: TrainRoute object
+        """
         req = TrainRouteReq(self.session, train_number, origin, destination, departure_date)
         response = req.get()
         return TrainRoute(response)
+
+    def routes(self, origin, destination, departure_date, min_change_time, max_change_time, first_change_only):
+        """Getting Route
+        :param origin:
+        :param destination:
+        :param departure_date:
+        :param min_change_time:
+        :param max_change_time:
+        :param first_change_only:
+        :return: Route object
+        """
+        req = RoutesReq(self.session, origin, destination, departure_date, min_change_time, max_change_time, first_change_only)
+        response = req.get()
+        return Routes(response)
 
 
 class TrainPricing(object):
@@ -107,6 +128,13 @@ class Schedule(object):
 
 class TrainRoute(object):
     def __init__(self, json_data):
-        self.routes = get_array(json_data.get('Routes', None), Routes)
+        self.routes = get_array(json_data.get('Routes', None), TrainRouteRoute)
+
+        self.json_data = json_data
+
+
+class Routes(object):
+    def __init__(self, json_data):
+        self.routes = get_array(json_data.get('Routes', None), Route)
 
         self.json_data = json_data

@@ -202,7 +202,7 @@ class ScheduleInfo(object):
         self.json_data = json_data
 
 
-class Routes(object):
+class TrainRouteRoute(object):
     def __init__(self, json_data):
         self.name = json_data.get('Name', None)
         self.origin_name = json_data.get('OriginName', None)
@@ -224,3 +224,33 @@ class RouteStopInfo(object):
         self.station_time_description = json_data.get('StationTimeDescription', None)
 
         self.json_data = json_data
+
+
+class Route(object):
+    def __init__(self, json_data):
+        self.origin_code = json_data.get('OriginCode', None)
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_code = json_data.get('DestinationCode', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.departure_date_time = json_data.get('DepartureDateTime', None)
+        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+        self.travel_time = json_data.get('TravelTime', None)
+        self.change_time = json_data.get('ChangeTime', None)
+        self.route_parts = get_array(json_data.get('RouteParts', None), RoutePart)
+
+        self.json_data = json_data
+
+
+class RoutePart(object):
+    def __init__(self, json_data):
+        self.train_number = json_data.get('TrainNumber', None)
+        self.origin_city_code = json_data.get('OriginCityCode', None)
+        self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.destination_city_code = json_data.get('DestinationCityCode', None)
+        self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.departure_date_time = json_data.get('DepartureDateTime', None)
+        self.arrival_date_time = json_data.get('ArrivalDateTime', None)
+
+        self.json_data = json_data
+
+

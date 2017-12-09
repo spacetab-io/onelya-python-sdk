@@ -90,3 +90,27 @@ class TrainRouteReq(object):
                 "DepartureDate": self.departure_date
         }
         return self.session.make_api_request(TrainRouteReq.METHOD, json_data)
+
+
+class RoutesReq(object):
+    METHOD = 'Railway/V1/Search/Routes'
+
+    def __init__(self, session, origin, destination, departure_date, min_change_time, max_change_time, first_change_only):
+        self.session = session
+        self.origin = origin
+        self.destination = destination
+        self.departure_date = departure_date
+        self.min_change_time = min_change_time
+        self.max_change_time = max_change_time
+        self.first_change_only = first_change_only
+
+    def get(self):
+        json_data = {
+                "Origin": self.origin,
+                "Destination": self.destination,
+                "DepartureDate": self.departure_date,
+                "MinChangeTime": self.min_change_time,
+                "MaxChangeTime": self.max_change_time,
+                "FirstChangeOnly": self.first_change_only
+        }
+        return self.session.make_api_request(RoutesReq.METHOD, json_data)

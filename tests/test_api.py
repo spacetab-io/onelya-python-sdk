@@ -85,6 +85,14 @@ class TestAPI(unittest.TestCase):
 
         self.assertEquals(type(train_route.routes), list)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_rotes(self):
+        api = API(self.username, self.password, self.pos)
+        routes = api.railway.search.routes('2000000', '2004000', '2017-03-04T00:00:00', 60, 360, True)
+        self.assert_json_with_class(routes)
+
+        self.assertEquals(type(routes.routes), list)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError(error_data).message_params is None)
