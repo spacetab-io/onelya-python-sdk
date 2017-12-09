@@ -11,7 +11,6 @@ class OnelyaAPIError(Exception):
         self.code = error_data.get('Code')
         self.message = error_data.get('Message').replace('request.', '')
         self.message_params = self.__prettify_message_params(error_data, request_data)
-        print(error_data)
 
     @staticmethod
     def __prettify_message_params(error_data, request_data):

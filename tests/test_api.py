@@ -95,7 +95,7 @@ class TestAPI(unittest.TestCase):
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
-        self.assertTrue(OnelyaAPIError(error_data).message_params is None)
+        self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)
 
     def test_empty_json_for_train_pricing(self):
         self.assertTrue(TrainPricing({}).json_data == {})

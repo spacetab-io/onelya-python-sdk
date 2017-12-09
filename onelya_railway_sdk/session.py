@@ -28,7 +28,7 @@ class Session(object):
 
         if 'Code' in response:
             raise OnelyaAPIError(method, response, data)
-        return data
+        return response
 
     def __send_api_request(self, method, data):
         url = '{}{}'.format(Session.API_URL, method)
