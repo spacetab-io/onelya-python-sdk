@@ -1,6 +1,8 @@
 from .session import Session
 from .railway import Railway
 
+__version__ = 0.1
+
 
 class API(object):
 
