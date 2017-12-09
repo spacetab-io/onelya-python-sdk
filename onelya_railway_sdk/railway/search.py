@@ -29,7 +29,7 @@ class Search(object):
         :param train_number:
         :param car_type:
         :param tariff_type:
-        :return: TrainPricing object
+        :return: CarPricing object
         """
         req = CarPricingReq(self.session, origin_code, destination_code, departure_date, train_number, car_type, tariff_type)
         response = req.get()
@@ -89,10 +89,10 @@ class CarPricing(object):
         self.route_policy = json_data.get('RoutePolicy', None)
         self.train_info = self.__get_train_info(json_data.get('TrainInfo', None))
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
-        self.allowerd_document_types = json_data.get('AllowedDocumentTypes', None)
-        self.cars = json_data.get('ClientFeeCalculation', None)
-        self.cars = json_data.get('AgentFeeCalculation', None)
-        self.cars = json_data.get('BookingSystem', None)
+        self.allowed_document_types = json_data.get('AllowedDocumentTypes', None)
+        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
+        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.booking_system = json_data.get('BookingSystem', None)
 
         self.json_data = json_data
 
