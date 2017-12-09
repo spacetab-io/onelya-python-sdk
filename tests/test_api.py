@@ -15,22 +15,8 @@ class MockSession(object):
         self.auth = None
         self.mock_json = None
 
-    def post(self, url, data=None):
+    def post(self, url, data=None, timeout=None):
         self.mock_json = json.loads(open('tests/data/{}.json'.format(url[url.index('.ru/') + len('.ru/'):].replace('/V1', '')), 'r', encoding='utf8').read())
-        return self
-
-    def json(self):
-        return self.mock_json
-
-
-class MockWrongAUthSession(object):
-    def __init__(self):
-        self.headers = {}
-        self.auth = None
-        self.mock_json = None
-
-    def post(self, url, data=None):
-        self.mock_json = {'Code': 12, 'Message': 'Доступ запрещен', 'MessageParam': None}
         return self
 
     def json(self):
@@ -46,10 +32,6 @@ class TestAPI(unittest.TestCase):
 
         self.destination = '2004000'
         self.empty_destination = None
-
-    @mock.patch('requests.Session', MockWrongAUthSession)
-    def test_json_wrong_auth(self):
-        self.assertRaises(OnelyaAPIError, lambda:  API('username', 'password', 'pos'))
 
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_train_pricing(self):
