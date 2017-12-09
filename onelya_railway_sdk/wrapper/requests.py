@@ -15,7 +15,7 @@ class RequestWrapper(object):
         for key in kwargs.keys():
             item = kwargs[key]
             onelya_key = self.__get_onelya_key(key)
-            if type(item) in [str, int, type(None), bool]:
+            if type(item) in [str, int, float, type(None), bool]:
                 json_data[onelya_key] = item
             elif type(item) is dict:
                 json_data[onelya_key] = self.__get_json_data(False, **item)
@@ -40,6 +40,8 @@ class RequestWrapper(object):
 
     @staticmethod
     def __get_onelya_key(key):
+        if key == 'type':
+            return '$type'
         new_key = key[0].upper()
         i = 1
         while i < len(key):

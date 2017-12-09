@@ -1,0 +1,113 @@
+{
+  "OrderId": 51978,
+  "Amount": 9481.7,
+  "ConfirmTill": "2016-10-27T19:04:04",
+  "Customers": [
+    {
+      "Index": 1,
+      "OrderCustomerId": 66650,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "BirthDate": "1976-10-12T00:00:00",
+      "DocumentNumber": "4601123450",
+      "DocumentValidTill": "9999-12-31T23:59:59",
+      "DocumentType": "RussianPassport",
+      "CitizenshipCode": "RU",
+      "BirthPlace": null
+    }
+  ],
+  "ReservationResults": [
+    {
+      "$type": "ApiContracts.Railway.V1.Messages.Reservation.RailwayReservationResponse, ApiContracts",
+      "DepartureDateTime": "2016-11-01T23:40:00",
+      "ArrivalDateTime": "2016-11-02T08:36:00",
+      "Blanks": [
+        {
+          "OrderItemBlankId": 51946,
+          "Amount": 9481.7,
+          "Number": null,
+          "TariffType": "Full",
+          "IsMealOptionPossible": false,
+          "VatRateValues": null,
+          "BaseFare": 0.0,
+          "AdditionalPrice": 0.0,
+          "TariffInfo": null,
+          "ServicePrice": 0.0
+        }
+      ],
+      "OriginStation": "МОСКВА ОКТЯБРЬСКАЯ",
+      "DestinationStation": "САНКТ-ПЕТЕРБУРГ-ГЛАВН.",
+      "OriginStationCode": null,
+      "DestinationStationCode": null,
+      "TrainNumber": "054ЧА",
+      "BookingTrainNumber": null,
+      "TrainNumberToGetRoute": null,
+      "CarNumber": "07",
+      "ServiceClass": null,
+      "InternationalServiceClass": null,
+      "TimeDescription": null,
+      "IsPrintTicketPossible": true,
+      "NearestTicketPrintStations": null,
+      "Carrier": "ЗАО ТК \"ГСЭ\"",
+      "CarrierCode": null,
+      "CarrierTin": null,
+      "CountryCode": null,
+      "IsMealOptionPossible": false,
+      "MealGroup": null,
+      "BookingSystem": "Express3",
+      "IsThreeHoursReservationAvailable": false,
+      "TripDuration": 0,
+      "TrainDescription": null,
+      "CarDescription": null,
+      "IsSuburban": false,
+      "Passengers": [
+        {
+          "Category": "Adult",
+          "Places": "001",
+          "PlaceTiers": "Н",
+          "PlacesWithType": null,
+          "TariffType": "Full",
+          "FirstName": "Иван",
+          "MiddleName": "Иванович",
+          "LastName": "Иванов",
+          "BirthDate": "1976-10-12T00:00:00",
+          "Sex": "Male",
+          "Citizenship": "RU",
+          "OrderItemBlankId": 51946,
+          "OrderCustomerId": 66650,
+          "OrderCustomerReferenceIndex": 1,
+          "Amount": 9481.7,
+          "Fare": 9481.7,
+          "Tax": 0.0,
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "AgentFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          }
+        }
+      ],
+      "Index": 0,
+      "OrderItemId": 52157,
+      "AgentReferenceId": null,
+      "Amount": 9481.7,
+      "Fare": 9481.7,
+      "Tax": 0.0,
+      "ReservationNumber": null,
+      "ConfirmTill": "2016-10-27T19:04:04",
+      "ClientFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "AgentFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "ErrorResult": null
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "ContactPhone": "+79123456789",
+  "ContactEmails": [
+    "test@test.ru"
+  ],
+  "Customers": [
+    {
+      "$type": "ApiContracts.Order.V1.Reservation.OrderFullCustomerRequest, ApiContracts",
+      "DocumentNumber": "4601123450",
+      "DocumentType": "RussianPassport",
+      "DocumentValidTill": null,
+      "CitizenshipCode": "RU",
+      "BirthPlace": null,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "Birthday": "1970-01-01T03:00:00",
+      "Index": 1
+    }
+  ],
+  "ReservationItems": [
+    {
+      "$type": "ApiContracts.Railway.V1.Messages.Reservation.RailwayReservationRequest, ApiContracts",
+      "OriginCode": "2006004",
+      "DestinationCode": "2004001",
+      "DepartureDate": "1970-01-01T03:00:00",
+      "TrainNumber": "054Ч",
+      "CarNumber": "07",
+      "CarType": "Luxury",
+      "LowerPlaceQuantity": 1,
+      "UpperPlaceQuantity": 0,
+      "CabinGenderKind": "NoValue",
+      "CarStorey": "NoValue",
+      "PlaceRange": {
+        "From": 1,
+        "To": 5
+      },
+      "CabinPlaceDemands": "NoValue",
+      "SetElectronicRegistration": true,
+      "Bedding": null,
+      "ServiceClass": "1Л",
+      "InternationalServiceClass": null,
+      "AdditionalPlaceRequirements": "NoValue",
+      "ProviderPaymentForm": "Card",
+      "Passengers": [
+        {
+          "Category": "Adult",
+          "PreferredAdultTariffType": "Full",
+          "RailwayBonusCards": null,
+          "IsInvalid": false,
+          "OrderCustomerIndex": 1
+        }
+      ],
+      "Index": 1,
+      "AgentReferenceId": null,
+      "AgentPaymentId": null
+    }
+  ]
+}

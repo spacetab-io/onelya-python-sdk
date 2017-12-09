@@ -35,8 +35,8 @@ class CarPricing(object):
         self.train_info = get_item(json_data.get('TrainInfo', None), TrainInfo)
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
         self.allowed_document_types = json_data.get('AllowedDocumentTypes', None)
-        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
-        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.booking_system = json_data.get('BookingSystem', None)
 
         self.json_data = json_data

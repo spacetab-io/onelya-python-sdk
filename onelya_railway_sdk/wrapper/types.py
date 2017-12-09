@@ -15,6 +15,10 @@ class RzhdCardTypes:
     UNIVERSAL_RZHD_CARD = 'UniversalRzhdCard'
 
 
+class ProviderPaymentForm(RzhdCardTypes):
+    pass
+
+
 class TransportType:
     TRAIN = 'Train'
     BUS = 'Bus'
@@ -39,6 +43,30 @@ class RoutePolicy:
     INTERNATIONAL = 'International'
 
 
+class Sex:
+    NOVALUE = 'NoValue'
+    MALE = 'Male'
+    FEMALE = 'Female'
+
+
+class ProviderPaymentForm:
+    CASH = 'Cash'
+    INVOICE = 'Invoice'
+    CARD = 'Card'
+
+
+class CarStorey:
+    NO_VALUE = 'NoValue'
+    FIRST = 'First'
+    SECOND = 'Second'
+
+
+class RailwayPassengerCategory:
+    ADULT = 'Adult'
+    CHILD = 'Child'
+    BABY_WITHOUT_PLACE = 'BabyWithoutPlace'
+
+
 class StationTimeDescription:
     NO_VALUE = 'NoValue'
     MOSCOW = 'Moscow'
@@ -51,6 +79,20 @@ class RouteStopType:
     DEPARTURE = 'Departure'
     ARRIVAL = 'Arrival'
     INTERMEDIATE = 'Intermediate'
+
+
+class CabinPlaceDemands:
+    NO_VALUE = 'NoValue'
+    IN_ONE_CABIN = 'InOneCabin'
+    NO_SIDE_PLACES = 'NoSidePlaces'
+    IN_ONE_COMPARTMENT = 'InOneCompartment'
+
+
+class CabinGenderKind:
+    NO_VALUE = 'NoValue'
+    MIXED = 'Mixed'
+    MALE = 'Male'
+    FEMALE = 'Female'
 
 
 class CarType:
@@ -78,6 +120,22 @@ class DiscountType:
     SINGLE = 'Single'
 
 
+class AdditionalPlaceRequirements:
+    NO_VALUE = 'NoValue'
+    MOTHER_AND_BABY_PLACES = 'MotherAndBabyPlaces'
+    WITH_BABY_PLACES = 'WithBabyPlaces'
+    WITH_PETS_PLACES = 'WithPetsPlaces'
+    USUAL = 'Usual'
+    USUAL_NEAR_THE_TABLE = 'UsualNearTheTable'
+    ANY_NEAR_THE_TABLE = 'AnyNearTheTable'
+    ANY_NOT_NEAR_THE_TABLE = 'AnyNotNearTheTable'
+    NEAR_THE_PLAYGROUND = 'NearThePlayground'
+    NEAR_THE_PLAYGROUND_AND_NOT_THE_TABLE = 'NearThePlaygroundAndNotTheTable'
+    NEAR_THE_PLAYGROUND_AND_THE_TABLE = 'NearThePlaygroundAndTheTable'
+    NEAR_THE_PLACES_WITH_PETS = 'NearThePlacesWithPets'
+    FOLDABLE_PLACE = 'FoldablePlace'
+
+
 class DocumentType:
     RUSSIAN_PASSPORT = 'RussianPassport'
     RUSSIAN_FOREIGN_PASSPORT = 'RussianForeignPassport'
@@ -92,6 +150,21 @@ class DocumentType:
     STATELESS_PERSON_IDENTITY_CARD = 'StatelessPersonIdentityCard'
     RESIDENCE_PERMIT = 'ResidencePermit'
     RUSSIAN_TEMPORARY_IDENTITY_CARD = 'RussianTemporaryIdentityCard'
+
+
+class PreferredAdultTariffType:
+    FULL = 'Full'
+    JUNIOR = 'Junior'
+    SENIOR = 'Senior'
+    PUPIL = 'Pupil'
+    HOLIDAY = 'Holiday'
+    WEDDING = 'Wedding'
+    FAMILY = 'Family'
+    KUPEK = 'Kupek'
+    SINGLE = 'Single'
+    TKS_P = 'TksP'
+    TKS_M = 'TksM'
+    TKS_I = 'TksI'
 
 
 class CarService:
@@ -112,6 +185,48 @@ class CarService:
     PETS_CARRIAGE = 'PetsCarriage'
     PLACES_FOR_PASSENGER_WITH_BABY = 'PlacesForPassengerWithBaby'
     TRANSFER = 'Transfer'
+
+
+class TicketTariffType:
+    FULL = 'Full'
+    CHILD = 'Child'
+    CHILD17 = 'Child17'
+    FREE_CHILD = 'FreeChild'
+    JUNIOR = 'Junior'
+    SENIOR = 'Senior'
+    BACKWARD_WAY_IN_ROUND_TRIP_WITH_DISCOUNT = 'BackwardWayInRoundTripWithDiscount'
+    BACKWARD_WAY_IN_ROUND_TRIP_WITH_DISCOUNT_IN_INTERSTATE_DIRECTION = 'BackwardWayInRoundTripWithDiscountInInterstateDirection'
+    UNIVERSAL_CARD = 'UniversalCard'
+    PUPIL = 'Pupil'
+    HOLIDAY = 'Holiday'
+    WEDDING = 'Wedding'
+    FAMILY = 'Family'
+    KUPEK = 'Kupek'
+    SINGLE = 'Single'
+    TKS = 'Tks'
+    CHILD_BACKWARD_WAY_IN_ROUND_TRIP_WITH_DISCOUNT = 'ChildBackwardWayInRoundTripWithDiscount'
+    CHILD_BACKWARD_WAY_IN_ROUND_TRIP_WITH_DISCOUNT_IN_INTERSTATE_DIRECTION = 'ChildBackwardWayInRoundTripWithDiscountInInterstateDirection'
+    BIRTHDAY = 'Birthday'
+    UNKNOWN = 'Unknown'
+
+
+class ReservationPlaceType:
+    NO_VALUE = 'NoValue'
+    NEAR_PLAYGROUND = 'NearPlayground'
+    UPPER = 'Upper'
+    NOT_NEAR_TABLE = 'NotNearTable'
+    LOWER = 'Lower'
+    MIDDLE = 'Middle'
+    FOLDABLE = 'Foldable'
+    WITH_PETS = 'WithPets'
+    WITH_CHILD = 'WithChild'
+    MOTHER_AND_BABY = 'MotherAndBaby'
+    NEAR_PASSENGERS_WITH_PETS = 'NearPassengersWithPets'
+    NEAR_TABLE = 'NearTable'
+    NEAR_TABLE_PLAYGROUND = 'NearTablePlayground'
+    SEPARATE_COMPARTMENT = 'SeparateCompartment'
+    INVALIDS = 'Invalids'
+    NEGOTIATIONS = 'Negotiations'
 
 
 class CarPlaceType:
