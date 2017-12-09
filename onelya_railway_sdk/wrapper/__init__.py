@@ -293,3 +293,10 @@ class RoutePartReferenced(object):
 
         self.json_data = json_data
 
+
+class MealOption(object):
+    def __init__(self, json_data):
+        self.meal_option_code = json_data.get('MealOptionCode', None)
+        self.description = json_data.get('Description', None)
+
+        self.json_data = json_data

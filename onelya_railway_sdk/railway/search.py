@@ -1,9 +1,9 @@
 from onelya_railway_sdk.utils import get_array, get_item
 from onelya_railway_sdk.wrapper.requests import (TrainPricingReq, CarPricingReq, ScheduleReq, TrainRouteReq,
-                                                 RoutesReq, RoutePricingReq)
+                                                 RoutesReq, RoutePricingReq, SearchMealReq)
 from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
                                         CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
-                                        RouteReferenced)
+                                        RouteReferenced, MealOption)
 
 
 class Search(object):
@@ -89,6 +89,19 @@ class Search(object):
         response = req.get()
         return RoutePricing(response)
 
+    def search_meal(self, car_type, carrier_code, meal_group, departure_date_time, country_code):
+        """Getting RoutePricing
+        :param car_type:
+        :param carrier_code:
+        :param meal_group:
+        :param departure_date_time:
+        :param country_code:
+        :return: RoutePricing object
+        """
+        req = SearchMealReq(self.session, car_type, carrier_code, meal_group, departure_date_time, country_code)
+        response = req.get()
+        return SearchMeal(response)
+
 
 class TrainPricing(object):
     def __init__(self, json_data):
@@ -155,9 +168,15 @@ class Routes(object):
 
 class RoutePricing(object):
     def __init__(self, json_data):
-
         self.train_pricings = get_array(json_data.get('TrainPricings', None), TrainPricingResponse)
         self.routes = get_array(json_data.get('Routes', None), RouteReferenced)
         self.not_all_train_pricings_returned = json_data.get('NotAllTrainPricingsReturned', None)
+
+        self.json_data = json_data
+
+
+class SearchMeal(object):
+    def __init__(self, json_data):
+        self.meal_options = get_array(json_data.get('MealOptions', None), MealOption)
 
         self.json_data = json_data

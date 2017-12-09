@@ -5,8 +5,8 @@ import unittest
 from datetime import datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
-from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType
 from onelya_railway_sdk.railway.search import TrainPricing, TrainPriceInfo, Schedule
+from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
 
 
 class MockSession(object):
@@ -82,6 +82,14 @@ class TestAPI(unittest.TestCase):
         self.assert_json_with_class(rote_pricing)
 
         self.assertEquals(type(rote_pricing.routes), list)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_rote_pricing(self):
+        api = API(self.username, self.password, self.pos)
+        search_meal = api.railway.search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2', '2017-12-08T22:57:29', 'sample string 4')
+        self.assert_json_with_class(search_meal)
+
+        self.assertEquals(type(search_meal.meal_options), list)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
