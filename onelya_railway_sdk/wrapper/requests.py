@@ -15,12 +15,12 @@ class TrainPricingReq(object):
 
     def get(self):
         json_data = {
-                "Origin": self.origin,
-                "Destination": self.destination,
-                "DepartureDate": self.departure_date,
-                "TimeFrom": self.time_from,
-                "TimeTo": self.time_to,
-                "CarGrouping": self.car_grouping
+                'Origin': self.origin,
+                'Destination': self.destination,
+                'DepartureDate': self.departure_date,
+                'TimeFrom': self.time_from,
+                'TimeTo': self.time_to,
+                'CarGrouping': self.car_grouping
         }
         return self.session.make_api_request(TrainPricingReq.METHOD, json_data)
 
@@ -40,12 +40,12 @@ class CarPricingReq(object):
 
     def get(self):
         json_data = {
-                "OriginCode": self.origin_code,
-                "DestinationCode": self.destination_code,
-                "DepartureDate": self.departure_date,
-                "TrainNumber": self.train_number,
-                "CarType": self.car_type,
-                "TariffType": self.tariff_type
+                'OriginCode': self.origin_code,
+                'DestinationCode': self.destination_code,
+                'DepartureDate': self.departure_date,
+                'TrainNumber': self.train_number,
+                'CarType': self.car_type,
+                'TariffType': self.tariff_type
         }
         return self.session.make_api_request(CarPricingReq.METHOD, json_data)
 
@@ -63,11 +63,11 @@ class ScheduleReq(object):
 
     def get(self):
         json_data = {
-                "Origin": self.origin,
-                "Destination": self.destination,
-                "DepartureDate": self.departure_date,
-                "TimeFrom": self.time_from,
-                "TimeTo": self.time_to
+                'Origin': self.origin,
+                'Destination': self.destination,
+                'DepartureDate': self.departure_date,
+                'TimeFrom': self.time_from,
+                'TimeTo': self.time_to
         }
         return self.session.make_api_request(ScheduleReq.METHOD, json_data)
 
@@ -84,10 +84,10 @@ class TrainRouteReq(object):
 
     def get(self):
         json_data = {
-                "TrainNumber": self.train_number,
-                "Origin": self.origin,
-                "Destination": self.destination,
-                "DepartureDate": self.departure_date
+                'TrainNumber': self.train_number,
+                'Origin': self.origin,
+                'Destination': self.destination,
+                'DepartureDate': self.departure_date
         }
         return self.session.make_api_request(TrainRouteReq.METHOD, json_data)
 
@@ -106,12 +106,12 @@ class RoutesReq(object):
 
     def get(self):
         json_data = {
-                "Origin": self.origin,
-                "Destination": self.destination,
-                "DepartureDate": self.departure_date,
-                "MinChangeTime": self.min_change_time,
-                "MaxChangeTime": self.max_change_time,
-                "FirstChangeOnly": self.first_change_only
+                'Origin': self.origin,
+                'Destination': self.destination,
+                'DepartureDate': self.departure_date,
+                'MinChangeTime': self.min_change_time,
+                'MaxChangeTime': self.max_change_time,
+                'FirstChangeOnly': self.first_change_only
         }
         return self.session.make_api_request(RoutesReq.METHOD, json_data)
 
@@ -128,9 +128,31 @@ class RoutePricingReq(object):
 
     def get(self):
         json_data = {
-                "OriginCode": self.origin_code,
-                "DestinationCode": self.destination_code,
-                "DepartureDate": self.departure_date
+                'OriginCode': self.origin_code,
+                'DestinationCode': self.destination_code,
+                'DepartureDate': self.departure_date
         }
         return self.session.make_api_request(RoutePricingReq.METHOD, json_data)
 
+
+class SearchMealReq(object):
+    METHOD = 'Railway/V1/Search/SearchMeal'
+
+    def __init__(self, session, car_type, carrier_code, meal_group, departure_date_time, country_code):
+        self.session = session
+
+        self.car_type = car_type
+        self.carrier_code = carrier_code
+        self.meal_group = meal_group
+        self.departure_date_time = departure_date_time
+        self.country_code = country_code
+
+    def get(self):
+        json_data = {
+                'OriginCode': self.car_type,
+                'DestinationCode': self.carrier_code,
+                'DepartureDate': self.meal_group,
+                'DepartureDateTime': self.departure_date_time,
+                'CountryCode': self.country_code
+        }
+        return self.session.make_api_request(SearchMealReq.METHOD, json_data)
