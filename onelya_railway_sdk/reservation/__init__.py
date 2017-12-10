@@ -4,11 +4,11 @@ from ..wrapper.types import ProlongReservationType
 from .requests import OrderFullCustomerRequest, RailwayReservationRequest
 from ..wrapper import OrderCreateReservationCustomerResponse, RailwayReservationResponse
 
-CREATE_METHOD = 'Railway/V1/Reservation/Create'
-PROLONG_RESERVATION__METHOD = 'Railway/V1/Reservation/ProlongReservation'
+CREATE_METHOD = 'Order/V1/Reservation/Create'
+PROLONG_RESERVATION__METHOD = 'Order/V1/Reservation/ProlongReservation'
 
 
-class RailwayReservation(object):
+class Reservation(object):
 
     def __init__(self, session):
         self.session = session

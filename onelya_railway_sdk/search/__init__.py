@@ -15,7 +15,7 @@ ROUTE_RICING_METHOD = 'Railway/V1/Search/RoutePricing'
 SEARCH_MEAL_METHOD = 'Railway/V1/Search/SearchMeal'
 
 
-class RailwaySearch(object):
+class Search(object):
     def __init__(self, session):
         self.__request_wrapper = RequestWrapper(session)
 

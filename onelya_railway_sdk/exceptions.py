@@ -19,7 +19,7 @@ class OnelyaAPIError(Exception):
             json_message_params = {}
             for message in message_params:
                 for item in message.split(', '):
-                    param_key = item.split('.')[1]
+                    param_key = item.split('.')[1].split(' =')[0]
                     json_message_params[param_key] = request_data[param_key]
             return json_message_params
         return message_params
