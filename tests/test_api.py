@@ -7,7 +7,7 @@ from onelya_railway_sdk.utils import set_datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
 from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
-                                              RzhdCardTypes, CarStorey, CabinPlaceDemands, ProviderPaymentForm)
+                                              CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm, PricingTariffType)
 from onelya_railway_sdk.railway_search.wrapper import TrainPricing, TrainPriceInfo, Schedule
 from onelya_railway_sdk.reservation.wrapper import (OrderFullCustomerRequest, RailwayReservationRequest,
                                                     RailwayPassengerRequest, RailwayPassengerCategory)
@@ -37,56 +37,69 @@ class TestAPI(unittest.TestCase):
         self.password = os.environ.get('PASSWORD', None)
         self.pos = os.environ.get('POS', None)
 
-        self.destination = '2004000'
-        self.empty_destination = None
-
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_train_pricing(self):
         api = API(self.username, self.password, self.pos)
-        train_pricing = api.railway_search.train_pricing('Москва', self.destination, datetime.now(), 12, 24)
+        train_pricing = api.railway_search.train_pricing('Москва', '2004000', datetime.fromtimestamp(0), 12, 24,
+                                                         CarGrouping.GROUP)
 
+        input_data = json.loads(open('tests/data/Railway/Search/TrainPricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(train_pricing)
 
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_car_pricing(self):
         api = API(self.username, self.password, self.pos)
-        car_pricing = api.railway_search.car_pricing('2000000', self.empty_destination, datetime.now(), '054Ч')
+        car_pricing = api.railway_search.car_pricing('2000000', '2004000', datetime.fromtimestamp(0), '054Ч', None, PricingTariffType.FULL)
 
+        input_data = json.loads(open('tests/data/Railway/Search/CarPricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(car_pricing)
 
     @mock.patch('requests.Session', MockSession)
     def test_railway_schedule(self):
         api = API(self.username, self.password, self.pos)
-        schedule = api.railway_search.schedule('Москва', '2000000', 12, 24)
+        schedule = api.railway_search.schedule('Москва', '2004000', 12, 24)
 
+        input_data = json.loads(open('tests/data/Railway/Search/Schedule.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(schedule)
 
     @mock.patch('requests.Session', MockSession)
     def test_train_route(self):
         api = API(self.username, self.password, self.pos)
-        train_route = api.railway_search.train_route('054', 'Москва', '2004000', datetime.now())
+        train_route = api.railway_search.train_route('054', 'Москва', '2004000', datetime.fromtimestamp(0))
 
+        input_data = json.loads(open('tests/data/Railway/Search/TrainRoute.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(train_route)
 
     @mock.patch('requests.Session', MockSession)
     def test_rotes(self):
         api = API(self.username, self.password, self.pos)
-        routes = api.railway_search.routes('2000000', '2004000', datetime.now())
+        routes = api.railway_search.routes('2000000', '2004000', datetime.fromtimestamp(0))
 
+        input_data = json.loads(open('tests/data/Railway/Search/Routes.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(routes)
 
     @mock.patch('requests.Session', MockSession)
     def test_rote_pricing(self):
         api = API(self.username, self.password, self.pos)
-        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', datetime.now())
+        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', datetime.fromtimestamp(0))
 
+        input_data = json.loads(open('tests/data/Railway/Search/RoutePricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(rote_pricing)
 
     @mock.patch('requests.Session', MockSession)
-    def test_rote_pricing(self):
+    def test_search_meal(self):
         api = API(self.username, self.password, self.pos)
         search_meal = api.railway_search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2',
-                                                     'sample string 4')
+                                                     'sample string 4', datetime.fromtimestamp(0))
+
+        input_data = json.loads(open('tests/data/Railway/Search/SearchMeal.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(search_meal)
 
     @mock.patch('requests.Session', MockSession)

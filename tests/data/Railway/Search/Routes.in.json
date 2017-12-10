@@ -1,0 +1,8 @@
+{
+  "Origin": "2000000",
+  "Destination": "2004000",
+  "DepartureDate": "1970-01-01T03:00:00",
+  "MinChangeTime": 60,
+  "MaxChangeTime": 360,
+  "FirstChangeOnly": true
+}

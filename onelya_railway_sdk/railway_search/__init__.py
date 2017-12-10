@@ -17,14 +17,14 @@ class RailwaySearch(object):
         self.__request_wrapper = RequestWrapper(session)
 
     def train_pricing(self, origin: str, destination: str, departure_date: datetime, time_from: int, time_to: int,
-                      car_grouping: CarGrouping=CarGrouping.GROUP):
+                      car_grouping: CarGrouping=None):
         response = self.__request_wrapper.make_request(TRAIN_PRICING_METHOD, origin=origin, destination=destination,
                                                        car_grouping=car_grouping, time_from=time_from, time_to=time_to,
                                                        departure_date=departure_date)
         return TrainPricing(response)
 
     def car_pricing(self, origin_code: str, destination_code: str, departure_date: datetime, train_number: str,
-                    car_type: CarType=None, tariff_type: PricingTariffType=PricingTariffType.FULL):
+                    car_type: CarType=None, tariff_type: PricingTariffType=None):
         response = self.__request_wrapper.make_request(CAR_PRICING_METHOD, origin_code=origin_code,
                                                        destination_code=destination_code, departure_date=departure_date,
                                                        train_number=train_number, car_type=car_type,
