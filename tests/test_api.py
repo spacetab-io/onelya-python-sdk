@@ -32,6 +32,7 @@ class TestAPI(unittest.TestCase):
 
     def setUp(self):
         self.maxDiff = None
+        self.datetime = datetime.fromtimestamp(0).replace(hour=3)
 
         self.username = os.environ.get('USERNAME', None)
         self.password = os.environ.get('PASSWORD', None)
@@ -40,8 +41,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_train_pricing(self):
         api = API(self.username, self.password, self.pos)
-        train_pricing = api.railway_search.train_pricing('Москва', '2004000', datetime.fromtimestamp(0), 12, 24,
-                                                         CarGrouping.GROUP)
+        train_pricing = api.railway_search.train_pricing('Москва', '2004000', self.datetime, 12, 24, CarGrouping.GROUP)
 
         input_data = json.loads(open('tests/data/Railway/Search/TrainPricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -50,7 +50,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_json_railway_car_pricing(self):
         api = API(self.username, self.password, self.pos)
-        car_pricing = api.railway_search.car_pricing('2000000', '2004000', datetime.fromtimestamp(0), '054Ч', None, PricingTariffType.FULL)
+        car_pricing = api.railway_search.car_pricing('2000000', '2004000', self.datetime, '054Ч', None, PricingTariffType.FULL)
 
         input_data = json.loads(open('tests/data/Railway/Search/CarPricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -68,7 +68,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_train_route(self):
         api = API(self.username, self.password, self.pos)
-        train_route = api.railway_search.train_route('054', 'Москва', '2004000', datetime.fromtimestamp(0))
+        train_route = api.railway_search.train_route('054', 'Москва', '2004000', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/TrainRoute.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -77,7 +77,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_rotes(self):
         api = API(self.username, self.password, self.pos)
-        routes = api.railway_search.routes('2000000', '2004000', datetime.fromtimestamp(0))
+        routes = api.railway_search.routes('2000000', '2004000', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/Routes.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -86,7 +86,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_rote_pricing(self):
         api = API(self.username, self.password, self.pos)
-        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', datetime.fromtimestamp(0))
+        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/RoutePricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -96,7 +96,7 @@ class TestAPI(unittest.TestCase):
     def test_search_meal(self):
         api = API(self.username, self.password, self.pos)
         search_meal = api.railway_search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2',
-                                                     'sample string 4', datetime.fromtimestamp(0))
+                                                     'sample string 4', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/SearchMeal.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
@@ -107,11 +107,11 @@ class TestAPI(unittest.TestCase):
         api = API(self.username, self.password, self.pos)
 
         customers = OrderFullCustomerRequest("4601123450", DocumentType.RUSSIAN_PASSPORT, 'Иван', 'Иванов',
-                                             Sex.MALE, 1, 'Иванович', None, 'RU', None, datetime.fromtimestamp(0))
+                                             Sex.MALE, 1, 'Иванович', None, 'RU', None, self.datetime)
 
         passengers = [RailwayPassengerRequest(RailwayPassengerCategory.ADULT, 1, is_invalid=False)]
 
-        reservation_items = RailwayReservationRequest('2006004', '2004001', datetime.fromtimestamp(0), '054Ч',
+        reservation_items = RailwayReservationRequest('2006004', '2004001', self.datetime, '054Ч',
                                                       CarType.LUXURY, passengers, 1, '07', 1, 0, CabinGenderKind.NO_VALUE,
                                                       CarStorey.NO_VALUE, (1, 5), None, CabinPlaceDemands.NO_VALUE,
                                                       True, '1Л', AdditionalPlaceRequirements.NO_VALUE, None,
