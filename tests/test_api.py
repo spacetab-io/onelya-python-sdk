@@ -132,6 +132,15 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(prolong_reservation)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_create(self):
+        api = API(self.username, self.password, self.pos)
+        create = api.reservation.confirm(51978, provider_payment_form=ProviderPaymentForm.CARD)
+
+        input_data = json.loads(open('tests/data/Order/Reservation/Confirm.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
+        self.assert_json_with_class(create)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)

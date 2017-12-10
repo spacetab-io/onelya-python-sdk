@@ -4,6 +4,11 @@ class ProlongReservationType:
     RAILWAY_THREE_HOURS_RESERVATION = 'RailwayThreeHoursReservation'
 
 
+class PendingElectronicRegistration:
+    NO_VALUE = 'NoValue'
+    TO_CANCEL = 'ToCancel'
+
+
 class CarGrouping:
     GROUP = 'Group'
     DONT_GROUP = 'DontGroup'
@@ -17,10 +22,6 @@ class PricingTariffType:
 class RzhdCardTypes:
     RZHD_BONUS = 'RzhdBonus'
     UNIVERSAL_RZHD_CARD = 'UniversalRzhdCard'
-
-
-class ProviderPaymentForm(RzhdCardTypes):
-    pass
 
 
 class TransportType:
@@ -107,6 +108,16 @@ class CarType:
     COMPARTMENT = 'Compartment'
     RESERVED_SEAT = 'ReservedSeat'
     SEDENTARY = 'Sedentary'
+
+
+class BlankStatus:
+    ELECTRONIC_REGISTRATION_ABSENT = 'ElectronicRegistrationAbsent'
+    ELECTRONIC_REGISTRATION_PRESENT = 'ElectronicRegistrationPresent'
+    NOT_CONFIRMED = 'NotConfirmed'
+    VOIDED = 'Voided'
+    RETURNED = 'Returned'
+    PLACES_RETURNED = 'PlacesReturned'
+    VOUCHER_ISSUED = 'VoucherIssued'
 
 
 class DiscountType:

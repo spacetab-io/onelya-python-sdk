@@ -404,7 +404,7 @@ class RailwayReservationResponse(object):
         self.fare = json_data.get('Fare', None)
         self.tax = json_data.get('Tax', None)
         self.reservation_number = json_data.get('ReservationNumber', None)
-        self.confirm_till = json_data.get('ConfirmTill', None)
+        self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.error_result = json_data.get('ErrorResult', None)
@@ -424,9 +424,80 @@ class OrderCreateReservationCustomerResponse(object):
         self.sex = json_data.get('Sex', None)
         self.birth_date = json_data.get('BirthDate', None)
         self.document_number = json_data.get('DocumentNumber', None)
-        self.document_valid_till = json_data.get('DocumentValidTill', None)
+        self.document_valid_till = get_datetime(json_data.get('DocumentValidTill', None))
         self.document_type = json_data.get('DocumentType', None)
         self.citizenship_code = json_data.get('CitizenshipCode', None)
         self.birth_place = json_data.get('BirthPlace', None)
+
+        self.json_data = json_data
+
+
+class OrderCustomerResponse(object):
+    def __init__(self, json_data):
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.first_name = json_data.get('FirstName', None)
+        self.middle_name = json_data.get('MiddleName', None)
+        self.last_name = json_data.get('LastName', None)
+        self.sex = json_data.get('Sex', None)
+        self.birth_date = json_data.get('BirthDate', None)
+        self.document_number = json_data.get('DocumentNumber', None)
+        self.document_valid_till = get_datetime(json_data.get('DocumentValidTill', None))
+        self.document_type = json_data.get('DocumentType', None)
+        self.citizenship_code = json_data.get('CitizenshipCode', None)
+        self.birth_place = json_data.get('BirthPlace', None)
+
+        self.json_data = json_data
+
+
+class RailwayBlankInfo(object):
+    def __init__(self, json_data):
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.number = json_data.get('Number', None)
+        self.blank_status = json_data.get('BlankStatus', None)
+        self.pending_electronic_registration = json_data.get('PendingElectronicRegistration', None)
+        self.sign_sequence = json_data.get('sign_sequence', None)
+
+        self.json_data = json_data
+
+
+class OrderItemCustomerResponseBase(object):
+    def __init__(self, json_data):
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.amount = json_data.get('Amount', None)
+        self.fare = json_data.get('Fare', None)
+        self.tax = json_data.get('Tax', None)
+        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
+        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+
+        self.json_data = json_data
+
+
+class ApiErrorResult(object):
+    def __init__(self, json_data):
+        self.code = json_data.get('Code', None)
+        self.message = json_data.get('Message', None)
+        self.message_params = json_data.get('MessageParams', None)
+
+        self.json_data = json_data
+
+
+class RailwayConfirmResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.blanks = get_array(json_data.get('Blanks', None), RailwayBlankInfo)
+
+        self.expiration_electronic_registration_date_time = get_datetime(json_data.get('ExpirationElectronicRegistrationDateTime', None))
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.amount = json_data.get('Amount', None)
+        self.fare = json_data.get('Fare', None)
+        self.tax = json_data.get('Tax', None)
+        self.confirmed = get_datetime(json_data.get('Confirmed', None))
+        self.void_till = get_datetime(json_data.get('VoidTill', None))
+        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
+        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), OrderItemCustomerResponseBase)
+        self.warnings = get_array(json_data.get('Warnings', None), ApiErrorResult)
+        self.error_result = get_item(json_data.get('ErrorResult', None), ApiErrorResult)
 
         self.json_data = json_data

@@ -71,3 +71,15 @@ class RailwayReservationRequest(object):
         self.provider_payment_form = provider_payment_form
         self.agent_reference_id = agent_reference_id
         self.agent_payment_id = agent_payment_id
+
+
+class OrderCustomerDocuments(object):
+    def __init__(self, order_customer_id: int=None, document_number: str=None, document_type: DocumentType=None,
+                 document_valid_till: datetime=None, citizenship: str=None):
+        self.order_customer_id = order_customer_id
+        self.document_number = document_number
+        self.document_type = document_type
+        self.document_valid_till = document_valid_till
+        self.citizenship = citizenship
+
+

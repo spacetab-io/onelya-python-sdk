@@ -1,11 +1,12 @@
 from ..utils import get_datetime, get_array
 from ..wrapper.requests import RequestWrapper
-from ..wrapper.types import ProlongReservationType
-from .requests import OrderFullCustomerRequest, RailwayReservationRequest
-from ..wrapper import OrderCreateReservationCustomerResponse, RailwayReservationResponse
+from ..wrapper.types import ProlongReservationType, ProviderPaymentForm
+from .requests import OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments
+from ..wrapper import OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse, RailwayConfirmResponse
 
 CREATE_METHOD = 'Order/V1/Reservation/Create'
-PROLONG_RESERVATION__METHOD = 'Order/V1/Reservation/ProlongReservation'
+PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
+CONFIRM_METHOD = 'Order/V1/Reservation/Confirm'
 
 
 class Reservation(object):
@@ -22,10 +23,18 @@ class Reservation(object):
 
     def prolong_reservation(self, order_id: int, order_item_ids: 'list of int'=None,
                             prolong_reservation_type: ProlongReservationType=ProlongReservationType.RAILWAY_THREE_HOURS_RESERVATION):
-        response = self.request_wrapper.make_request(PROLONG_RESERVATION__METHOD, order_id=order_id,
+        response = self.request_wrapper.make_request(PROLONG_RESERVATION_METHOD, order_id=order_id,
                                                      prolong_reservation_type=prolong_reservation_type,
                                                      order_item_ids=order_item_ids)
         return ProlongReservation(response)
+
+    def confirm(self, order_id: int, order_customer_ids: 'list of int'=None,
+                order_customer_documents: 'lisf of OrderCustomerDocuments'=None,
+                provider_payment_form: ProviderPaymentForm=None):
+        response = self.request_wrapper.make_request(CONFIRM_METHOD, order_id=order_id, order_customer_ids=order_customer_ids,
+                                                     order_customer_documents=order_customer_documents,
+                                                     provider_payment_form=provider_payment_form)
+        return Confirm(response)
 
 
 class CreateReservation(object):
@@ -43,5 +52,14 @@ class ProlongReservation(object):
     def __init__(self, json_data):
         self.order_id = json_data.get('OrderId', None)
         self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
+
+        self.json_data = json_data
+
+
+class Confirm(object):
+    def __init__(self, json_data):
+        self.order_id = json_data.get('OrderId', None)
+        self.customers = get_array(json_data.get('Customers', None),  OrderCustomerResponse)
+        self.confirm_results = get_array(json_data.get('ConfirmResults', None), RailwayConfirmResponse)
 
         self.json_data = json_data
