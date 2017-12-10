@@ -8,6 +8,7 @@ CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
 CONFIRM_METHOD = 'Order/V1/Reservation/Confirm'
 BLANK_METHOD = 'Order/V1/Reservation/Blank'
+CANCEL_METHOD = 'Order/V1/Reservation/Cancel'
 
 
 class Reservation(object):
@@ -43,6 +44,11 @@ class Reservation(object):
                                                      retrieve_main_services=retrieve_main_services,
                                                      retrieve_upsales=retrieve_upsales)
         return Blank(response)
+
+    def cancel(self, order_id: int, order_item_ids: 'list of int'=None, order_customer_ids: 'list of int'=None):
+        self.request_wrapper.make_request(CANCEL_METHOD, order_id=order_id, order_item_ids=order_item_ids,
+                                          order_customer_ids=order_customer_ids)
+        return True
 
 
 class CreateReservation(object):
