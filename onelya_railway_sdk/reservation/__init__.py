@@ -7,6 +7,7 @@ from ..wrapper import OrderCreateReservationCustomerResponse, RailwayReservation
 CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
 CONFIRM_METHOD = 'Order/V1/Reservation/Confirm'
+BLANK_METHOD = 'Order/V1/Reservation/Blank'
 
 
 class Reservation(object):
@@ -36,6 +37,13 @@ class Reservation(object):
                                                      provider_payment_form=provider_payment_form)
         return Confirm(response)
 
+    def blank(self, order_id: int, order_item_id: int, retrieve_main_services: bool=True, retrieve_upsales: bool=True):
+
+        response = self.request_wrapper.make_request(BLANK_METHOD, order_id=order_id, order_item_id=order_item_id,
+                                                     retrieve_main_services=retrieve_main_services,
+                                                     retrieve_upsales=retrieve_upsales)
+        return Blank(response)
+
 
 class CreateReservation(object):
     def __init__(self, json_data):
@@ -63,3 +71,15 @@ class Confirm(object):
         self.confirm_results = get_array(json_data.get('ConfirmResults', None), RailwayConfirmResponse)
 
         self.json_data = json_data
+
+
+class Blank(object):
+    def __init__(self, data):
+        self.__data = data
+
+    def save_blank(self, path):
+        open(path, 'wb').write(self.content)
+
+    @property
+    def content(self):
+        return self.__data.content

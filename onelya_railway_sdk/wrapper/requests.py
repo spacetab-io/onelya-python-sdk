@@ -8,7 +8,7 @@ class RequestWrapper(object):
 
     def make_request(self, method_name, **kwargs):
         json_data = self.__get_json_data(False, **kwargs)
-        return self.__send_request(method_name, json_data)
+        return self.session.make_api_request(method_name, json_data)
 
     def __get_json_data(self, recursive, **kwargs):
         json_data = {}
@@ -34,9 +34,6 @@ class RequestWrapper(object):
             if recursive:
                 return json_data[key]
         return json_data
-
-    def __send_request(self, method_name, json_data):
-        return self.session.make_api_request(method_name, json_data)
 
     @staticmethod
     def __get_onelya_key(key):

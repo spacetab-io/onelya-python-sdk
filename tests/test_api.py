@@ -12,6 +12,8 @@ from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinG
                                               CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
                                               PricingTariffType, RailwayPassengerCategory, ProlongReservationType)
 
+PDF_PATH = 'tests/data/Order/Reservation/Blank.pdf'
+
 
 class MockSession(object):
     def __init__(self):
@@ -26,6 +28,24 @@ class MockSession(object):
 
     def json(self):
         return self.mock_json
+
+
+class MockFileSession(object):
+    def __init__(self):
+        self.headers = {}
+        self.auth = None
+        self.__content = None
+
+    def post(self, url, data=None, timeout=None):
+        self.__content = open(PDF_PATH, 'rb').read()
+        return self
+
+    def json(self):
+        raise ValueError
+
+    @property
+    def content(self):
+        return self.__content
 
 
 class TestAPI(unittest.TestCase):
@@ -140,6 +160,17 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Order/Reservation/Confirm.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(create)
+
+    @mock.patch('requests.Session', MockFileSession)
+    def test_reservation_blank(self):
+        api = API(self.username, self.password, self.pos)
+        blank = api.reservation.blank(1, 2)
+
+        input_data = json.loads(open('tests/data/Order/Reservation/Blank.in.json', 'r', encoding='utf8').read())
+        pdf_file = open(PDF_PATH, 'rb').read()
+
+        self.assertEquals(input_data, api.get_last_request_data())
+        self.assertEquals(blank.content, pdf_file)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}

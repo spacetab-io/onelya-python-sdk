@@ -24,6 +24,12 @@ class Session(object):
 
     def make_api_request(self, method, data):
         response = self.__send_api_request(method, data)
+        try:
+            response = response.json()
+        except ValueError:
+            self.last_response_data = response.content
+            return response
+
         self.last_response_data = response
 
         if 'Code' in response:
@@ -34,4 +40,4 @@ class Session(object):
         url = '{}{}'.format(Session.API_URL, method)
         self.last_request_data = data
         response = self.requests_session.post(url, data=json.dumps(data), timeout=120)
-        return response.json()
+        return response
