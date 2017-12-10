@@ -153,13 +153,13 @@ class TestAPI(unittest.TestCase):
         self.assert_json_with_class(prolong_reservation)
 
     @mock.patch('requests.Session', MockSession)
-    def test_reservation_create(self):
+    def test_reservation_confirm(self):
         api = API(self.username, self.password, self.pos)
-        create = api.reservation.confirm(51978, provider_payment_form=ProviderPaymentForm.CARD)
+        confirm = api.reservation.confirm(51978, provider_payment_form=ProviderPaymentForm.CARD)
 
         input_data = json.loads(open('tests/data/Order/Reservation/Confirm.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
-        self.assert_json_with_class(create)
+        self.assert_json_with_class(confirm)
 
     @mock.patch('requests.Session', MockFileSession)
     def test_reservation_blank(self):
@@ -204,6 +204,7 @@ class TestAPI(unittest.TestCase):
                     self.assertTrue(wrapper.json_data[key] == var)
                 else:
                     self.assertTrue(var.json_data == wrapper.json_data[key])
+                    self.assert_json_with_class(var)
             else:
                 value = self.get_value(var)
                 self.assertTrue(wrapper.json_data[key] == value)
@@ -223,6 +224,7 @@ class TestAPI(unittest.TestCase):
                             self.assertTrue(data_item[key] == var)
                         else:
                             self.assertTrue(var.json_data == data_item[key])
+                            self.assert_json_with_class(var)
                     else:
                         value = self.get_value(var)
                         self.assertTrue(data_item[key] == value)

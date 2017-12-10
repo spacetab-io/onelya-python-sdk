@@ -169,8 +169,8 @@ class TrainInfo(object):
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.arrival_date_times = get_datetime_array(json_data.get('ArrivalDateTimes', None))
         self.departure_date_from_forming_station = get_datetime(json_data.get('DepartureDateFromFormingStation', None))
-        self.departure_stopTime = json_data.get('DepartureStopTime', None)
-        self.arrivalStopTime = json_data.get('ArrivalStopTime', None)
+        self.departure_stop_time = json_data.get('DepartureStopTime', None)
+        self.arrival_stop_time = json_data.get('ArrivalStopTime', None)
         self.trip_duration = json_data.get('TripDuration', None)
         self.trip_distance = json_data.get('TripDistance', None)
         self.is_suburban = json_data.get('IsSuburban', None)
@@ -264,10 +264,6 @@ class TrainPricingResponse(object):
         self.departure_time_description = json_data.get('DepartureTimeDescription', None)
         self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
         self.is_from_ukrain = json_data.get('IsFromUkrain', None)
-        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
-        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
-        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
-
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
@@ -466,8 +462,8 @@ class OrderItemCustomerResponseBase(object):
         self.amount = json_data.get('Amount', None)
         self.fare = json_data.get('Fare', None)
         self.tax = json_data.get('Tax', None)
-        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
-        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
 
         self.json_data = json_data
 
@@ -494,8 +490,8 @@ class RailwayConfirmResponse(object):
         self.tax = json_data.get('Tax', None)
         self.confirmed = get_datetime(json_data.get('Confirmed', None))
         self.void_till = get_datetime(json_data.get('VoidTill', None))
-        self.client_fee_calculation = json_data.get('ClientFeeCalculation', None)
-        self.agent_fee_calculation = json_data.get('AgentFeeCalculation', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), OrderItemCustomerResponseBase)
         self.warnings = get_array(json_data.get('Warnings', None), ApiErrorResult)
         self.error_result = get_item(json_data.get('ErrorResult', None), ApiErrorResult)
