@@ -3,14 +3,14 @@ import json
 import mock
 import unittest
 from datetime import datetime
-from onelya_railway_sdk.utils import set_datetime
 from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
+from onelya_railway_sdk.railway_search import TrainPricing, TrainPriceInfo, Schedule
+from onelya_railway_sdk.reservation.requests import (OrderFullCustomerRequest, RailwayReservationRequest,
+                                                     RailwayPassengerRequest)
 from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
-                                              CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm, PricingTariffType)
-from onelya_railway_sdk.railway_search.wrapper import TrainPricing, TrainPriceInfo, Schedule
-from onelya_railway_sdk.reservation.wrapper import (OrderFullCustomerRequest, RailwayReservationRequest,
-                                                    RailwayPassengerRequest, RailwayPassengerCategory)
+                                              CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
+                                              PricingTariffType, RailwayPassengerCategory)
 
 
 class MockSession(object):
