@@ -1,5 +1,9 @@
 
 
+class ProlongReservationType:
+    RAILWAY_THREE_HOURS_RESERVATION = 'RailwayThreeHoursReservation'
+
+
 class CarGrouping:
     GROUP = 'Group'
     DONT_GROUP = 'DontGroup'

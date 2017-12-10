@@ -10,7 +10,7 @@ from onelya_railway_sdk.reservation.requests import (OrderFullCustomerRequest, R
                                                      RailwayPassengerRequest)
 from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
                                               CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
-                                              PricingTariffType, RailwayPassengerCategory)
+                                              PricingTariffType, RailwayPassengerCategory, ProlongReservationType)
 
 
 class MockSession(object):
@@ -122,6 +122,15 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Railway/Reservation/Create.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(create)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_prolong_reservation(self):
+        api = API(self.username, self.password, self.pos)
+        prolong_reservation = api.railway_reservation.prolong_reservation(51978, None)
+
+        input_data = json.loads(open('tests/data/Railway/Reservation/ProlongReservation.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
+        self.assert_json_with_class(prolong_reservation)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
