@@ -1,14 +1,17 @@
-from ..utils import get_datetime, get_array
 from ..wrapper.requests import RequestWrapper
+from .requests import ServiceReturnAmountRequest
+from ..utils import get_datetime, get_array, get_item
 from ..wrapper.types import ProlongReservationType, ProviderPaymentForm
 from .requests import OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments
-from ..wrapper import OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse, RailwayConfirmResponse
+from ..wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
+                       RailwayConfirmResponse, RailwayReturnAmountResponse)
 
 CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
 CONFIRM_METHOD = 'Order/V1/Reservation/Confirm'
 BLANK_METHOD = 'Order/V1/Reservation/Blank'
 CANCEL_METHOD = 'Order/V1/Reservation/Cancel'
+RETURN_AMOUNT_METHOD = 'Order/V1/Reservation/ReturnAmount'
 
 
 class Reservation(object):
@@ -50,6 +53,12 @@ class Reservation(object):
                                           order_customer_ids=order_customer_ids)
         return True
 
+    def return_amount(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None):
+        response = self.request_wrapper.make_request(RETURN_AMOUNT_METHOD,
+                                                     service_return_amount_request=ServiceReturnAmountRequest(
+                                                         check_document_number, order_item_id, order_item_blank_ids))
+        return ReturnAmount(response)
+
 
 class CreateReservation(object):
     def __init__(self, json_data):
@@ -89,3 +98,11 @@ class Blank(object):
     @property
     def content(self):
         return self.__data.content
+
+
+class ReturnAmount(object):
+    def __init__(self, json_data):
+        self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), RailwayReturnAmountResponse)
+
+        self.json_data = json_data
+

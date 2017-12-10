@@ -83,3 +83,9 @@ class OrderCustomerDocuments(object):
         self.citizenship = citizenship
 
 
+class ServiceReturnAmountRequest(object):
+    def __init__(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None):
+        self.type = 'ApiContracts.Railway.V1.Messages.Return.RailwayReturnAmountRequest, ApiContracts'
+        self.check_document_number = check_document_number
+        self.order_item_id = order_item_id
+        self.order_item_blank_ids = order_item_blank_ids

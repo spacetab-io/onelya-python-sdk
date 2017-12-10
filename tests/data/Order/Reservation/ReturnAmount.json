@@ -1,0 +1,18 @@
+{
+  "ServiceReturnResponse": {
+    "$type": "ApiContracts.Railway.V1.Messages.Return.RailwayReturnAmountResponse, ApiContracts",
+    "Blanks": [
+      {
+        "PurchaseOrderItemBlankId": 51948,
+        "ReturnOrderItemBlankId": 0,
+        "Amount": 7581.7,
+        "Penalty": 0.0,
+        "VatRateValues": null,
+        "ServicePrice": 0.0
+      }
+    ],
+    "Amount": 7581.7,
+    "ClientFeeCalculation": null,
+    "AgentFeeCalculation": null
+  }
+}

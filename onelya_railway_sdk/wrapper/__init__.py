@@ -497,3 +497,26 @@ class RailwayConfirmResponse(object):
         self.error_result = get_item(json_data.get('ErrorResult', None), ApiErrorResult)
 
         self.json_data = json_data
+
+
+class RailwayReturnBlankResponse(object):
+    def __init__(self, json_data):
+        self.purchase_order_item_blank_id = json_data.get('PurchaseOrderItemBlankId', None)
+        self.return_order_item_blank_id = json_data.get('ReturnOrderItemBlankId', None)
+        self.amount = json_data.get('Amount', None)
+        self.penalty = json_data.get('Penalty', None)
+        self.vat_rate_values = get_array(json_data.get('VatRateValues', None), RateValue)
+        self.service_price = json_data.get('ServicePrice', None)
+
+        self.json_data = json_data
+
+
+class RailwayReturnAmountResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.blanks = get_array(json_data.get('Blanks', None), RailwayReturnBlankResponse)
+        self.amount = json_data.get('Amount', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+
+        self.json_data = json_data

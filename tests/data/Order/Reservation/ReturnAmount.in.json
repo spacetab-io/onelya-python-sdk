@@ -1,0 +1,10 @@
+{
+  "ServiceReturnAmountRequest": {
+    "$type": "ApiContracts.Railway.V1.Messages.Return.RailwayReturnAmountRequest, ApiContracts",
+    "OrderItemBlankIds": [
+      51948
+    ],
+    "CheckDocumentNumber": "4601123450",
+    "OrderItemId": 52159
+  }
+}
