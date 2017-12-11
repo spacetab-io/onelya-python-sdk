@@ -89,3 +89,13 @@ class ServiceReturnAmountRequest(object):
         self.check_document_number = check_document_number
         self.order_item_id = order_item_id
         self.order_item_blank_ids = order_item_blank_ids
+
+
+class ServiceAutoReturnRequest(object):
+    def __init__(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None,
+                 agent_reference_id: str=None):
+        self.type = 'ApiContracts.Railway.V1.Messages.Return.RailwayAutoReturnRequest, ApiContracts'
+        self.check_document_number = check_document_number
+        self.order_item_id = order_item_id
+        self.order_item_blank_ids = order_item_blank_ids
+        self.agent_reference_id = agent_reference_id

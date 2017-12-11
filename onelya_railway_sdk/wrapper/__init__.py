@@ -520,3 +520,19 @@ class RailwayReturnAmountResponse(object):
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
 
         self.json_data = json_data
+
+
+class RailwayAutoReturnResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.blanks = get_array(json_data.get('Blanks', None), RailwayReturnBlankResponse)
+        self.amount = json_data.get('Amount', None)
+        self.fare = json_data.get('Fare', None)
+        self.tax = json_data.get('Tax', None)
+        self.confirmed = get_datetime(json_data.get('Confirmed', None))
+        self.return_order_item_id = json_data.get('ReturnOrderItemId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+
+        self.json_data = json_data

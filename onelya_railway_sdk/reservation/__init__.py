@@ -2,9 +2,10 @@ from ..wrapper.requests import RequestWrapper
 from .requests import ServiceReturnAmountRequest
 from ..utils import get_datetime, get_array, get_item
 from ..wrapper.types import ProlongReservationType, ProviderPaymentForm
-from .requests import OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments
+from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
+                       ServiceAutoReturnRequest)
 from ..wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
-                       RailwayConfirmResponse, RailwayReturnAmountResponse)
+                       RailwayConfirmResponse, RailwayReturnAmountResponse, RailwayAutoReturnResponse)
 
 CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
@@ -12,6 +13,7 @@ CONFIRM_METHOD = 'Order/V1/Reservation/Confirm'
 BLANK_METHOD = 'Order/V1/Reservation/Blank'
 CANCEL_METHOD = 'Order/V1/Reservation/Cancel'
 RETURN_AMOUNT_METHOD = 'Order/V1/Reservation/ReturnAmount'
+AUTO_RETURN_METHOD = 'Order/V1/Reservation/AutoReturn'
 
 
 class Reservation(object):
@@ -59,6 +61,14 @@ class Reservation(object):
                                                          check_document_number, order_item_id, order_item_blank_ids))
         return ReturnAmount(response)
 
+    def auto_return(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None,
+                    agent_reference_id: str=None):
+        response = self.request_wrapper.make_request(AUTO_RETURN_METHOD,
+                                                     service_auto_return_request=ServiceAutoReturnRequest(
+                                                         check_document_number, order_item_id, order_item_blank_ids,
+                                                         agent_reference_id))
+        return AutoReturn(response)
+
 
 class CreateReservation(object):
     def __init__(self, json_data):
@@ -103,6 +113,13 @@ class Blank(object):
 class ReturnAmount(object):
     def __init__(self, json_data):
         self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), RailwayReturnAmountResponse)
+
+        self.json_data = json_data
+
+
+class AutoReturn(object):
+    def __init__(self, json_data):
+        self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), RailwayAutoReturnResponse)
 
         self.json_data = json_data
 

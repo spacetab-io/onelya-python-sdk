@@ -1,0 +1,11 @@
+{
+  "ServiceAutoReturnRequest": {
+    "$type": "ApiContracts.Railway.V1.Messages.Return.RailwayAutoReturnRequest, ApiContracts",
+    "OrderItemBlankIds": [
+      51946
+    ],
+    "CheckDocumentNumber": "4601123450",
+    "OrderItemId": 52157,
+    "AgentReferenceId": null
+  }
+}

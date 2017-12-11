@@ -190,6 +190,15 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.get_last_request_data())
         self.assert_json_with_class(return_amount)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_auto_return(self):
+        api = API(self.username, self.password, self.pos)
+        auto_return = api.reservation.auto_return('4601123450', 52157, [51946])
+
+        input_data = json.loads(open('tests/data/Order/Reservation/AutoReturn.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.get_last_request_data())
+        self.assert_json_with_class(auto_return)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)
