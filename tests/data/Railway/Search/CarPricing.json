@@ -64,7 +64,7 @@
     "ArrivalDateTimes": [
       "2016-11-02T08:36:00"
     ],
-    "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
+    "DepartureDateFromFormingStation": "1970-01-01T03:00:00",
     "DepartureStopTime": 0,
     "ArrivalStopTime": 0,
     "TripDuration": 536,
