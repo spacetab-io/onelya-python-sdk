@@ -689,3 +689,21 @@ class ShortOrderInfo(object):
         self.pos_sys_name = json_data.get('PosSysName', None)
 
         self.json_data = json_data
+
+
+class ServiceUpsaleOperationItemResult(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.upsale_order_item_id = json_data.get('UpsaleOrderItemId', None)
+        self.amount = json_data.get('Amount', None)
+        self.is_succeeded = json_data.get('IsSucceeded', None)
+
+        self.json_data = json_data
+
+
+class CustomerUpsaleOperationResult(object):
+    def __init__(self, json_data):
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.items = get_array(json_data.get('Items', None), ServiceUpsaleOperationItemResult)
+
+        self.json_data = json_data

@@ -1,0 +1,27 @@
+{
+  "OrderId": 51978,
+  "UpsaleResults": [
+    {
+      "OrderCustomerId": 1389,
+      "Items": [
+        {
+          "$type": "ApiContracts.Insurance.V1.Messages.InsuranceOperationItemResult, ApiContracts",
+          "UpsaleOrderItemId": 52920,
+          "Amount": 100.0,
+          "IsSucceeded": true
+        }
+      ]
+    },
+    {
+      "OrderCustomerId": 1390,
+      "Items": [
+        {
+          "$type": "ApiContracts.Insurance.V1.Messages.InsuranceOperationItemResult, ApiContracts",
+          "UpsaleOrderItemId": 52921,
+          "Amount": 100.0,
+          "IsSucceeded": true
+        }
+      ]
+    }
+  ]
+}

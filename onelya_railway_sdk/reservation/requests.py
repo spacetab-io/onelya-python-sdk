@@ -99,3 +99,19 @@ class ServiceAutoReturnRequest(object):
         self.order_item_id = order_item_id
         self.order_item_blank_ids = order_item_blank_ids
         self.agent_reference_id = agent_reference_id
+
+
+class ProductRequest(object):
+    def __init__(self, package: str):
+        self.type = 'ApiContracts.Insurance.V1.Products.Travel.AddUpsale.AviaAddUpsaleRequest, ApiContracts'
+        self.package = package
+
+
+class ServiceAddUpsaleRequest(object):
+    def __init__(self, supplier: str, order_customer_ids: 'list of int', product_request: ProductRequest,
+                 agent_payment_id: int=None):
+        self.type = 'ApiContracts.Insurance.V1.Messages.InsuranceAddUpsaleRequest, ApiContracts'
+        self.supplier = supplier
+        self.order_customer_ids = order_customer_ids
+        self.product_request = product_request
+        self.agent_payment_id = agent_payment_id

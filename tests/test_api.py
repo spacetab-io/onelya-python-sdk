@@ -7,7 +7,7 @@ from onelya_railway_sdk.api import API
 from onelya_railway_sdk.exceptions import OnelyaAPIError
 from onelya_railway_sdk.search import TrainPricing, TrainPriceInfo, Schedule
 from onelya_railway_sdk.reservation.requests import (OrderFullCustomerRequest, RailwayReservationRequest,
-                                                     RailwayPassengerRequest)
+                                                     RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest)
 from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
                                               CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
                                               PricingTariffType, RailwayPassengerCategory, OperationType)
@@ -198,6 +198,26 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Order/Reservation/AutoReturn.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.last_request)
         self.assert_json_with_class(auto_return)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_add_upsale(self):
+        api = API(self.username, self.password, self.pos)
+        product_request = ProductRequest('AccidentAndLuggageLossAndDamage')
+        service_add_upsale_request = ServiceAddUpsaleRequest('Igs', [1389, 1390], product_request)
+        add_upsale = api.reservation.add_upsale(51978, 52919, service_add_upsale_request)
+
+        input_data = json.loads(open('tests/data/Order/Reservation/AddUpsale.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(add_upsale)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_refuse_upsale(self):
+        api = API(self.username, self.password, self.pos)
+        refuse_upsale = api.reservation.refuse_upsale(1, 2, [1, 2])
+
+        input_data = json.loads(open('tests/data/Order/Reservation/RefuseUpsale.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(refuse_upsale)
 
     @mock.patch('requests.Session', MockSession)
     def test_order_info(self):

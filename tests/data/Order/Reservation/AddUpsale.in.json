@@ -1,0 +1,17 @@
+{
+  "OrderId": 51978,
+  "OrderItemId": 52919,
+  "ServiceAddUpsaleRequest": {
+    "$type": "ApiContracts.Insurance.V1.Messages.InsuranceAddUpsaleRequest, ApiContracts",
+    "Supplier": "Igs",
+    "OrderCustomerIds": [
+      1389,
+      1390
+    ],
+    "ProductRequest": {
+      "$type": "ApiContracts.Insurance.V1.Products.Travel.AddUpsale.AviaAddUpsaleRequest, ApiContracts",
+      "Package": "AccidentAndLuggageLossAndDamage"
+    },
+    "AgentPaymentId": null
+  }
+}
