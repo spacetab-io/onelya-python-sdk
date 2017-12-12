@@ -1,0 +1,12 @@
+{
+  "Countries": [
+    {
+      "CountryId": 1,
+      "Alpha2Code": "RU",
+      "NameRu": "Россия",
+      "NameEn": "Russia",
+      "IsActive": true,
+      "Updated": "2016-11-12T00:00:00"
+    }
+  ]
+}

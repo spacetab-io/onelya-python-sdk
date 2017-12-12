@@ -5,8 +5,10 @@ from ..utils import set_datetime
 class RequestWrapper(object):
     def __init__(self, session):
         self.session = session
+        self.method_name = None
 
     def make_request(self, method_name, **kwargs):
+        self.method_name = method_name
         json_data = self.__get_json_data(False, **kwargs)
         return self.session.make_api_request(method_name, json_data)
 
@@ -35,9 +37,15 @@ class RequestWrapper(object):
                 return json_data[key]
         return json_data
 
-    @staticmethod
-    def __get_onelya_key(key):
-        if key == 'type':
+    def __get_onelya_key(self, key):
+        """Getting json key
+        Also converting type -> $type if method not from references
+
+        :param key:
+        :param method_name:
+        :return:
+        """
+        if key == 'type' and 'References' not in self.method_name:
             return '$type'
         new_key = key[0].upper()
         i = 1

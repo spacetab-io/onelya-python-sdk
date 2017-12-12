@@ -237,6 +237,42 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.last_request)
         self.assert_json_with_class(order_list)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_references_transport_nodes(self):
+        api = API(self.username, self.password, self.pos)
+        transport_nodes = api.references.transport_nodes()
+
+        input_data = json.loads(open('tests/data/Info/References/TransportNodes.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(transport_nodes)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_references_cities(self):
+        api = API(self.username, self.password, self.pos)
+        cities = api.references.cities()
+
+        input_data = json.loads(open('tests/data/Info/References/Cities.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(cities)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_references_countries(self):
+        api = API(self.username, self.password, self.pos)
+        countries = api.references.countries()
+
+        input_data = json.loads(open('tests/data/Info/References/Countries.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(countries)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_references_regions(self):
+        api = API(self.username, self.password, self.pos)
+        regions = api.references.regions()
+
+        input_data = json.loads(open('tests/data/Info/References/Regions.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(regions)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)

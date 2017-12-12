@@ -89,6 +89,13 @@ class RailwayPassengerCategory:
     BABY_WITHOUT_PLACE = 'BabyWithoutPlace'
 
 
+class TransportNodeType:
+    AIRPORT = 'Airport'
+    RAILWAY_STATION = 'RailwayStation'
+    BUS_STOP = 'BusStop'
+    AEROEXPRESS_STATION = 'AeroexpressStation'
+
+
 class StationTimeDescription:
     NO_VALUE = 'NoValue'
     MOSCOW = 'Moscow'

@@ -707,3 +707,72 @@ class CustomerUpsaleOperationResult(object):
         self.items = get_array(json_data.get('Items', None), ServiceUpsaleOperationItemResult)
 
         self.json_data = json_data
+
+
+class GeoPoint(object):
+    def __init__(self, json_data):
+        self.latitude = json_data.get('Latitude', None)
+        self.longitude = json_data.get('Longitude', None)
+
+        self.json_data = json_data
+
+
+class TransportNode(object):
+    def __init__(self, json_data):
+        self.transport_node_id = json_data.get('TransportNodeId', None)
+        self.country_id = json_data.get('CountryId', None)
+        self.region_id = json_data.get('RegionId', None)
+        self.city_id = json_data.get('CityId', None)
+        self.code = json_data.get('Code', None)
+        self.name_ru = json_data.get('NameRu', None)
+        self.name_en = json_data.get('NameEn', None)
+        self.type = json_data.get('Type', None)
+        self.popularity_index = json_data.get('PopularityIndex', None)
+        self.description = json_data.get('Description', None)
+        self.is_active = json_data.get('IsActive', None)
+        self.updated = get_datetime(json_data.get('Updated', None))
+        self.utc_time_offset = json_data.get('UtcTimeOffset', None)
+        self.location = get_item(json_data.get('Location', None), GeoPoint)
+
+        self.json_data = json_data
+
+
+class City(object):
+    def __init__(self, json_data):
+        self.city_id = json_data.get('CityId', None)
+        self.country_id = json_data.get('CountryId', None)
+        self.region_id = json_data.get('RegionId', None)
+        self.sys_code = json_data.get('SysCode', None)
+        self.code = json_data.get('Code', None)
+        self.name_ru = json_data.get('NameRu', None)
+        self.name_en = json_data.get('NameEn', None)
+        self.popularity_index = json_data.get('PopularityIndex', None)
+        self.is_active = json_data.get('IsActive', None)
+        self.updated = get_datetime(json_data.get('Updated', None))
+
+        self.json_data = json_data
+
+
+class Country(object):
+    def __init__(self, json_data):
+        self.country_id = json_data.get('CountryId', None)
+        self.alpha2_code = json_data.get('Alpha2Code', None)
+        self.name_ru = json_data.get('NameRu', None)
+        self.name_en = json_data.get('NameEn', None)
+        self.is_active = json_data.get('IsActive', None)
+        self.updated = get_datetime(json_data.get('Updated', None))
+
+        self.json_data = json_data
+
+
+class Region(object):
+    def __init__(self, json_data):
+        self.region_id = json_data.get('RegionId', None)
+        self.country_id = json_data.get('CountryId', None)
+        self.iso_code = json_data.get('IsoCode', None)
+        self.name_ru = json_data.get('NameRu', None)
+        self.name_en = json_data.get('NameEn', None)
+        self.is_active = json_data.get('IsActive', None)
+        self.updated = get_datetime(json_data.get('Updated', None))
+
+        self.json_data = json_data

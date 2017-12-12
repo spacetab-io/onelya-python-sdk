@@ -1,6 +1,7 @@
 from .info import Info
 from .search import Search
 from .session import Session
+from .references import References
 from .reservation import Reservation
 
 
@@ -10,6 +11,7 @@ class API(object):
         self.search = Search(self.__session)
         self.reservation = Reservation(self.__session)
         self.info = Info(self.__session)
+        self.references = References(self.__session)
 
     @property
     def last_response(self):
