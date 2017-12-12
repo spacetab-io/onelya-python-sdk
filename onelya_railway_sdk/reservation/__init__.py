@@ -19,8 +19,7 @@ AUTO_RETURN_METHOD = 'Order/V1/Reservation/AutoReturn'
 class Reservation(object):
 
     def __init__(self, session):
-        self.session = session
-        self.request_wrapper = RequestWrapper(self.session)
+        self.request_wrapper = RequestWrapper(session)
 
     def create(self, customers: OrderFullCustomerRequest, reservation_items: RailwayReservationRequest,
                contact_phone=None, contact_emails=None):

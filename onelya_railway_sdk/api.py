@@ -9,10 +9,12 @@ class API(object):
         self.search = Search(self.__session)
         self.reservation = Reservation(self.__session)
 
-    def get_last_response_data(self):
+    @property
+    def last_response(self):
         return self.__session.last_response_data
-
-    def get_last_request_data(self):
+    
+    @property
+    def last_request(self):
         return self.__session.last_request_data
 
 
