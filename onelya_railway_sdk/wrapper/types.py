@@ -24,6 +24,23 @@ class RzhdCardTypes:
     UNIVERSAL_RZHD_CARD = 'UniversalRzhdCard'
 
 
+class RailwayServiceType:
+    TICKETS = 'Tickets'
+    TALONS = 'Talons'
+
+
+class SimpleOperationStatus:
+    ERROR = 'Error'
+    IN_PROCESS = 'InProcess'
+    SUCCEEDED = 'Succeeded'
+
+
+class OperationType:
+    PURCHASE = 'Purchase'
+    RETURN = 'Return'
+    EXCHANGE = 'Exchange'
+
+
 class TransportType:
     TRAIN = 'Train'
     BUS = 'Bus'
@@ -118,6 +135,17 @@ class BlankStatus:
     RETURNED = 'Returned'
     PLACES_RETURNED = 'PlacesReturned'
     VOUCHER_ISSUED = 'VoucherIssued'
+
+
+class DetailedOperationStatus:
+    ERROR = 'Error'
+    CREATED = 'Created'
+    RESERVED = 'Reserved'
+    IN_PROCESS_OF_CANCELLING = 'InProcessOfCancelling'
+    IN_PROCESS_OF_FINALIZING = 'InProcessOfFinalizing'
+    IN_PROCESS_OF_VOIDING = 'InProcessOfVoiding'
+    IN_PROCESS = 'InProcess'
+    SUCCEEDED = 'Succeeded'
 
 
 class DiscountType:

@@ -1,0 +1,46 @@
+{
+  "Orders": [
+    {
+      "OrderItems": [
+        {
+          "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayShortOrderItemInfo, ApiContracts",
+          "ServiceType": "Tickets",
+          "PlaceQuantity": 1,
+          "OrderItemBlanks": null,
+          "OrderId": 51978,
+          "AgentReferenceId": null,
+          "OrderItemId": 52157,
+          "PosSysName": "ThePos",
+          "Amount": 9481.7,
+          "ReservationNumber": "71234567890000",
+          "OperationType": "Purchase",
+          "SimpleOperationStatus": "Succeeded",
+          "DetailedOperationStatus": "Error",
+          "DepartureDateTime": "2016-11-01T23:40:00",
+          "CreateDateTime": "2016-10-27T18:50:04",
+          "ConfirmTimeLimit": "2016-10-27T19:04:04",
+          "ConfirmDateTime": "2016-10-27T19:00:15",
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "AgentFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "ProviderPaymentForm": null,
+          "IsExternallyLoaded": false
+        }
+      ],
+      "OrderId": 51978,
+      "Amount": 9481.7,
+      "ContactPhone": "+79123456789",
+      "ContactEmails": [
+        "test@test.ru"
+      ],
+      "Created": "0001-01-01T00:00:00",
+      "Confirmed": "0001-01-01T00:00:00",
+      "PosSysName": null
+    }
+  ]
+}

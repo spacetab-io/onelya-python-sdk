@@ -536,3 +536,156 @@ class RailwayAutoReturnResponse(object):
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
 
         self.json_data = json_data
+
+
+class OrderCustomerInfo(object):
+    def __init__(self, json_data):
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.first_name = json_data.get('FirstName', None)
+        self.middle_name = json_data.get('MiddleName', None)
+        self.last_name = json_data.get('LastName', None)
+        self.sex = json_data.get('Sex', None)
+        self.birth_date = get_datetime(json_data.get('BirthDate', None))
+        self.document_number = json_data.get('DocumentNumber', None)
+        self.document_valid_till = get_datetime(json_data.get('DocumentValidTill', None))
+        self.document_type = json_data.get('DocumentType', None)
+        self.citizenship_code = json_data.get('CitizenshipCode', None)
+
+        self.json_data = json_data
+
+
+class RailwayOrderItemCustomerInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.places = json_data.get('Places', None)
+        self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.order_item_customer_id = json_data.get('OrderItemCustomerId', None)
+        self.amount = json_data.get('Amount', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+
+        self.json_data = json_data
+
+
+class RailwayOrderItemBlankInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.voucher_number = json_data.get('VoucherNumber', None)
+        self.base_fare = json_data.get('BaseFare', None)
+        self.additional_price = json_data.get('AdditionalPrice', None)
+        self.service_price = json_data.get('ServicePrice', None)
+        self.vat_rate_values = get_array(json_data.get('VatRateValues', None), RateValue)
+        self.tariff_type = json_data.get('TariffType', None)
+        self.blank_status = json_data.get('BlankStatus', None)
+        self.is_electronic_registration_set = json_data.get('IsElectronicRegistrationSet', None)
+        self.is_meal_option_possible = json_data.get('IsMealOptionPossible', None)
+        self.pending_electronic_registration = json_data.get('PendingElectronicRegistration', None)
+        self.electronic_registration_set_date_time = get_datetime(json_data.get('ElectronicRegistrationSetDateTime', None))
+        self.sign_sequence = json_data.get('SignSequence', None)
+        self.tariff_info = get_item(json_data.get('TariffInfo', None), TicketTariffInfo)
+        self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId', None)
+        self.blank_number = json_data.get('BlankNumber', None)
+        self.amount = json_data.get('Amount', None)
+
+        self.json_data = json_data
+
+
+class RailwayFullOrderItemInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.service_type = json_data.get('ServiceType', None)
+        self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.origin_station_name = json_data.get('OriginStationName', None)
+        self.destination_station_name = json_data.get('DestinationStationName', None)
+        self.train_number = json_data.get('TrainNumber', None)
+        self.booking_train_number = json_data.get('BookingTrainNumber', None)
+        self.train_number_to_get_route = json_data.get('TrainNumberToGetRoute', None)
+        self.car_number = json_data.get('CarNumber', None)
+        self.car_type = json_data.get('CarType', None)
+        self.electronic_registration_expiration_date_time = get_datetime(json_data.get('ElectronicRegistrationExpirationDateTime', None))
+        self.place_reservation_type = json_data.get('PlaceReservationType', None)
+        self.service_class = json_data.get('ServiceClass', None)
+        self.additional_information = json_data.get('AdditionalInformation', None)
+        self.carrier_description = json_data.get('CarrierDescription', None)
+        self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), RailwayOrderItemCustomerInfo)
+        self.order_item_blanks = get_array(json_data.get('OrderItemBlanks', None), RailwayOrderItemBlankInfo)
+
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
+        self.origin_location_code = json_data.get('OriginLocationCode', None)
+        self.origin_location_name = json_data.get('OriginLocationName', None)
+        self.destination_location_code = json_data.get('DestinationLocationCode', None)
+        self.destination_location_name = json_data.get('DestinationLocationName', None)
+        self.order_id = json_data.get('OrderId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.amount = json_data.get('Amount', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.operation_type = json_data.get('OperationType', None)
+        self.simple_operation_status = json_data.get('SimpleOperationStatus', None)
+        self.detailed_operation_status = json_data.get('DetailedOperationStatus', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.create_date_time = get_datetime(json_data.get('CreateDateTime', None))
+        self.confirm_time_limit = get_datetime(json_data.get('ConfirmTimeLimit', None))
+        self.confirm_date_time = get_datetime(json_data.get('ConfirmDateTime', None))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.provider_payment_form = json_data.get('ProviderPaymentForm', None)
+        self.is_externally_loaded = json_data.get('IsExternallyLoaded', None)
+
+        self.json_data = json_data
+
+
+class RailwayShortOrderItemBlankInfo(object):
+    def __init__(self, json_data):
+        self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId', None)
+        self.blank_number = json_data.get('BlankNumber', None)
+        self.amount = json_data.get('Amount', None)
+
+        self.json_data = json_data
+
+
+class RailwayShortOrderItemInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.service_type = json_data.get('ServiceType', None)
+        self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.order_item_blanks = get_array(json_data.get('OrderItemBlanks', None), RailwayShortOrderItemBlankInfo)
+        self.order_id = json_data.get('OrderId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.amount = json_data.get('Amount', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.operation_type = json_data.get('OperationType', None)
+        self.simple_operation_status = json_data.get('SimpleOperationStatus', None)
+        self.detailed_operation_status = json_data.get('DetailedOperationStatus', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.create_date_time = get_datetime(json_data.get('CreateDateTime', None))
+        self.confirm_time_limit = get_datetime(json_data.get('ConfirmTimeLimit', None))
+        self.confirm_date_time = get_datetime(json_data.get('ConfirmDateTime', None))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.provider_payment_form = json_data.get('ProviderPaymentForm', None)
+        self.is_externally_loaded = json_data.get('IsExternallyLoaded', None)
+
+        self.json_data = json_data
+
+
+class ShortOrderInfo(object):
+    def __init__(self, json_data):
+        self.order_items = get_array(json_data.get('OrderItems', None), RailwayShortOrderItemInfo)
+        self.order_id = json_data.get('OrderId', None)
+        self.amount = json_data.get('Amount', None)
+        self.contact_phone = json_data.get('ContactPhone', None)
+        self.contact_emails = json_data.get('ContactEmails', None)
+        self.created = get_datetime(json_data.get('Created', None))
+        self.confirmed = get_datetime(json_data.get('Confirmed', None))
+        self.pos_sys_name = json_data.get('PosSysName', None)
+
+        self.json_data = json_data

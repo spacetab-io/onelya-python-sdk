@@ -10,7 +10,7 @@ from onelya_railway_sdk.reservation.requests import (OrderFullCustomerRequest, R
                                                      RailwayPassengerRequest)
 from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
                                               CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
-                                              PricingTariffType, RailwayPassengerCategory, ProlongReservationType)
+                                              PricingTariffType, RailwayPassengerCategory, OperationType)
 
 PDF_PATH = 'tests/data/Order/Reservation/Blank.pdf'
 
@@ -198,6 +198,24 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Order/Reservation/AutoReturn.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.last_request)
         self.assert_json_with_class(auto_return)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_order_info(self):
+        api = API(self.username, self.password, self.pos)
+        order_info = api.info.info(51978)
+
+        input_data = json.loads(open('tests/data/Order/Info/OrderInfo.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(order_info)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_order_list(self):
+        api = API(self.username, self.password, self.pos)
+        order_list = api.info.list(self.datetime, OperationType.PURCHASE)
+
+        input_data = json.loads(open('tests/data/Order/Info/OrderList.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(order_list)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
