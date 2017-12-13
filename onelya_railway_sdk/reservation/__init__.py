@@ -1,4 +1,3 @@
-from ..wrapper.requests import RequestWrapper
 from .requests import ServiceReturnAmountRequest
 from ..utils import get_datetime, get_array, get_item
 from ..wrapper.types import ProlongReservationType, ProviderPaymentForm
@@ -21,8 +20,8 @@ REFUSE_UPSALE_METHOD = 'Order/V1/Reservation/RefuseUpsale'
 
 class Reservation(object):
 
-    def __init__(self, session):
-        self.request_wrapper = RequestWrapper(session)
+    def __init__(self, request_wrapper):
+        self.request_wrapper = request_wrapper
 
     def create(self, customers: OrderFullCustomerRequest, reservation_items: RailwayReservationRequest,
                contact_phone=None, contact_emails=None):

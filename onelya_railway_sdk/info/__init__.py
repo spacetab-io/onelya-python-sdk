@@ -1,6 +1,5 @@
 from datetime import datetime
-from onelya_railway_sdk.utils import get_array, get_item, get_datetime
-from onelya_railway_sdk.wrapper.requests import RequestWrapper
+from onelya_railway_sdk.utils import get_array, get_datetime
 from onelya_railway_sdk.wrapper.types import OperationType, ProviderPaymentForm
 from onelya_railway_sdk.wrapper import OrderCustomerInfo, RailwayFullOrderItemInfo, ShortOrderInfo
 
@@ -9,8 +8,8 @@ ORDER_LIST_METHOD = 'Order/V1/Info/OrderList'
 
 
 class Info(object):
-    def __init__(self, session):
-        self.__request_wrapper = RequestWrapper(session)
+    def __init__(self, request_wrapper):
+        self.__request_wrapper = request_wrapper
 
     def info(self, order_id: int=None, agent_reference_id: str=None):
         response = self.__request_wrapper.make_request(ORDER_INFO_METHOD, order_id=order_id,

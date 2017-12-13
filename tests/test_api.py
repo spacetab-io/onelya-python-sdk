@@ -273,6 +273,14 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.last_request)
         self.assert_json_with_class(regions)
 
+    @mock.patch('requests.Session', MockSession)
+    def test_partner_balances(self):
+        api = API(self.username, self.password, self.pos)
+        balances = api.balances()
+
+        self.assertEquals({}, api.last_request)
+        self.assert_json_with_class(balances)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)

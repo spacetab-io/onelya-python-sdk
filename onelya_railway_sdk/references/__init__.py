@@ -1,6 +1,5 @@
 from datetime import datetime
-from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.requests import RequestWrapper
+from onelya_railway_sdk.utils import get_array
 from onelya_railway_sdk.wrapper.types import TransportNodeType
 from onelya_railway_sdk.wrapper import TransportNode, City, Country, Region
 
@@ -11,8 +10,8 @@ REGIONS_METHOD = 'Info/V1/References/Regions'
 
 
 class References(object):
-    def __init__(self, session):
-        self.__request_wrapper = RequestWrapper(session)
+    def __init__(self, request_wrapper):
+        self.__request_wrapper = request_wrapper
 
     def transport_nodes(self, last_updated: datetime=None, type: TransportNodeType=None):
         response = self.__request_wrapper.make_request(TRANSPORT_NODES_METHOD, last_updated=last_updated, type=type)

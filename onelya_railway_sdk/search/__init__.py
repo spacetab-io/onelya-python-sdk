@@ -1,6 +1,5 @@
 from datetime import datetime
 from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.requests import RequestWrapper
 from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
 from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
                                         CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
@@ -16,8 +15,8 @@ SEARCH_MEAL_METHOD = 'Railway/V1/Search/SearchMeal'
 
 
 class Search(object):
-    def __init__(self, session):
-        self.__request_wrapper = RequestWrapper(session)
+    def __init__(self, request_wrapper):
+        self.__request_wrapper = request_wrapper
 
     def train_pricing(self, origin: str, destination: str, departure_date: datetime, time_from: int=12,
                       time_to: int=24, car_grouping: CarGrouping=CarGrouping.GROUP):

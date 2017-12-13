@@ -776,3 +776,11 @@ class Region(object):
         self.updated = get_datetime(json_data.get('Updated', None))
 
         self.json_data = json_data
+
+
+class AgentAccount(object):
+    def __init__(self, json_data):
+        self.current_balance = json_data.get('CurrentBalance', None)
+        self.account_name = json_data.get('AccountName', None)
+
+        self.json_data = json_data
