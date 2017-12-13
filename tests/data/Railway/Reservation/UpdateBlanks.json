@@ -1,0 +1,12 @@
+{
+  "Blanks": [
+    {
+      "OrderItemBlankId": 51946,
+      "Number": "71234567890000",
+      "BlankStatus": "ElectronicRegistrationPresent",
+      "PendingElectronicRegistration": "NoValue",
+      "SignSequence": null
+    }
+  ],
+  "IsModified": false
+}

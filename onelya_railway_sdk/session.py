@@ -27,7 +27,10 @@ class Session(object):
         try:
             response = response.json()
         except ValueError:
-            self.last_response_data = response.content
+            if response.headers['Content-Type'] == 'application/pdf':
+                self.last_response_data = response.content
+            else:
+                self.last_response_data = response.text
             return response
 
         self.last_response_data = response

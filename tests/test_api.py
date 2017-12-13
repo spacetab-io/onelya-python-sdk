@@ -13,6 +13,7 @@ from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinG
                                               PricingTariffType, RailwayPassengerCategory, OperationType)
 
 PDF_PATH = 'tests/data/Order/Reservation/Blank.pdf'
+HTML_PATH = 'tests/data/Railway/Reservation/BlankAsHtml.html'
 
 
 class MockSession(object):
@@ -37,6 +38,7 @@ class MockFileSession(object):
         self.__content = None
 
     def post(self, url, data=None, timeout=None):
+        self.headers['Content-Type'] = 'application/pdf'
         self.__content = open(PDF_PATH, 'rb').read()
         return self
 
@@ -45,6 +47,24 @@ class MockFileSession(object):
 
     @property
     def content(self):
+        return self.__content
+
+
+class MockHTMLSession(object):
+    def __init__(self):
+        self.headers = {}
+        self.auth = None
+        self.__content = None
+
+    def post(self, url, data=None, timeout=None):
+        self.__content = open(HTML_PATH, 'r').read()
+        return self
+
+    def json(self):
+        raise ValueError
+
+    @property
+    def text(self):
         return self.__content
 
 
@@ -218,6 +238,44 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Order/Reservation/RefuseUpsale.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.last_request)
         self.assert_json_with_class(refuse_upsale)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_update_blanks(self):
+        api = API(self.username, self.password, self.pos)
+        update_blanks = api.reservation.update_blanks(52159)
+
+        input_data = json.loads(open('tests/data/Railway/Reservation/UpdateBlanks.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(update_blanks)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_electronic_registration(self):
+        api = API(self.username, self.password, self.pos)
+        electronic_registration = api.reservation.electronic_registration(52159, True, [51946])
+
+        input_data = json.loads(open('tests/data/Railway/Reservation/ElectronicRegistration.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(electronic_registration)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_reservation_meal_option(self):
+        api = API(self.username, self.password, self.pos)
+        meal_option = api.reservation.meal_option(52159, 'Б', 51946)
+
+        input_data = json.loads(open('tests/data/Railway/Reservation/MealOption.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(meal_option)
+
+    @mock.patch('requests.Session', MockHTMLSession)
+    def test_reservation_blank_as_html(self):
+        api = API(self.username, self.password, self.pos)
+        blank_as_html = api.reservation.blank_as_html(1)
+
+        input_data = json.loads(open('tests/data/Railway/Reservation/BlankAsHtml.in.json', 'r', encoding='utf8').read())
+        html_file = open(HTML_PATH, 'r').read()
+
+        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(blank_as_html.html, html_file)
 
     @mock.patch('requests.Session', MockSession)
     def test_order_info(self):

@@ -5,7 +5,7 @@ from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, Orde
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
 from ..wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
                        RailwayConfirmResponse, RailwayReturnAmountResponse, RailwayAutoReturnResponse,
-                       CustomerUpsaleOperationResult)
+                       CustomerUpsaleOperationResult, RailwayBlankInfo)
 
 CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'
@@ -16,6 +16,11 @@ RETURN_AMOUNT_METHOD = 'Order/V1/Reservation/ReturnAmount'
 AUTO_RETURN_METHOD = 'Order/V1/Reservation/AutoReturn'
 ADD_UPSALE_METHOD = 'Order/V1/Reservation/AddUpsale'
 REFUSE_UPSALE_METHOD = 'Order/V1/Reservation/RefuseUpsale'
+
+UPDATE_BLANKS_METHOD = 'Railway/V1/Reservation/UpdateBlanks'
+ELECTRONIC_REGISTRATION_METHOD = 'Railway/V1/Reservation/ElectronicRegistration'
+MEAL_OPTION_METHOD = 'Railway/V1/Reservation/MealOption'
+BLANK_AS_HTML_METHOD = 'Railway/V1/Reservation/BlankAsHtml'
 
 
 class Reservation(object):
@@ -79,6 +84,27 @@ class Reservation(object):
         response = self.request_wrapper.make_request(REFUSE_UPSALE_METHOD, order_id=order_id, order_item_id=order_item_id,
                                                      order_customer_ids=order_customer_ids)
         return RefuseUpsale(response)
+
+    def update_blanks(self, order_item_id: int):
+        response = self.request_wrapper.make_request(UPDATE_BLANKS_METHOD, order_item_id=order_item_id)
+        return UpdateBlanks(response)
+
+    def electronic_registration(self, order_item_id: int, set: bool, order_item_blank_ids: 'list of int'=None,
+                                send_notification: bool=False):
+        response = self.request_wrapper.make_request(ELECTRONIC_REGISTRATION_METHOD, order_item_id=order_item_id,
+                                                     set=set, order_item_blank_ids=order_item_blank_ids,
+                                                     send_notification=send_notification)
+        return ElectronicRegistration(response)
+
+    def meal_option(self, order_item_id: int, meal_option_code: str, order_item_blank_id: int):
+        response = self.request_wrapper.make_request(MEAL_OPTION_METHOD, order_item_id=order_item_id,
+                                                     meal_option_code=meal_option_code,
+                                                     order_item_blank_id=order_item_blank_id)
+        return MealOption(response)
+
+    def blank_as_html(self, order_item_id: int):
+        response = self.request_wrapper.make_request(BLANK_AS_HTML_METHOD, order_item_id=order_item_id)
+        return BlankAsHtml(response)
 
 
 class CreateReservation(object):
@@ -148,3 +174,35 @@ class RefuseUpsale(object):
         self.order_id = json_data.get('OrderId', None)
 
         self.json_data = json_data
+
+
+class UpdateBlanks(object):
+    def __init__(self, json_data):
+        self.blanks = get_array(json_data.get('Blanks', None), RailwayBlankInfo)
+        self.is_modified = json_data.get('IsModified', None)
+
+        self.json_data = json_data
+
+
+class ElectronicRegistration(object):
+    def __init__(self, json_data):
+        self.expiration_electronic_registration_date_time = get_datetime(json_data.get('ExpirationElectronicRegistrationDateTime', None))
+        self.blanks = get_array(json_data.get('Blanks', None), RailwayBlankInfo)
+
+        self.json_data = json_data
+
+
+class MealOption(object):
+    def __init__(self, json_data):
+        self.meal_option_code = json_data.get('MealOptionCode', None)
+
+        self.json_data = json_data
+
+
+class BlankAsHtml(object):
+    def __init__(self, data):
+        self.__data = data
+
+    @property
+    def html(self):
+        return self.__data.text
