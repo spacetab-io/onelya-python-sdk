@@ -3,13 +3,21 @@ from onelya_railway_sdk.api import __version__
 
 
 setup(
-    name='onelya_railway_sdk',
     version=__version__,
+    name='onelya_railway_sdk',
     packages=find_packages(),
 
     install_requires=[
         'requests'
     ],
+
+    description='Onelya Python SDK',
+
+    author='Travel Managment Consulting',
+    author_email='otd@tm-consulting.ru',
+
+    url='https://github.com/tmconsulting/onelya-railway-sdk',
+    download_url='https://github.com/tmconsulting/onelya-railway-sdk/archive/%s.tar.gz' % __version__,
 
     license='MIT License',
     classifiers=[
