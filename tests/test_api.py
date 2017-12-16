@@ -71,6 +71,7 @@ class MockHTMLSession(object):
 
 class TestAPI(unittest.TestCase):
 
+    @mock.patch('requests.Session', MockSession)
     def setUp(self):
         self.maxDiff = None
         self.datetime = datetime.fromtimestamp(0).replace(hour=3)
@@ -79,73 +80,59 @@ class TestAPI(unittest.TestCase):
         self.password = os.environ.get('PASSWORD', None)
         self.pos = os.environ.get('POS', None)
 
-    @mock.patch('requests.Session', MockSession)
+        self.api = API(self.username, self.password, self.pos)
+
     def test_json_railway_train_pricing(self):
-        api = API(self.username, self.password, self.pos)
-        train_pricing = api.railway_search.train_pricing('Москва', '2004000', self.datetime, 12, 24, CarGrouping.GROUP)
+        train_pricing = self.api.railway_search.train_pricing('Москва', '2004000', self.datetime, 12, 24, CarGrouping.GROUP)
 
         input_data = json.loads(open('tests/data/Railway/Search/TrainPricing.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(train_pricing)
 
-    @mock.patch('requests.Session', MockSession)
     def test_json_railway_car_pricing(self):
-        api = API(self.username, self.password, self.pos)
-        car_pricing = api.railway_search.car_pricing('2000000', '2004000', self.datetime, '054Ч', None, PricingTariffType.FULL)
+        car_pricing = self.api.railway_search.car_pricing('2000000', '2004000', self.datetime, '054Ч', None, PricingTariffType.FULL)
 
         input_data = json.loads(open('tests/data/Railway/Search/CarPricing.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(car_pricing)
 
-    @mock.patch('requests.Session', MockSession)
     def test_railway_schedule(self):
-        api = API(self.username, self.password, self.pos)
-        schedule = api.railway_search.schedule('Москва', '2004000', 12, 24)
+        schedule = self.api.railway_search.schedule('Москва', '2004000', 12, 24)
 
         input_data = json.loads(open('tests/data/Railway/Search/Schedule.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(schedule)
 
-    @mock.patch('requests.Session', MockSession)
     def test_train_route(self):
-        api = API(self.username, self.password, self.pos)
-        train_route = api.railway_search.train_route('054', 'Москва', '2004000', self.datetime)
+        train_route = self.api.railway_search.train_route('054', 'Москва', '2004000', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/TrainRoute.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(train_route)
 
-    @mock.patch('requests.Session', MockSession)
     def test_routes(self):
-        api = API(self.username, self.password, self.pos)
-        routes = api.railway_search.routes('2000000', '2004000', self.datetime)
+        routes = self.api.railway_search.routes('2000000', '2004000', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/Routes.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(routes)
 
-    @mock.patch('requests.Session', MockSession)
     def test_route_pricing(self):
-        api = API(self.username, self.password, self.pos)
-        route_pricing = api.railway_search.route_pricing('2000000', '2078750', self.datetime)
+        route_pricing = self.api.railway_search.route_pricing('2000000', '2078750', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/RoutePricing.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(route_pricing)
 
-    @mock.patch('requests.Session', MockSession)
     def test_search_meal(self):
-        api = API(self.username, self.password, self.pos)
-        search_meal = api.railway_search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2',
+        search_meal = self.api.railway_search.search_meal(CarType.UNKNOWN, 'sample string 1', 'sample string 2',
                                                      'sample string 4', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/SearchMeal.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(search_meal)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_create(self):
-        api = API(self.username, self.password, self.pos)
 
         customers = OrderFullCustomerRequest("4601123450", DocumentType.RUSSIAN_PASSPORT, 'Иван', 'Иванов',
                                              Sex.MALE, 1, 'Иванович', None, 'RU', None, self.datetime)
@@ -158,28 +145,24 @@ class TestAPI(unittest.TestCase):
                                                       True, '1Л', AdditionalPlaceRequirements.NO_VALUE, None,
                                                       ProviderPaymentForm.CARD, None, None)
 
-        create = api.railway_reservation.create([customers], [reservation_items], '+79123456789', ['test@test.ru'])
+        create = self.api.railway_reservation.create([customers], [reservation_items], '+79123456789', ['test@test.ru'])
 
         input_data = json.loads(open('tests/data/Order/Reservation/Create.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(create)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_prolong_reservation(self):
-        api = API(self.username, self.password, self.pos)
-        prolong_reservation = api.railway_reservation.prolong_reservation(51978, None)
+        prolong_reservation = self.api.railway_reservation.prolong_reservation(51978, None)
 
         input_data = json.loads(open('tests/data/Order/Reservation/ProlongReservation.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(prolong_reservation)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_confirm(self):
-        api = API(self.username, self.password, self.pos)
-        confirm = api.railway_reservation.confirm(51978, provider_payment_form=ProviderPaymentForm.CARD)
+        confirm = self.api.railway_reservation.confirm(51978, provider_payment_form=ProviderPaymentForm.CARD)
 
         input_data = json.loads(open('tests/data/Order/Reservation/Confirm.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(confirm)
 
     @mock.patch('requests.Session', MockFileSession)
@@ -193,78 +176,62 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.last_request)
         self.assertEquals(blank.content, pdf_file)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_cancel(self):
-        api = API(self.username, self.password, self.pos)
-        cancel = api.railway_reservation.cancel(51978)
+        cancel = self.api.railway_reservation.cancel(51978)
 
         input_data = json.loads(open('tests/data/Order/Reservation/Cancel.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assertTrue(cancel)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_return_amount(self):
-        api = API(self.username, self.password, self.pos)
-        return_amount = api.railway_reservation.return_amount('4601123450', 52159, [51948])
+        return_amount = self.api.railway_reservation.return_amount('4601123450', 52159, [51948])
 
         input_data = json.loads(open('tests/data/Order/Reservation/ReturnAmount.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(return_amount)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_auto_return(self):
-        api = API(self.username, self.password, self.pos)
-        auto_return = api.railway_reservation.auto_return('4601123450', 52157, [51946])
+        auto_return = self.api.railway_reservation.auto_return('4601123450', 52157, [51946])
 
         input_data = json.loads(open('tests/data/Order/Reservation/AutoReturn.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(auto_return)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_add_upsale(self):
-        api = API(self.username, self.password, self.pos)
         product_request = ProductRequest('AccidentAndLuggageLossAndDamage')
         service_add_upsale_request = ServiceAddUpsaleRequest('Igs', [1389, 1390], product_request)
-        add_upsale = api.railway_reservation.add_upsale(51978, 52919, service_add_upsale_request)
+        add_upsale = self.api.railway_reservation.add_upsale(51978, 52919, service_add_upsale_request)
 
         input_data = json.loads(open('tests/data/Order/Reservation/AddUpsale.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(add_upsale)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_refuse_upsale(self):
-        api = API(self.username, self.password, self.pos)
-        refuse_upsale = api.railway_reservation.refuse_upsale(1, 2, [1, 2])
+        refuse_upsale = self.api.railway_reservation.refuse_upsale(1, 2, [1, 2])
 
         input_data = json.loads(open('tests/data/Order/Reservation/RefuseUpsale.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(refuse_upsale)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_update_blanks(self):
-        api = API(self.username, self.password, self.pos)
-        update_blanks = api.railway_reservation.update_blanks(52159)
+        update_blanks = self.api.railway_reservation.update_blanks(52159)
 
         input_data = json.loads(open('tests/data/Railway/Reservation/UpdateBlanks.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(update_blanks)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_electronic_registration(self):
-        api = API(self.username, self.password, self.pos)
-        electronic_registration = api.railway_reservation.electronic_registration(52159, True, [51946])
+        electronic_registration = self.api.railway_reservation.electronic_registration(52159, True, [51946])
 
         input_data = json.loads(open('tests/data/Railway/Reservation/ElectronicRegistration.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(electronic_registration)
 
-    @mock.patch('requests.Session', MockSession)
     def test_reservation_meal_option(self):
-        api = API(self.username, self.password, self.pos)
-        meal_option = api.railway_reservation.meal_option(52159, 'Б', 51946)
+        meal_option = self.api.railway_reservation.meal_option(52159, 'Б', 51946)
 
         input_data = json.loads(open('tests/data/Railway/Reservation/MealOption.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(meal_option)
 
     @mock.patch('requests.Session', MockHTMLSession)
@@ -278,75 +245,59 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, api.last_request)
         self.assertEquals(blank_as_html.html, html_file)
 
-    @mock.patch('requests.Session', MockSession)
     def test_order_info(self):
-        api = API(self.username, self.password, self.pos)
-        order_info = api.railway_info.info(51978)
+        order_info = self.api.railway_info.info(51978)
 
         input_data = json.loads(open('tests/data/Order/Info/OrderInfo.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(order_info)
 
-    @mock.patch('requests.Session', MockSession)
     def test_order_list(self):
-        api = API(self.username, self.password, self.pos)
-        order_list = api.railway_info.list(self.datetime, OperationType.PURCHASE)
+        order_list = self.api.railway_info.list(self.datetime, OperationType.PURCHASE)
 
         input_data = json.loads(open('tests/data/Order/Info/OrderList.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(order_list)
 
-    @mock.patch('requests.Session', MockSession)
     def test_references_transport_nodes(self):
-        api = API(self.username, self.password, self.pos)
-        transport_nodes = api.references.transport_nodes()
+        transport_nodes = self.api.references.transport_nodes()
 
         input_data = json.loads(open('tests/data/Info/References/TransportNodes.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(transport_nodes)
 
-    @mock.patch('requests.Session', MockSession)
     def test_references_cities(self):
-        api = API(self.username, self.password, self.pos)
-        cities = api.references.cities()
+        cities = self.api.references.cities()
 
         input_data = json.loads(open('tests/data/Info/References/Cities.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(cities)
 
-    @mock.patch('requests.Session', MockSession)
     def test_references_countries(self):
-        api = API(self.username, self.password, self.pos)
-        countries = api.references.countries()
+        countries = self.api.references.countries()
 
         input_data = json.loads(open('tests/data/Info/References/Countries.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(countries)
 
-    @mock.patch('requests.Session', MockSession)
     def test_references_regions(self):
-        api = API(self.username, self.password, self.pos)
-        regions = api.references.regions()
+        regions = self.api.references.regions()
 
         input_data = json.loads(open('tests/data/Info/References/Regions.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(regions)
 
-    @mock.patch('requests.Session', MockSession)
     def test_partner_balances(self):
-        api = API(self.username, self.password, self.pos)
-        balances = api.partner_balances()
+        balances = self.api.partner_balances()
 
-        self.assertEquals({}, api.last_request)
+        self.assertEquals({}, self.api.last_request)
         self.assert_json_with_class(balances)
 
-    @mock.patch('requests.Session', MockSession)
     def test_search_pricing(self):
-        api = API(self.username, self.password, self.pos)
-        search_pricing = api.railway_search_pricing()
+        search_pricing = self.api.railway_search_pricing()
 
         input_data = json.loads(open('tests/data/Insurance/Search/Pricing.in.json', 'r', encoding='utf8').read())
-        self.assertEquals(input_data, api.last_request)
+        self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(search_pricing)
 
     def test_empty_message_params(self):

@@ -22,7 +22,7 @@ To start you will need to have credentials for the Onelya. <br>
 Example of api initializing
 
 ```python
-from onelya_railway_sdk import API
+from onelya-railway-sdk import API
 
 api = API('username', 'password', 'pos')
 
