@@ -784,3 +784,41 @@ class AgentAccount(object):
         self.account_name = json_data.get('AccountName', None)
 
         self.json_data = json_data
+
+
+class RailwayCompensationInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.event = json_data.get('Event', None)
+        self.compensation = json_data.get('Compensation', None)
+
+        self.json_data = json_data
+
+
+class RailwayProductPricingInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.compensations = get_array(json_data.get('Compensations', None), RailwayCompensationInfo)
+        self.package = json_data.get('Package', None)
+        self.compensation = json_data.get('Compensation', None)
+        self.amount = json_data.get('Amount', None)
+
+        self.json_data = json_data
+
+
+class RailwayPricingInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.product_pricing_info_list = get_array(json_data.get('ProductPricingInfoList', None), RailwayProductPricingInfo)
+        self.supplier = json_data.get('Supplier', None)
+
+        self.json_data = json_data
+
+
+class RailwayPricingResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.product_pricing_info_list = get_array(json_data.get('ProductPricingInfoList', None), RailwayProductPricingInfo)
+        self.pricing_info_list = get_array(json_data.get('PricingInfoList', None), RailwayPricingInfo)
+
+        self.json_data = json_data

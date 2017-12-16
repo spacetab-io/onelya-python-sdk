@@ -89,6 +89,12 @@ class RailwayPassengerCategory:
     BABY_WITHOUT_PLACE = 'BabyWithoutPlace'
 
 
+class RailwayTravelEvent:
+    INJURY = 'Injury'
+    DEATH = 'Death'
+    DISABILITY = 'Disability'
+
+
 class TransportNodeType:
     AIRPORT = 'Airport'
     RAILWAY_STATION = 'RailwayStation'
@@ -122,6 +128,14 @@ class CabinGenderKind:
     MIXED = 'Mixed'
     MALE = 'Male'
     FEMALE = 'Female'
+
+
+class InsuranceSupplier:
+    IGS = 'Igs'
+    SOGAZ = 'Sogaz'
+    RENESSANS = 'Renessans'
+    ROSGOSSTRAH = 'Rosgosstrah'
+    BLAGOSOSTOYANIE = 'Blagosostoyanie'
 
 
 class CarType:

@@ -1,0 +1,5 @@
+{
+  "Product": {
+    "$type": "ApiContracts.Insurance.V1.Products.Travel.Pricing.RailwayPricingRequest, ApiContracts"
+  }
+}

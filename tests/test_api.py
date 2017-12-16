@@ -334,10 +334,19 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockSession)
     def test_partner_balances(self):
         api = API(self.username, self.password, self.pos)
-        balances = api.balances()
+        balances = api.partner_balances()
 
         self.assertEquals({}, api.last_request)
         self.assert_json_with_class(balances)
+
+    @mock.patch('requests.Session', MockSession)
+    def test_search_pricing(self):
+        api = API(self.username, self.password, self.pos)
+        search_pricing = api.search_pricing()
+
+        input_data = json.loads(open('tests/data/Insurance/Search/Pricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, api.last_request)
+        self.assert_json_with_class(search_pricing)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}

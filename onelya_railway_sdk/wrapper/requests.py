@@ -7,9 +7,9 @@ class RequestWrapper(object):
         self.session = session
         self.method_name = None
 
-    def make_request(self, method_name, **kwargs):
+    def make_request(self, method_name, json=None, **kwargs):
         self.method_name = method_name
-        json_data = self.__get_json_data(False, **kwargs)
+        json_data = self.__get_json_data(False, **kwargs) if json is None else json
         return self.session.make_api_request(method_name, json_data)
 
     def __get_json_data(self, recursive, **kwargs):
@@ -57,3 +57,5 @@ class RequestWrapper(object):
                 new_key += key[i]
             i += 1
         return new_key
+
+
