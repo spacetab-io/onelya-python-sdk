@@ -12,8 +12,7 @@ This SDK is used to connect to the Onelya and use it methods(Railway and Aeroexp
 
 ### Installation
 ```
-git clone https://github.com/tmconsulting/onelya-python-sdk
-pip3 install onelya-python-sdk/
+pip3 install onelya_railway_sdk
 ```
 
 ### Get started
