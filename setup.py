@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
-from onelya_railway_sdk.api import __version__
 
+__version__ = '0.1.1'
 
 setup(
     version=__version__,
