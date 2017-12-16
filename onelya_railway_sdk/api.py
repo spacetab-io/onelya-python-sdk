@@ -1,11 +1,11 @@
-from .info import Info
-from .search import Search
+from onelya_railway_sdk.railway.reservation import Reservation as RailwayReservation
+from onelya_railway_sdk.references import References as References
+from .railway.info import Info as RailwayInfo
+from .railway.search import Search as RailwaySearch
 from .session import Session
-from .references import References
-from .reservation import Reservation
 from .utils import get_array, get_item
-from .wrapper.requests import RequestWrapper
 from .wrapper import AgentAccount, RailwayPricingResponse
+from .wrapper.requests import RequestWrapper
 
 BALANCES_METHOD = 'Partner/V1/Info/Balances'
 PRICING_METHOD = 'Insurance/V1/Search/Pricing'
@@ -15,16 +15,16 @@ class API(object):
     def __init__(self, username: str, password: str, pos: str):
         self.__session = Session(username, password, pos)
         self.__request_wrapper = RequestWrapper(self.__session)
-        self.search = Search(self.__request_wrapper)
-        self.reservation = Reservation(self.__request_wrapper)
-        self.info = Info(self.__request_wrapper)
+        self.railway_search = RailwaySearch(self.__request_wrapper)
+        self.railway_reservation = RailwayReservation(self.__request_wrapper)
+        self.railway_info = RailwayInfo(self.__request_wrapper)
         self.references = References(self.__request_wrapper)
 
     def partner_balances(self):
         response = self.__request_wrapper.make_request(BALANCES_METHOD)
         return Balances(response)
 
-    def search_pricing(self):
+    def railway_search_pricing(self):
         response = self.__request_wrapper.make_request(PRICING_METHOD, json={
             'Product': {
                 '$type': 'ApiContracts.Insurance.V1.Products.Travel.Pricing.RailwayPricingRequest, ApiContracts'
