@@ -116,7 +116,7 @@ class TestAPI(unittest.TestCase):
         self.assert_json_with_class(train_route)
 
     @mock.patch('requests.Session', MockSession)
-    def test_rotes(self):
+    def test_routes(self):
         api = API(self.username, self.password, self.pos)
         routes = api.railway_search.routes('2000000', '2004000', self.datetime)
 
@@ -125,9 +125,9 @@ class TestAPI(unittest.TestCase):
         self.assert_json_with_class(routes)
 
     @mock.patch('requests.Session', MockSession)
-    def test_rote_pricing(self):
+    def test_route_pricing(self):
         api = API(self.username, self.password, self.pos)
-        rote_pricing = api.railway_search.route_pricing('2000000', '2078750', self.datetime)
+        route_pricing = api.railway_search.route_pricing('2000000', '2078750', self.datetime)
 
         input_data = json.loads(open('tests/data/Railway/Search/RoutePricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.last_request)
