@@ -131,7 +131,7 @@ class TestAPI(unittest.TestCase):
 
         input_data = json.loads(open('tests/data/Railway/Search/RoutePricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, api.last_request)
-        self.assert_json_with_class(rote_pricing)
+        self.assert_json_with_class(route_pricing)
 
     @mock.patch('requests.Session', MockSession)
     def test_search_meal(self):

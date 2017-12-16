@@ -7,6 +7,8 @@ from .utils import get_array, get_item
 from .wrapper import AgentAccount, RailwayPricingResponse
 from .wrapper.requests import RequestWrapper
 
+__version__ = 0.1
+
 BALANCES_METHOD = 'Partner/V1/Info/Balances'
 PRICING_METHOD = 'Insurance/V1/Search/Pricing'
 

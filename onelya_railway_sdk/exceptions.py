@@ -5,7 +5,7 @@ class OnelyaAPIError(Exception):
 
     def __init__(self, method, error_data, request_data):
         super(OnelyaAPIError, self).__init__()
-        self.method = method
+        self.method = method.replace("/", "-")
         self.error_data = error_data
 
         self.code = error_data.get('Code')
@@ -28,5 +28,5 @@ class OnelyaAPIError(Exception):
         error_message = '''Code: {self.code}
         Message: {self.message}
         MessageParams: {self.message_params}
-        Docs: https://test.onelya.ru/ApiDocs/Api?apiId={method}'''.format(self=self, method=self.method.replace('/', '-'))
+        Docs: https://test.onelya.ru/ApiDocs/Api?apiId={self.method}'''.format(self=self)
         return error_message

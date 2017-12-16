@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 test-reports/
 .idea/
+.DS_Store
 .Python
 env/
 build/

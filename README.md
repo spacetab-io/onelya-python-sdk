@@ -1,4 +1,4 @@
-Python SDK
+Onelya Python SDK [![master](https://circleci.com/gh/tmconsulting/onelya-railway-sdk/tree/master.svg?style=shield)](https://circleci.com/gh/tmconsulting/onelya-railway-sdk/tree/master)
 ---------------
 
 This SDK is used to connect to the Onelya and use it methods(Railway and Aeroexpress) for a 3-d party API.
@@ -6,6 +6,9 @@ This SDK is used to connect to the Onelya and use it methods(Railway and Aeroexp
 * [Installation](#installation)
 * [Get started](#get-started)
 * [Api Reference](#api-reference)
+* [Contact us](#contact-us)
+* [License](#license)
+
 
 ### Installation
 ```
@@ -120,3 +123,12 @@ Currently available methods:
 
 * [Railway](https://test.onelya.ru/ApiDocs/Railway)
 * [References](https://test.onelya.ru/ApiDocs/References).
+
+### Contact us.
+
+If you have any issues or questions regarding the API or the SDK it self, you are welcome to create an issue, or
+You can write an Email to `artyom.slobodyan@gmail.com` or `roquie0@gmail.com`
+
+### License.
+
+SDK is released under the [MIT License](./LICENSE).
