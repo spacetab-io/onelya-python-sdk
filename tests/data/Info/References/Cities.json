@@ -1,0 +1,16 @@
+{
+  "Cities": [
+    {
+      "CityId": 1,
+      "CountryId": 1,
+      "RegionId": 0,
+      "SysCode": null,
+      "Code": "MOW",
+      "NameRu": "Москва",
+      "NameEn": "Moscow",
+      "PopularityIndex": 40,
+      "IsActive": true,
+      "Updated": "2016-11-12T00:00:00"
+    }
+  ]
+}

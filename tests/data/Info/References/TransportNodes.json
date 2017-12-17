@@ -1,0 +1,39 @@
+{
+  "TransportNodes": [
+    {
+      "TransportNodeId": 1,
+      "CountryId": 1,
+      "RegionId": 1,
+      "CityId": 1,
+      "Code": "DME",
+      "NameRu": "Домодедово",
+      "NameEn": "Domodedovo",
+      "Type": "Airport",
+      "PopularityIndex": 40,
+      "Description": "",
+      "IsActive": true,
+      "Updated": "2016-11-12T00:00:00",
+      "UtcTimeOffset": 3,
+      "Location": null
+    },
+    {
+      "TransportNodeId": 2,
+      "CountryId": 1,
+      "RegionId": 1,
+      "CityId": 1,
+      "Code": "2000000",
+      "NameRu": "Москва",
+      "NameEn": "Moscow",
+      "Type": "RailwayStation",
+      "PopularityIndex": 55,
+      "Description": "",
+      "IsActive": true,
+      "Updated": "2016-11-12T00:00:00",
+      "UtcTimeOffset": 3,
+      "Location": {
+        "Latitude": 55.7575,
+        "Longitude": 37.6619
+      }
+    }
+  ]
+}

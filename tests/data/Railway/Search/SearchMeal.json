@@ -1,0 +1,12 @@
+{
+  "MealOptions": [
+    {
+      "MealOptionCode": "sample string 1",
+      "Description": "sample string 2"
+    },
+    {
+      "MealOptionCode": "sample string 1",
+      "Description": "sample string 2"
+    }
+  ]
+}

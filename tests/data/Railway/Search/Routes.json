@@ -1,0 +1,34 @@
+{
+  "Routes": [
+    {
+      "OriginCode": "2000000",
+      "OriginStationCode": "2006004",
+      "DestinationCode": "2004000",
+      "DestinationStationCode": "2004006",
+      "DepartureDateTime": "2017-04-04T22:05:00",
+      "ArrivalDateTime": "2017-04-05T05:46:00",
+      "TravelTime": 461,
+      "ChangeTime": 61,
+      "RouteParts": [
+        {
+          "TrainNumber": "042А",
+          "OriginCityCode": null,
+          "OriginStationCode": "2006004",
+          "DestinationCityCode": null,
+          "DestinationStationCode": "2004600",
+          "DepartureDateTime": "2017-04-04T22:05:00",
+          "ArrivalDateTime": "2017-04-05T00:10:00"
+        },
+        {
+          "TrainNumber": "032А",
+          "OriginCityCode": null,
+          "OriginStationCode": "2004600",
+          "DestinationCityCode": null,
+          "DestinationStationCode": "2004006",
+          "DepartureDateTime": "2017-04-05T01:11:00",
+          "ArrivalDateTime": "2017-04-05T05:46:00"
+        }
+      ]
+    }
+  ]
+}

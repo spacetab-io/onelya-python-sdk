@@ -1,0 +1,31 @@
+{
+  "PricingResponse": {
+    "$type": "ApiContracts.Insurance.V1.Products.Travel.Pricing.RailwayPricingResponse, ApiContracts",
+    "ProductPricingInfoList": [
+      {
+        "$type": "ApiContracts.Insurance.V1.Products.ProductPricing.RailwayProductPricingInfo, ApiContracts",
+        "Compensations": [
+          {
+            "$type": "ApiContracts.Insurance.V1.Compensation.RailwayCompensationInfo, ApiContracts",
+            "Event": "Death",
+            "Compensation": 100000
+          },
+          {
+            "$type": "ApiContracts.Insurance.V1.Compensation.RailwayCompensationInfo, ApiContracts",
+            "Event": "Disability",
+            "Compensation": 100000
+          },
+          {
+            "$type": "ApiContracts.Insurance.V1.Compensation.RailwayCompensationInfo, ApiContracts",
+            "Event": "Injury",
+            "Compensation": 100000
+          }
+        ],
+        "Package": "Accident1",
+        "Amount": 50.0,
+        "Compensation": 0.0
+      }
+    ],
+    "PricingInfoList": null
+  }
+}

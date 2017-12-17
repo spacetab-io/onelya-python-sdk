@@ -1,0 +1,66 @@
+{
+  "OrderId": 51978,
+  "Customers": [
+    {
+      "OrderCustomerId": 66650,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "BirthDate": "1976-10-12T00:00:00",
+      "DocumentNumber": "4601123450",
+      "DocumentValidTill": "9999-12-31T23:59:59",
+      "DocumentType": "RussianPassport",
+      "CitizenshipCode": "RU",
+      "BirthPlace": null
+    }
+  ],
+  "ConfirmResults": [
+    {
+      "$type": "ApiContracts.Railway.V1.Messages.Reservation.RailwayConfirmResponse, ApiContracts",
+      "ReservationNumber": "71234567890000",
+      "Blanks": [
+        {
+          "OrderItemBlankId": 51948,
+          "Number": "71234567890000",
+          "BlankStatus": "ElectronicRegistrationPresent",
+          "PendingElectronicRegistration": "NoValue",
+          "SignSequence": null
+        }
+      ],
+      "ExpirationElectronicRegistrationDateTime": null,
+      "OrderItemId": 52159,
+      "Amount": 9481.7,
+      "Fare": 9481.7,
+      "Tax": 0.0,
+      "Confirmed": "2016-10-27T19:16:17",
+      "VoidTill": "1753-01-01T00:00:00",
+      "ClientFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "AgentFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "OrderItemCustomers": [
+        {
+          "OrderCustomerId": 66652,
+          "Amount": 9481.7,
+          "Fare": 9481.7,
+          "Tax": 0.0,
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "AgentFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          }
+        }
+      ],
+      "Warnings": null,
+      "ErrorResult": null
+    }
+  ]
+}

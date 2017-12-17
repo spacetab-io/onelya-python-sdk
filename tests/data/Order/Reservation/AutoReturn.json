@@ -1,0 +1,29 @@
+{
+  "ServiceReturnResponse": {
+    "$type": "ApiContracts.Railway.V1.Messages.Return.RailwayAutoReturnResponse, ApiContracts",
+    "Blanks": [
+      {
+        "PurchaseOrderItemBlankId": 51946,
+        "ReturnOrderItemBlankId": 51951,
+        "Amount": 7581.7,
+        "Penalty": 0.0,
+        "VatRateValues": null,
+        "ServicePrice": 0.0
+      }
+    ],
+    "Amount": 7581.7,
+    "Fare": 9481.7,
+    "Tax": 0.0,
+    "Confirmed": "2017-12-11T15:41:32",
+    "ReturnOrderItemId": 52162,
+    "AgentReferenceId": null,
+    "ClientFeeCalculation": {
+      "Charge": 100.0,
+      "Profit": 0.0
+    },
+    "AgentFeeCalculation": {
+      "Charge": 100.0,
+      "Profit": 0.0
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "Regions": [
+    {
+      "RegionId": 1,
+      "CountryId": 1,
+      "IsoCode": "ALT",
+      "NameRu": "Алтайский край",
+      "NameEn": "Altaiskyi krai",
+      "IsActive": true,
+      "Updated": "2016-11-12T00:00:00"
+    }
+  ]
+}

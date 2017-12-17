@@ -1,0 +1,110 @@
+{
+  "OrderCustomers": [
+    {
+      "OrderCustomerId": 66650,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "BirthDate": "1976-10-12T00:00:00",
+      "DocumentNumber": "4601123450",
+      "DocumentValidTill": "9999-12-31T23:59:59",
+      "DocumentType": "RussianPassport",
+      "CitizenshipCode": "RU"
+    }
+  ],
+  "OrderItems": [
+    {
+      "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayFullOrderItemInfo, ApiContracts",
+      "ServiceType": "Tickets",
+      "PlaceQuantity": 1,
+      "OriginStationName": "МОСКВА ОКТЯБРЬСКАЯ",
+      "DestinationStationName": "САНКТ-ПЕТЕРБУРГ-ГЛАВН.",
+      "TrainNumber": "054ЧА",
+      "BookingTrainNumber": null,
+      "TrainNumberToGetRoute": null,
+      "CarNumber": "07",
+      "CarType": "Luxury",
+      "ElectronicRegistrationExpirationDateTime": "2016-11-01T22:40:00",
+      "PlaceReservationType": "Usual",
+      "ServiceClass": "1Б",
+      "AdditionalInformation": "",
+      "CarrierDescription": "ЗАО ТК \"ГСЭ\"",
+      "OrderItemCustomers": [
+        {
+          "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayOrderItemCustomerInfo, ApiContracts",
+          "OrderItemBlankId": 51946,
+          "Places": "001",
+          "PlaceQuantity": 1,
+          "OrderCustomerId": 66650,
+          "OrderItemCustomerId": 51445,
+          "Amount": 9481.7,
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          }
+        }
+      ],
+      "OrderItemBlanks": [
+        {
+          "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayOrderItemBlankInfo, ApiContracts",
+          "VoucherNumber": null,
+          "BaseFare": 0.0,
+          "AdditionalPrice": 0.0,
+          "ServicePrice": 0.0,
+          "VatRateValues": null,
+          "TariffType": "Full",
+          "BlankStatus": "ElectronicRegistrationPresent",
+          "IsElectronicRegistrationSet": true,
+          "IsMealOptionPossible": false,
+          "PendingElectronicRegistration": "NoValue",
+          "ElectronicRegistrationSetDateTime": null,
+          "SignSequence": null,
+          "TariffInfo": null,
+          "PlaceQuantity": 1,
+          "OrderItemBlankId": 51946,
+          "PreviousOrderItemBlankId": 0,
+          "BlankNumber": "71234567890000",
+          "Amount": 9481.7
+        }
+      ],
+      "ArrivalDateTime": "2016-11-02T08:36:00",
+      "OriginLocationCode": "2006004",
+      "OriginLocationName": "МОСКВА",
+      "DestinationLocationCode": "2004001",
+      "DestinationLocationName": "САНКТ-ПЕТЕРБУРГ",
+      "OrderId": 51978,
+      "AgentReferenceId": null,
+      "OrderItemId": 52157,
+      "PosSysName": "ThePos",
+      "Amount": 9481.7,
+      "ReservationNumber": "71234567890000",
+      "OperationType": "Purchase",
+      "SimpleOperationStatus": "Succeeded",
+      "DetailedOperationStatus": "Error",
+      "DepartureDateTime": "2016-11-01T23:40:00",
+      "CreateDateTime": "2016-10-27T18:50:04",
+      "ConfirmTimeLimit": "2016-10-27T19:04:04",
+      "ConfirmDateTime": "2016-10-27T19:00:15",
+      "ClientFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "AgentFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "ProviderPaymentForm": null,
+      "IsExternallyLoaded": false
+    }
+  ],
+  "OrderId": 51978,
+  "Amount": 9481.7,
+  "ContactPhone": "+79123456789",
+  "ContactEmails": [
+    "test@test.ru"
+  ],
+  "Created": "1970-01-01T03:00:00",
+  "Confirmed": "1970-01-01T03:00:00",
+  "PosSysName": null
+}

@@ -1,0 +1,129 @@
+{
+  "TrainPricings": [
+    {
+      "RoutePolicy": "Internal",
+      "OriginCode": "2000000",
+      "OriginStationCode": "2000000",
+      "DestinationCode": "2064788",
+      "DestinationStationCode": "2064788",
+      "Trains": [
+        {
+          "HasElectronicRegistration": true,
+          "HasDynamicPricingCars": true,
+          "HasTwoStoreyCars": false,
+          "Carriers": [
+            "ФПК"
+          ],
+          "CarGroups": [],
+          "Id": 1,
+          "TrainNumber": "115А",
+          "TrainNumberToGetRoute": "115А",
+          "DisplayTrainNumber": "115А",
+          "TrainDescription": "СК",
+          "TrainName": "",
+          "TransportType": "Train",
+          "OriginName": "С-ПЕТ-ЛАД",
+          "OriginStationCode": "2000001",
+          "DestinationName": "АДЛЕР",
+          "DestinationStationCode": "2064800",
+          "DestinationNames": [
+            "АДЛЕР"
+          ],
+          "DepartureDateTime": "2017-05-01T04:31:00",
+          "ArrivalDateTime": "2017-05-11T10:03:00",
+          "ArrivalDateTimes": [
+            "2017-05-11T10:30:00"
+          ],
+          "DepartureDateFromFormingStation": "2017-05-09T00:00:00",
+          "DepartureStopTime": 15,
+          "ArrivalStopTime": 7,
+          "TripDuration": 1772,
+          "TripDistance": 1598,
+          "IsSuburban": false,
+          "IsComponent": false,
+          "CarServices": [],
+          "IsSaleForbidden": false
+        }
+      ],
+      "DepartureTimeDescription": "Moscow",
+      "ArrivalTimeDescription": "Moscow",
+      "IsFromUkrain": false,
+      "ClientFeeCalculation": null,
+      "AgentFeeCalculation": null,
+      "NotAllTrainsReturned": false,
+      "StationClarifying": null,
+      "BookingSystem": "Express3",
+      "Id": 1
+    },
+    {
+      "RoutePolicy": "Internal",
+      "OriginCode": "2064188",
+      "OriginStationCode": "2064188",
+      "DestinationCode": "2078750",
+      "DestinationStationCode": "2078750",
+      "Trains": [
+        {
+          "HasElectronicRegistration": true,
+          "HasDynamicPricingCars": false,
+          "HasTwoStoreyCars": false,
+          "Carriers": [
+            "ЕТД"
+          ],
+          "CarGroups": [],
+          "Id": 1,
+          "TrainNumber": "521А",
+          "TrainNumberToGetRoute": "521А",
+          "DisplayTrainNumber": "521А",
+          "TrainDescription": "ПАСС",
+          "TrainName": "",
+          "TransportType": "Ferry",
+          "OriginName": "АНАПА",
+          "OriginStationCode": "2064188",
+          "DestinationName": "СЕВАСТОПОЛЬ",
+          "DestinationStationCode": "2078750",
+          "DestinationNames": [
+            "СЕВАСТОПОЛЬ"
+          ],
+          "DepartureDateTime": "2017-05-11T10:30:00",
+          "ArrivalDateTime": "2017-05-11T20:10:00",
+          "ArrivalDateTimes": [
+            "2017-05-11T20:10:00"
+          ],
+          "DepartureDateFromFormingStation": "2017-05-11T00:00:00",
+          "DepartureStopTime": 0,
+          "ArrivalStopTime": 0,
+          "TripDuration": 580,
+          "TripDistance": 414,
+          "IsSuburban": false,
+          "IsComponent": false,
+          "CarServices": [],
+          "IsSaleForbidden": false
+        }
+      ],
+      "DepartureTimeDescription": "Moscow",
+      "ArrivalTimeDescription": "Moscow",
+      "IsFromUkrain": false,
+      "ClientFeeCalculation": null,
+      "AgentFeeCalculation": null,
+      "NotAllTrainsReturned": false,
+      "StationClarifying": null,
+      "BookingSystem": "Express3",
+      "Id": 2
+    }
+  ],
+  "Routes": [
+    {
+      "RouteParts": [
+        {
+          "PricingId": 1,
+          "TrainId": 1
+        },
+        {
+          "PricingId": 2,
+          "TrainId": 1
+        }
+      ]
+    }
+  ],
+  "NotAllTrainPricingsReturned": false
+}
