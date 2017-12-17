@@ -1,7 +1,7 @@
 from datetime import datetime
-from onelya_railway_sdk.utils import get_array
-from onelya_railway_sdk.wrapper.types import TransportNodeType
-from onelya_railway_sdk.wrapper import TransportNode, City, Country, Region
+from onelya_sdk.utils import get_array
+from onelya_sdk.wrapper.types import TransportNodeType
+from onelya_sdk.wrapper import TransportNode, City, Country, Region
 
 TRANSPORT_NODES_METHOD = 'Info/V1/References/TransportNodes'
 CITIES_METHOD = 'Info/V1/References/Cities'

@@ -1,7 +1,7 @@
 from datetime import datetime
-from onelya_railway_sdk.wrapper.types import (RailwayPassengerCategory, PreferredAdultTariffType, CarType, CarStorey,
-                                              RzhdCardTypes, CabinGenderKind, CabinPlaceDemands, ProviderPaymentForm,
-                                              AdditionalPlaceRequirements, DocumentType, Sex)
+from onelya_sdk.wrapper.types import (RailwayPassengerCategory, PreferredAdultTariffType, CarType, CarStorey,
+                                      RzhdCardTypes, CabinGenderKind, CabinPlaceDemands, ProviderPaymentForm,
+                                      AdditionalPlaceRequirements, DocumentType, Sex)
 
 
 class RailwayPassengerRequest(object):
