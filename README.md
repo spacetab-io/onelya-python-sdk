@@ -1,4 +1,4 @@
-Onelya Python SDK [![master](https://circleci.com/gh/tmconsulting/onelya-railway-sdk/tree/master.svg?style=shield)](https://circleci.com/gh/tmconsulting/onelya-railway-sdk/tree/master)
+Onelya Python SDK [![master](https://circleci.com/gh/tmconsulting/onelya-python-sdk/tree/master.svg?style=shield)](https://circleci.com/gh/tmconsulting/onelya-python-sdk/tree/master)
 ---------------
 
 This SDK is used to connect to the Onelya and use it methods(Railway and Aeroexpress) for a 3-d party API.
