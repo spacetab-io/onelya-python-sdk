@@ -12,7 +12,7 @@ This SDK is used to connect to the Onelya and use it methods(Railway and Aeroexp
 
 ### Installation
 ```
-pip3 install onelya_railway_sdk
+pip3 install onelya_sdk
 ```
 
 ### Get started
@@ -21,7 +21,7 @@ To start you will need to have credentials for the Onelya. <br>
 Example of api initializing
 
 ```python
-from onelya-railway-sdk import API
+from onelya_sdk import API
 
 api = API('username', 'password', 'pos')
 
@@ -30,7 +30,7 @@ api = API('username', 'password', 'pos')
 After that, include the wrappers for requests to Railway Reservation
 
 ```python
-from onelya_railway_sdk.railway import *
+from onelya_sdk.railway import *
 ```
 
 Now you can use all the methods of the Onelya Railway.

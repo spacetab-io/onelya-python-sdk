@@ -4,7 +4,7 @@ __version__ = '1.0.0'
 
 setup(
     version=__version__,
-    name='onelya_railway_sdk',
+    name='onelya_sdk',
     packages=find_packages(),
 
     install_requires=[
@@ -16,8 +16,8 @@ setup(
     author='Travel Managment Consulting',
     author_email='otd@tm-consulting.ru',
 
-    url='https://github.com/tmconsulting/onelya-railway-sdk',
-    download_url='https://github.com/tmconsulting/onelya-railway-sdk/archive/%s.tar.gz' % __version__,
+    url='https://github.com/tmconsulting/onelya-python-sdk',
+    download_url='https://github.com/tmconsulting/onelya-python-sdk/archive/%s.tar.gz' % __version__,
 
     license='MIT License',
     classifiers=[

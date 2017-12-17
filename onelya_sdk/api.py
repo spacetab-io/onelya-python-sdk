@@ -1,5 +1,5 @@
-from onelya_railway_sdk.railway.reservation import Reservation as RailwayReservation
-from onelya_railway_sdk.references import References as References
+from onelya_sdk.railway.reservation import Reservation as RailwayReservation
+from onelya_sdk.references import References as References
 from .railway.info import Info as RailwayInfo
 from .railway.search import Search as RailwaySearch
 from .session import Session

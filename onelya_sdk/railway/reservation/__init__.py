@@ -1,11 +1,11 @@
 from .requests import ServiceReturnAmountRequest
-from onelya_railway_sdk.utils import get_datetime, get_array, get_item
-from onelya_railway_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm
+from onelya_sdk.utils import get_datetime, get_array, get_item
+from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm
 from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
-from onelya_railway_sdk.wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
-                                        RailwayConfirmResponse, RailwayReturnAmountResponse, RailwayAutoReturnResponse,
-                                        CustomerUpsaleOperationResult, RailwayBlankInfo)
+from onelya_sdk.wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
+                                RailwayConfirmResponse, RailwayReturnAmountResponse, RailwayAutoReturnResponse,
+                                CustomerUpsaleOperationResult, RailwayBlankInfo)
 
 CREATE_METHOD = 'Order/V1/Reservation/Create'
 PROLONG_RESERVATION_METHOD = 'Order/V1/Reservation/ProlongReservation'

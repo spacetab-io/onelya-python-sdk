@@ -5,13 +5,13 @@ from datetime import datetime
 
 import mock
 
-from onelya_railway_sdk.api import API
-from onelya_railway_sdk.exceptions import OnelyaAPIError
-from onelya_railway_sdk.railway import (OrderFullCustomerRequest, RailwayReservationRequest,
-                                        RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest)
-from onelya_railway_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
-                                              CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
-                                              PricingTariffType, RailwayPassengerCategory, OperationType)
+from onelya_sdk.api import API
+from onelya_sdk.exceptions import OnelyaAPIError
+from onelya_sdk.railway import (OrderFullCustomerRequest, RailwayReservationRequest,
+                                RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest)
+from onelya_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
+                                      CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
+                                      PricingTariffType, RailwayPassengerCategory, OperationType)
 
 PDF_PATH = 'tests/data/Order/Reservation/Blank.pdf'
 HTML_PATH = 'tests/data/Railway/Reservation/BlankAsHtml.html'

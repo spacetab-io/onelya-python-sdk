@@ -1,9 +1,9 @@
 from datetime import datetime
-from onelya_railway_sdk.utils import get_array, get_item
-from onelya_railway_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
-from onelya_railway_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
-                                        CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
-                                        RouteReferenced, MealOption)
+from onelya_sdk.utils import get_array, get_item
+from onelya_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
+from onelya_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
+                                CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
+                                RouteReferenced, MealOption)
 
 TRAIN_PRICING_METHOD = 'Railway/V1/Search/TrainPricing'
 CAR_PRICING_METHOD = 'Railway/V1/Search/CarPricing'

@@ -1,7 +1,7 @@
 from datetime import datetime
-from onelya_railway_sdk.utils import get_array, get_datetime
-from onelya_railway_sdk.wrapper.types import OperationType, ProviderPaymentForm
-from onelya_railway_sdk.wrapper import OrderCustomerInfo, RailwayFullOrderItemInfo, ShortOrderInfo
+from onelya_sdk.utils import get_array, get_datetime
+from onelya_sdk.wrapper.types import OperationType, ProviderPaymentForm
+from onelya_sdk.wrapper import OrderCustomerInfo, RailwayFullOrderItemInfo, ShortOrderInfo
 
 ORDER_INFO_METHOD = 'Order/V1/Info/OrderInfo'
 ORDER_LIST_METHOD = 'Order/V1/Info/OrderList'
