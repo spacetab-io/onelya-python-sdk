@@ -12,7 +12,7 @@
       "Sex": "Male",
       "BirthDate": "1976-10-12T00:00:00",
       "DocumentNumber": "4601123450",
-      "DocumentValidTill": "0001-01-01T00:00:00",
+      "DocumentValidTill": "1976-10-12T00:00:00",
       "DocumentType": "RussianPassport",
       "CitizenshipCode": "RU",
       "BirthPlace": null

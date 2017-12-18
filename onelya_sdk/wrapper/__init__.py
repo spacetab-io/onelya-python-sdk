@@ -418,7 +418,7 @@ class OrderCreateReservationCustomerResponse(object):
         self.middle_name = json_data.get('MiddleName', None)
         self.last_name = json_data.get('LastName', None)
         self.sex = json_data.get('Sex', None)
-        self.birth_date = json_data.get('BirthDate', None)
+        self.birth_date = get_datetime(json_data.get('BirthDate', None))
         self.document_number = json_data.get('DocumentNumber', None)
         self.document_valid_till = get_datetime(json_data.get('DocumentValidTill', None))
         self.document_type = json_data.get('DocumentType', None)
