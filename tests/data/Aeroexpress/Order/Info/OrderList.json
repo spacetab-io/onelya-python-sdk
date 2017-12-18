@@ -4,9 +4,6 @@
       "OrderItems": [
         {
           "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayShortOrderItemInfo, ApiContracts",
-          "ServiceType": "Tickets",
-          "PlaceQuantity": 1,
-          "OrderItemBlanks": null,
           "OrderId": 51978,
           "AgentReferenceId": null,
           "OrderItemId": 52157,

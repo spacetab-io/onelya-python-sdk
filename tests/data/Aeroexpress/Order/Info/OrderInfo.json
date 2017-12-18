@@ -15,29 +15,13 @@
   ],
   "OrderItems": [
     {
-      "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayFullOrderItemInfo, ApiContracts",
-      "ServiceType": "Tickets",
-      "PlaceQuantity": 1,
-      "OriginStationName": "МОСКВА ОКТЯБРЬСКАЯ",
-      "DestinationStationName": "САНКТ-ПЕТЕРБУРГ-ГЛАВН.",
-      "TrainNumber": "054ЧА",
-      "BookingTrainNumber": null,
-      "TrainNumberToGetRoute": null,
-      "CarNumber": "07",
-      "CarType": "Luxury",
-      "ElectronicRegistrationExpirationDateTime": "2016-11-01T22:40:00",
-      "PlaceReservationType": "Usual",
-      "ServiceClass": "1Б",
-      "AdditionalInformation": "",
-      "CarrierDescription": "ЗАО ТК \"ГСЭ\"",
+      "$type": "ApiContracts.Order.V1.Info.OrderItem.Aeroexpress.AeroexpressFullOrderItemInfo, ApiContracts",
       "OrderItemCustomers": [
         {
-          "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayOrderItemCustomerInfo, ApiContracts",
+          "$type": "ApiContracts.Order.V1.Info.OrderItem.Aeroexpress.AeroexpressOrderItemCustomerInfo, ApiContracts",
           "OrderItemBlankId": 51946,
-          "Places": "001",
-          "PlaceQuantity": 1,
           "OrderCustomerId": 66650,
-          "OrderItemCustomerId": 51445,
+          "OrderItemCustomerId": 42650,
           "Amount": 9481.7,
           "ClientFeeCalculation": {
             "Charge": 100.0,
@@ -47,21 +31,8 @@
       ],
       "OrderItemBlanks": [
         {
-          "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayOrderItemBlankInfo, ApiContracts",
-          "VoucherNumber": null,
-          "BaseFare": 0.0,
-          "AdditionalPrice": 0.0,
-          "ServicePrice": 0.0,
-          "VatRateValues": null,
+          "$type": "ApiContracts.Order.V1.Info.OrderItem.Aeroexpress.AeroexpressOrderItemBlankInfo, ApiContracts",
           "TariffType": "Full",
-          "BlankStatus": "ElectronicRegistrationPresent",
-          "IsElectronicRegistrationSet": true,
-          "IsMealOptionPossible": false,
-          "PendingElectronicRegistration": "NoValue",
-          "ElectronicRegistrationSetDateTime": null,
-          "SignSequence": null,
-          "TariffInfo": null,
-          "PlaceQuantity": 1,
           "OrderItemBlankId": 51946,
           "PreviousOrderItemBlankId": 0,
           "BlankNumber": "71234567890000",
@@ -104,7 +75,7 @@
   "ContactEmails": [
     "test@test.ru"
   ],
-  "Created": "1970-01-01T03:00:00",
-  "Confirmed": "1970-01-01T03:00:00",
+  "Created": "0001-01-01T00:00:00",
+  "Confirmed": "0001-01-01T00:00:00",
   "PosSysName": null
 }

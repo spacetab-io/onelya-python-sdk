@@ -390,6 +390,20 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, self.aeroexpress_api.last_request)
         self.assert_json_with_class(auto_return)
 
+    def test_aeroexpress_order_info(self):
+        order_info = self.aeroexpress_api.aeroexpress_info.info(51978)
+
+        input_data = json.loads(open('tests/data/Aeroexpress/Order/Info/OrderInfo.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.aeroexpress_api.last_request)
+        self.assert_json_with_class(order_info)
+
+    def test_aeroexpress_order_list(self):
+        order_list = self.aeroexpress_api.aeroexpress_info.list(self.datetime, OperationType.PURCHASE)
+
+        input_data = json.loads(open('tests/data/Aeroexpress/Order/Info/OrderList.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.aeroexpress_api.last_request)
+        self.assert_json_with_class(order_list)
+
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)
