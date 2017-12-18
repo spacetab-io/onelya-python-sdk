@@ -1,0 +1,64 @@
+{
+  "Tariffs": [
+    {
+      "DocumentTypes": [
+        "RussianPassport",
+        "RussianForeignPassport",
+        "BirthCertificate",
+        "ForeignPassport",
+        "MilitaryCard"
+      ],
+      "ClientFeeCalculation": null,
+      "AgentFeeCalculation": {
+        "Charge": 36.0,
+        "Profit": 16.0
+      },
+      "TariffId": "1",
+      "TariffName": "Стандарт",
+      "RouteName": null,
+      "Description": "1 поездка в вагоне стандартного класса. Билет действителен на всех трех направлениях от/до московских аэропортов, на дату, указанную в проездном документе.",
+      "Price": 420.0,
+      "MaxTicketsQuantityAllowedForBooking": 10,
+      "IsForGuaranteedSeats": false,
+      "Races": null
+    },
+    {
+      "DocumentTypes": [
+        "RussianPassport",
+        "RussianForeignPassport",
+        "BirthCertificate",
+        "ForeignPassport",
+        "MilitaryCard"
+      ],
+      "ClientFeeCalculation": null,
+      "AgentFeeCalculation": {
+        "Charge": 36.0,
+        "Profit": 16.0
+      },
+      "TariffId": "3",
+      "TariffName": "Бизнес",
+      "RouteName": "Белорусский ― Шереметьево",
+      "Description": "1 поездка в вагоне бизнес класса с гарантированным посадочным местом. Билет действителен на дату, рейс и направление, указанные в проездном документе.",
+      "Price": 420.0,
+      "MaxTicketsQuantityAllowedForBooking": 10,
+      "IsForGuaranteedSeats": true,
+      "Races": [
+        {
+          "RaceId": "124",
+          "RaceName": "00:00 - 00:35",
+          "FreePlaceQuantity": 24
+        },
+        {
+          "RaceId": "124",
+          "RaceName": "00:30 - 01:05",
+          "FreePlaceQuantity": 24
+        },
+        {
+          "RaceId": "124",
+          "RaceName": "05:30 - 06:05",
+          "FreePlaceQuantity": 24
+        }
+      ]
+    }
+  ]
+}

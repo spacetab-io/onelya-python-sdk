@@ -32,6 +32,21 @@ class MockSession(object):
         return self.mock_json
 
 
+class MockAeroexpressSession(object):
+    def __init__(self):
+        self.headers = {}
+        self.auth = None
+        self.mock_json = None
+
+    def post(self, url, data=None, timeout=None):
+        self.mock_json = json.loads(open('tests/data/Aeroexpress/{}.json'.format(url[url.index('.ru/') + len('.ru/'):].
+                                                                     replace('/V1', '')), 'r', encoding='utf8').read())
+        return self
+
+    def json(self):
+        return self.mock_json
+
+
 class MockFileSession(object):
     def __init__(self):
         self.headers = {}
@@ -71,7 +86,6 @@ class MockHTMLSession(object):
 
 class TestAPI(unittest.TestCase):
 
-    @mock.patch('requests.Session', MockSession)
     def setUp(self):
         self.maxDiff = None
         self.datetime = datetime.fromtimestamp(0).replace(hour=3)
@@ -80,7 +94,16 @@ class TestAPI(unittest.TestCase):
         self.password = os.environ.get('PASSWORD', None)
         self.pos = os.environ.get('POS', None)
 
-        self.api = API(self.username, self.password, self.pos)
+        self.api = self.railway_api()
+        self.aeroexpress_api = self.aeroexpress_api()
+
+    @mock.patch('requests.Session', MockSession)
+    def railway_api(self):
+        return API(self.username, self.password, self.pos)
+
+    @mock.patch('requests.Session', MockAeroexpressSession)
+    def aeroexpress_api(self):
+        return API(self.username, self.password, self.pos)
 
     def test_json_railway_train_pricing(self):
         train_pricing = self.api.railway_search.train_pricing('Москва', '2004000', self.datetime, 12, 24, CarGrouping.GROUP)
@@ -299,6 +322,20 @@ class TestAPI(unittest.TestCase):
         input_data = json.loads(open('tests/data/Insurance/Search/Pricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, self.api.last_request)
         self.assert_json_with_class(search_pricing)
+
+    def test_aeroexpress_search_tariff_pricing(self):
+        tariff_pricing = self.aeroexpress_api.aeroexpress_search.tariff_pricing(self.datetime)
+
+        input_data = json.loads(open('tests/data/Aeroexpress/Aeroexpress/Search/TariffPricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.aeroexpress_api.last_request)
+        self.assert_json_with_class(tariff_pricing)
+
+    def test_aeroexpress_search_tariff_price_info(self):
+        tariff_price_info = self.aeroexpress_api.aeroexpress_search.tariff_price_info(self.datetime, '2')
+
+        input_data = json.loads(open('tests/data/Aeroexpress/Aeroexpress/Search/TariffPriceInfo.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.aeroexpress_api.last_request)
+        self.assert_json_with_class(tariff_price_info)
 
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}

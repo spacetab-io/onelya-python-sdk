@@ -822,3 +822,27 @@ class RailwayPricingResponse(object):
         self.pricing_info_list = get_array(json_data.get('PricingInfoList', None), RailwayPricingInfo)
 
         self.json_data = json_data
+
+
+class RaceInfo(object):
+    def __init__(self, json_data):
+        self.race_id = json_data.get('RaceId', None)
+        self.race_name = json_data.get('RaceName', None)
+        self.free_place_quantity = json_data.get('FreePlaceQuantity', None)
+
+        self.json_data = json_data
+
+
+class TariffPriceInfoResponse(object):
+    def __init__(self, json_data):
+        self.document_types = json_data.get('DocumentTypes', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.tariff_id = json_data.get('TariffId', None)
+        self.tariff_name = json_data.get('TariffName', None)
+        self.route_name = json_data.get('RouteName', None)
+        self.description = json_data.get('Description', None)
+        self.price = json_data.get('Price', None)
+        self.max_tickets_quantity_allowed_for_booking = json_data.get('MaxTicketsQuantityAllowedForBooking', None)
+        self.is_for_guaranteed_seats = json_data.get('IsForGuaranteedSeats', None)
+        self.races = get_array(json_data.get('Races', None), RaceInfo)
