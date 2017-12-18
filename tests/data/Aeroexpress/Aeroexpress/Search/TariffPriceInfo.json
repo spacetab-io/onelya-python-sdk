@@ -1,0 +1,22 @@
+{
+  "DocumentTypes": [
+    "RussianPassport",
+    "RussianForeignPassport",
+    "BirthCertificate",
+    "ForeignPassport",
+    "MilitaryCard"
+  ],
+  "ClientFeeCalculation": null,
+  "AgentFeeCalculation": {
+    "Charge": 36.0,
+    "Profit": 16.0
+  },
+  "TariffId": "2",
+  "TariffName": "Туда обратно",
+  "RouteName": null,
+  "Description": "2 поездки в вагоне стандартного класса. Билет действителен на всех трех направлениях от / до московских аэропортов в течение 30 дней с даты,\tуказанной в проездном документе(включительно).",
+  "Price": 820.0,
+  "MaxTicketsQuantityAllowedForBooking": 10,
+  "IsForGuaranteedSeats": false,
+  "Races": null
+}

@@ -1,0 +1,71 @@
+{
+  "OrderId": 57906,
+  "Amount": 540.0,
+  "ConfirmTill": "2017-07-11T16:23:53",
+  "Customers": [
+    {
+      "Index": 1,
+      "OrderCustomerId": 75663,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "BirthDate": "1976-10-12T00:00:00",
+      "DocumentNumber": "4601123450",
+      "DocumentValidTill": "1976-10-12T00:00:00",
+      "DocumentType": "RussianPassport",
+      "CitizenshipCode": "RU",
+      "BirthPlace": null
+    }
+  ],
+  "ReservationResults": [
+    {
+      "$type": "ApiContracts.Aeroexpress.V1.Messages.Reservation.AeroexpressReservationResponse, ApiContracts",
+      "Blanks": [
+        {
+          "OrderItemBlankId": 60166,
+          "TariffType": "Standard",
+          "Amount": 420.0
+        }
+      ],
+      "Passengers": [
+        {
+          "OrderItemBlankId": 60166,
+          "FirstName": "Иван",
+          "MiddleName": "Иванович",
+          "LastName": "Иванов",
+          "OrderCustomerId": 75663,
+          "OrderCustomerReferenceIndex": 1,
+          "Amount": 9481.7,
+          "Fare": 9481.7,
+          "Tax": 0.0,
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "AgentFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          }
+        }
+      ],
+      "Index": 1,
+      "OrderItemId": 58506,
+      "AgentReferenceId": "",
+      "Amount": 540.0,
+      "Fare": 540.0,
+      "Tax": 0.0,
+      "ReservationNumber": "1190989",
+      "ConfirmTill": "2017-07-11T16:23:53",
+      "ClientFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "AgentFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "ErrorResult": null
+    }
+  ]
+}

@@ -1,11 +1,14 @@
-from onelya_sdk.railway.reservation import Reservation as RailwayReservation
-from onelya_sdk.references import References as References
-from .railway.info import Info as RailwayInfo
-from .railway.search import Search as RailwaySearch
 from .session import Session
 from .utils import get_array, get_item
-from .wrapper import AgentAccount, RailwayPricingResponse
 from .wrapper.requests import RequestWrapper
+from .railway.info import Info as RailwayInfo
+from .references import References as References
+from .railway.search import Search as RailwaySearch
+from .aeroexpress.info import Info as AeroexpressInfo
+from .wrapper import AgentAccount, RailwayPricingResponse
+from .aeroexpress.search import Search as AeroexpressSearch
+from .railway.reservation import Reservation as RailwayReservation
+from .aeroexpress.reservation import Reservation as AeroexpressReservation
 
 __version__ = 0.1
 
@@ -17,9 +20,15 @@ class API(object):
     def __init__(self, username: str, password: str, pos: str):
         self.__session = Session(username, password, pos)
         self.__request_wrapper = RequestWrapper(self.__session)
+
         self.railway_search = RailwaySearch(self.__request_wrapper)
         self.railway_reservation = RailwayReservation(self.__request_wrapper)
         self.railway_info = RailwayInfo(self.__request_wrapper)
+
+        self.aeroexpress_search = AeroexpressSearch(self.__request_wrapper)
+        self.aeroexpress_reservation = AeroexpressReservation(self.__request_wrapper)
+        self.aeroexpress_info = AeroexpressInfo(self.__request_wrapper)
+
         self.references = References(self.__request_wrapper)
 
     def partner_balances(self):

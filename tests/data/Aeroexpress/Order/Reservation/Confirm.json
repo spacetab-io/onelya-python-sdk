@@ -1,0 +1,57 @@
+{
+  "OrderId": 51978,
+  "Customers": [
+    {
+      "OrderCustomerId": 75664,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "BirthDate": "1976-10-12T00:00:00",
+      "DocumentNumber": "4601123450",
+      "DocumentValidTill": "9999-12-31T23:59:59",
+      "DocumentType": "RussianPassport",
+      "CitizenshipCode": "RU",
+      "BirthPlace": null
+    }
+  ],
+  "ConfirmResults": [
+    {
+      "$type": "ApiContracts.Aeroexpress.V1.Messages.Reservation.AeroexpressConfirmResponse, ApiContracts",
+      "ReservationNumber": "1234567",
+      "ReturnTill": "0001-01-01T00:00:00",
+      "OrderItemId": 58506,
+      "Amount": 540.0,
+      "Fare": 540.0,
+      "Tax": 0.0,
+      "Confirmed": "2017-07-11T12:18:58",
+      "VoidTill": "2017-07-20T00:00:00",
+      "ClientFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "AgentFeeCalculation": {
+        "Charge": 100.0,
+        "Profit": 0.0
+      },
+      "OrderItemCustomers": [
+        {
+          "OrderCustomerId": 75663,
+          "Amount": 540.0,
+          "Fare": 540.0,
+          "Tax": 0.0,
+          "ClientFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          },
+          "AgentFeeCalculation": {
+            "Charge": 100.0,
+            "Profit": 0.0
+          }
+        }
+      ],
+      "Warnings": null,
+      "ErrorResult": null
+    }
+  ]
+}
