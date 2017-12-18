@@ -1,0 +1,39 @@
+{
+  "ContactPhone": "+79123456789",
+  "ContactEmails": [
+    "test@test.ru"
+  ],
+  "Customers": [
+    {
+      "$type": "ApiContracts.Order.V1.Reservation.OrderFullCustomerRequest, ApiContracts",
+      "DocumentNumber": "4601123450",
+      "DocumentType": "RussianPassport",
+      "DocumentValidTill": null,
+      "CitizenshipCode": "RU",
+      "BirthPlace": null,
+      "FirstName": "Иван",
+      "MiddleName": "Иванович",
+      "LastName": "Иванов",
+      "Sex": "Male",
+      "Birthday": "1970-01-01T03:00:00",
+      "Index": 1
+    }
+  ],
+  "ReservationItems": [
+    {
+      "$type": "ApiContracts.Aeroexpress.V1.Messages.Reservation.AeroexpressReservationRequest, ApiContracts",
+      "TariffId": "3",
+      "ScheduleId": "105",
+      "DepartureDate": "1970-01-01T03:00:00",
+      "ProviderPaymentForm": "Card",
+      "Passengers": [
+        {
+          "OrderCustomerIndex": 1
+        }
+      ],
+      "Index": 1,
+      "AgentReferenceId": null,
+      "AgentPaymentId": null
+    }
+  ]
+}

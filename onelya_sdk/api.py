@@ -7,6 +7,7 @@ from .railway.search import Search as RailwaySearch
 from .wrapper import AgentAccount, RailwayPricingResponse
 from .aeroexpress.search import Search as AeroexpressSearch
 from .railway.reservation import Reservation as RailwayReservation
+from .aeroexpress.reservation import Reservation as AeroexpressReservation
 
 __version__ = 0.1
 
@@ -24,6 +25,7 @@ class API(object):
         self.railway_info = RailwayInfo(self.__request_wrapper)
 
         self.aeroexpress_search = AeroexpressSearch(self.__request_wrapper)
+        self.aeroexpress_reservation = AeroexpressReservation(self.__request_wrapper)
 
         self.references = References(self.__request_wrapper)
 
