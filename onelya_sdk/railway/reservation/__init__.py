@@ -3,7 +3,7 @@ from onelya_sdk.utils import get_datetime, get_array, get_item
 from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm
 from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
-from onelya_sdk.wrapper import (OrderCreateReservationCustomerResponse, RailwayReservationResponse, OrderCustomerResponse,
+from onelya_sdk.wrapper import (OrderCreateReservationCustomerResponse, ReservationResponse, OrderCustomerResponse,
                                 RailwayConfirmResponse, RailwayReturnAmountResponse, RailwayAutoReturnResponse,
                                 CustomerUpsaleOperationResult, RailwayBlankInfo)
 
@@ -113,7 +113,7 @@ class CreateReservation(object):
         self.amount = json_data.get('Amount', None)
         self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
         self.customers = get_array(json_data.get('Customers', None), OrderCreateReservationCustomerResponse)
-        self.reservation_results = get_array(json_data.get('ReservationResults', None), RailwayReservationResponse)
+        self.reservation_results = get_array(json_data.get('ReservationResults', None), ReservationResponse)
 
         self.json_data = json_data
 

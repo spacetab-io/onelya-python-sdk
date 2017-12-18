@@ -1,7 +1,7 @@
 from datetime import datetime
 from onelya_sdk.utils import get_array, get_datetime
 from onelya_sdk.wrapper.types import OperationType, ProviderPaymentForm
-from onelya_sdk.wrapper import OrderCustomerInfo, RailwayFullOrderItemInfo, RailwayShortOrderInfo
+from onelya_sdk.wrapper import OrderCustomerInfo, AeroexpressFullOrderItemInfo, AeroexpressShortOrderInfo
 
 ORDER_INFO_METHOD = 'Order/V1/Info/OrderInfo'
 ORDER_LIST_METHOD = 'Order/V1/Info/OrderList'
@@ -27,7 +27,7 @@ class Info(object):
 class OrderInfo(object):
     def __init__(self, json_data):
         self.order_customers = get_array(json_data.get('OrderCustomers', None), OrderCustomerInfo)
-        self.order_items = get_array(json_data.get('OrderItems', None), RailwayFullOrderItemInfo)
+        self.order_items = get_array(json_data.get('OrderItems', None), AeroexpressFullOrderItemInfo)
 
         self.order_id = json_data.get('OrderId', None)
         self.amount = json_data.get('Amount', None)
@@ -42,6 +42,6 @@ class OrderInfo(object):
 
 class OrderList(object):
     def __init__(self, json_data):
-        self.orders = get_array(json_data.get('Orders', None), RailwayShortOrderInfo)
+        self.orders = get_array(json_data.get('Orders', None), AeroexpressShortOrderInfo)
 
         self.json_data = json_data

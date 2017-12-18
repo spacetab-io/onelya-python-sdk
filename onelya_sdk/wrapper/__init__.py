@@ -306,7 +306,7 @@ class PlaceWithType(object):
         self.json_data = json_data
 
 
-class RailwayPassengerResponse(object):
+class PassengerResponse(object):
     def __init__(self, json_data):
         self.category = json_data.get('Category', None)
         self.places = json_data.get('Places', None)
@@ -347,7 +347,7 @@ class TicketTariffInfo(object):
         self.json_data = json_data
 
 
-class RailwayReservationBlankResponse(object):
+class ReservationBlankResponse(object):
     def __init__(self, json_data):
         self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
         self.amount = json_data.get('Amount', None)
@@ -363,10 +363,10 @@ class RailwayReservationBlankResponse(object):
         self.json_data = json_data
 
 
-class RailwayReservationResponse(object):
+class ReservationResponse(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type', None)
-        self.blanks = get_array(json_data.get('Blanks', None), RailwayReservationBlankResponse)
+        self.blanks = get_array(json_data.get('Blanks', None), ReservationBlankResponse)
         self.origin_station = json_data.get('OriginStation', None)
         self.destination_station = json_data.get('DestinationStation', None)
         self.origin_station_code = json_data.get('OriginStationCode', None)
@@ -392,7 +392,7 @@ class RailwayReservationResponse(object):
         self.train_description = json_data.get('TrainDescription', None)
         self.car_description = json_data.get('CarDescription', None)
         self.is_suburban = json_data.get('IsSuburban', None)
-        self.passengers = get_array(json_data.get('Passengers', None), RailwayPassengerResponse)
+        self.passengers = get_array(json_data.get('Passengers', None), PassengerResponse)
         self.index = json_data.get('Index', None)
         self.order_item_id = json_data.get('OrderItemId', None)
         self.agent_reference_id = json_data.get('AgentReferenceId', None)
@@ -677,7 +677,7 @@ class RailwayShortOrderItemInfo(object):
         self.json_data = json_data
 
 
-class ShortOrderInfo(object):
+class RailwayShortOrderInfo(object):
     def __init__(self, json_data):
         self.order_items = get_array(json_data.get('OrderItems', None), RailwayShortOrderItemInfo)
         self.order_id = json_data.get('OrderId', None)
@@ -820,5 +820,163 @@ class RailwayPricingResponse(object):
         self.type = json_data.get('$type', None)
         self.product_pricing_info_list = get_array(json_data.get('ProductPricingInfoList', None), RailwayProductPricingInfo)
         self.pricing_info_list = get_array(json_data.get('PricingInfoList', None), RailwayPricingInfo)
+
+        self.json_data = json_data
+
+
+class RaceInfo(object):
+    def __init__(self, json_data):
+        self.race_id = json_data.get('RaceId', None)
+        self.race_name = json_data.get('RaceName', None)
+        self.free_place_quantity = json_data.get('FreePlaceQuantity', None)
+
+        self.json_data = json_data
+
+
+class TariffPriceInfoResponse(object):
+    def __init__(self, json_data):
+        self.document_types = json_data.get('DocumentTypes', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.tariff_id = json_data.get('TariffId', None)
+        self.tariff_name = json_data.get('TariffName', None)
+        self.route_name = json_data.get('RouteName', None)
+        self.description = json_data.get('Description', None)
+        self.price = json_data.get('Price', None)
+        self.max_tickets_quantity_allowed_for_booking = json_data.get('MaxTicketsQuantityAllowedForBooking', None)
+        self.is_for_guaranteed_seats = json_data.get('IsForGuaranteedSeats', None)
+        self.races = get_array(json_data.get('Races', None), RaceInfo)
+
+
+class AeroexpressConfirmResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.return_till = json_data.get('ReturnTill', None)
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.amount = json_data.get('Amount', None)
+        self.fare = json_data.get('Fare', None)
+        self.tax = json_data.get('Tax', None)
+        self.confirmed = json_data.get('Confirmed', None)
+        self.void_till = json_data.get('VoidTill', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), OrderItemCustomerResponseBase)
+        self.warnings = get_array(json_data.get('Warnings', None), ApiErrorResult)
+        self.error_result = get_item(json_data.get('ErrorResult', None), ApiErrorResult)
+
+
+class AeroexpressReturnBlankResponse(object):
+    def __init__(self, json_data):
+        self.purchase_order_item_blank_id = json_data.get('PurchaseOrderItemBlankId', None)
+        self.return_order_item_blank_id = json_data.get('ReturnOrderItemBlankId', None)
+        self.amount = json_data.get('Amount', None)
+
+        self.json_data = json_data
+
+
+class AeroexpressAutoReturnResponse(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.blanks = get_array(json_data.get('Blanks', None), AeroexpressReturnBlankResponse)
+        self.amount = json_data.get('Amount', None)
+        self.fare = json_data.get('Fare', None)
+        self.tax = json_data.get('Tax', None)
+        self.confirmed = get_datetime(json_data.get('Confirmed', None))
+        self.return_order_item_id = json_data.get('ReturnOrderItemId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+
+        self.json_data = json_data
+
+
+class AeroexpressOrderItemBlankInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.tariff_type = json_data.get('TariffType', None)
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId', None)
+        self.blank_number = json_data.get('BlankNumber', None)
+        self.amount = json_data.get('Amount', None)
+
+        self.json_data = json_data
+
+
+class AeroexpressOrderItemCustomerInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
+        self.order_customer_id = json_data.get('OrderCustomerId', None)
+        self.order_item_customer_id = json_data.get('OrderItemCustomerId', None)
+        self.amount = json_data.get('Amount', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+
+        self.json_data = json_data
+
+
+class AeroexpressFullOrderItemInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), AeroexpressOrderItemCustomerInfo)
+        self.order_item_blanks = get_array(json_data.get('OrderItemBlanks', None), AeroexpressOrderItemBlankInfo)
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
+        self.origin_location_code = json_data.get('OriginLocationCode', None)
+        self.origin_location_name = json_data.get('OriginLocationName', None)
+        self.destination_location_code = json_data.get('DestinationLocationCode', None)
+        self.destination_location_name = json_data.get('DestinationLocationName', None)
+        self.order_id = json_data.get('OrderId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.amount = json_data.get('Amount', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.operation_type = json_data.get('OperationType', None)
+        self.simple_operation_status = json_data.get('SimpleOperationStatus', None)
+        self.detailed_operation_status = json_data.get('DetailedOperationStatus', None)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.create_date_time = get_datetime(json_data.get('CreateDateTime', None))
+        self.confirm_time_limit = get_datetime(json_data.get('ConfirmTimeLimit', None))
+        self.confirm_date_time = get_datetime(json_data.get('ConfirmDateTime', None))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.provider_payment_form = json_data.get('ProviderPaymentForm', None)
+        self.is_externally_loaded = json_data.get('IsExternallyLoaded', None)
+
+
+class AeroexpressShortOrderItemInfo(object):
+    def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
+        self.order_id = json_data.get('OrderId', None)
+        self.agent_reference_id = json_data.get('AgentReferenceId', None)
+        self.order_item_id = json_data.get('OrderItemId', None)
+        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.amount = json_data.get('Amount', None)
+        self.reservation_number = json_data.get('ReservationNumber', None)
+        self.operation_type = json_data.get('OperationType', None)
+        self.simple_operation_status = json_data.get('SimpleOperationStatus', None)
+        self.detailed_operation_status = json_data.get('DetailedOperationStatus', None)
+        self.departure_date_time =  get_datetime(json_data.get('DepartureDateTime', None))
+        self.create_date_time = get_datetime(json_data.get('CreateDateTime', None))
+        self.confirm_time_limit =  get_datetime(json_data.get('ConfirmTimeLimit', None))
+        self.confirm_date_time =  get_datetime(json_data.get('ConfirmDateTime', None))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
+        self.provider_payment_form = json_data.get('ProviderPaymentForm', None)
+        self.is_externally_loaded = json_data.get('IsExternallyLoaded', None)
+
+        self.json_data = json_data
+
+
+class AeroexpressShortOrderInfo(object):
+    def __init__(self, json_data):
+        self.order_items = get_array(json_data.get('OrderItems', None), AeroexpressShortOrderItemInfo)
+        self.order_id = json_data.get('OrderId', None)
+        self.amount = json_data.get('Amount', None)
+        self.contact_phone = json_data.get('ContactPhone', None)
+        self.contact_emails = json_data.get('ContactEmails', None)
+        self.created = get_datetime(json_data.get('Created', None))
+        self.confirmed = get_datetime(json_data.get('Confirmed', None))
+        self.pos_sys_name = json_data.get('PosSysName', None)
 
         self.json_data = json_data

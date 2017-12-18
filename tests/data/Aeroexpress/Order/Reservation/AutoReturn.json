@@ -1,0 +1,26 @@
+{
+  "ServiceReturnResponse": {
+    "$type": "ApiContracts.Aeroexpress.V1.Messages.Return.AeroexpressAutoReturnResponse, ApiContracts",
+    "Blanks": [
+      {
+        "PurchaseOrderItemBlankId": 60166,
+        "ReturnOrderItemBlankId": 60170,
+        "Amount": 342.0
+      }
+    ],
+    "Amount": 342.0,
+    "Fare": 342.0,
+    "Tax": 0.0,
+    "Confirmed": "2017-12-18T10:50:47",
+    "ReturnOrderItemId": 58510,
+    "AgentReferenceId": "",
+    "ClientFeeCalculation": {
+      "Charge": 100.0,
+      "Profit": 0.0
+    },
+    "AgentFeeCalculation": {
+      "Charge": 100.0,
+      "Profit": 0.0
+    }
+  }
+}

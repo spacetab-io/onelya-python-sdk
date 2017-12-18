@@ -1,0 +1,7 @@
+{
+  "ServiceAutoReturnRequest": {
+    "$type": "ApiContracts.Aeroexpress.V1.Messages.Return.AeroexpressAutoReturnRequest, ApiContracts",
+    "OrderItemId": 52157,
+    "AgentReferenceId": null
+  }
+}
