@@ -41,9 +41,9 @@ class Reservation(object):
                                                      order_item_ids=order_item_ids)
         return ProlongReservation(response)
 
-    def confirm(self, order_id: int, order_customer_ids: 'list of int'=None,
-                order_customer_documents: 'lisf of OrderCustomerDocuments'=None,
-                provider_payment_form: ProviderPaymentForm=None):
+    def confirm(self, order_id: int, provider_payment_form: ProviderPaymentForm,
+                order_customer_ids: 'list of int'=None,
+                order_customer_documents: 'lisf of OrderCustomerDocuments'=None):
         response = self.request_wrapper.make_request(CONFIRM_METHOD, order_id=order_id, order_customer_ids=order_customer_ids,
                                                      order_customer_documents=order_customer_documents,
                                                      provider_payment_form=provider_payment_form)
