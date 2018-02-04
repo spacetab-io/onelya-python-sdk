@@ -840,6 +840,7 @@ class TariffPriceInfoResponse(object):
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.tariff_id = json_data.get('TariffId', None)
         self.tariff_name = json_data.get('TariffName', None)
+        self.tariff_type = json_data.get('TariffType', None)
         self.route_name = json_data.get('RouteName', None)
         self.description = json_data.get('Description', None)
         self.price = json_data.get('Price', None)
