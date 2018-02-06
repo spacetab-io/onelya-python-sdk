@@ -24,15 +24,15 @@ class Reservation(object):
                                                      reservation_items=reservation_items, contact_emails=contact_emails)
         return CreateReservation(response)
 
-    def confirm(self, order_id: int, order_customer_ids: 'list of int'=None,
-                order_customer_documents: 'lisf of OrderCustomerDocuments'=None,
-                provider_payment_form: ProviderPaymentForm=None):
+    def confirm(self, order_id: int, provider_payment_form: ProviderPaymentForm,
+                order_customer_ids: 'list of int'=None,
+                order_customer_documents: 'lisf of OrderCustomerDocuments'=None):
         response = self.request_wrapper.make_request(CONFIRM_METHOD, order_id=order_id, order_customer_ids=order_customer_ids,
                                                      order_customer_documents=order_customer_documents,
                                                      provider_payment_form=provider_payment_form)
         return Confirm(response)
 
-    def blank(self, order_id: int, order_item_id: int, retrieve_main_services: bool=True, retrieve_upsales: bool=True):
+    def blank(self, order_id: int, order_item_id: int=None, retrieve_main_services: bool=True, retrieve_upsales: bool=True):
 
         response = self.request_wrapper.make_request(BLANK_METHOD, order_id=order_id, order_item_id=order_item_id,
                                                      retrieve_main_services=retrieve_main_services,
