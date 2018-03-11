@@ -1,3 +1,8 @@
+class TariffType:
+    STANDART = 'Standard'
+    ROUND_TRIP = 'RoundTrip'
+    BUSINESS = 'Business'
+    CHILD = 'Child'
 
 
 class ProlongReservationType:

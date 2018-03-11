@@ -26,7 +26,7 @@ class Reservation(object):
 
     def confirm(self, order_id: int, provider_payment_form: ProviderPaymentForm,
                 order_customer_ids: 'list of int'=None,
-                order_customer_documents: 'lisf of OrderCustomerDocuments'=None):
+                order_customer_documents: 'list of OrderCustomerDocuments'=None):
         response = self.request_wrapper.make_request(CONFIRM_METHOD, order_id=order_id, order_customer_ids=order_customer_ids,
                                                      order_customer_documents=order_customer_documents,
                                                      provider_payment_form=provider_payment_form)
