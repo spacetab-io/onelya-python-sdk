@@ -448,6 +448,10 @@ class TestAPI(unittest.TestCase):
         var_name = json_key
         var_name = (var_name[0].lower() if var_name[0].isupper() else var_name[0]) + var_name[1:]
         var_name = ''.join([item if not item.isupper() else ('_%s' % item.lower()) for item in var_name])
+
+        if var_name == 'from':
+            return 'from_'
+
         return var_name.replace('$', '')
 
     @staticmethod

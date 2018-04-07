@@ -68,8 +68,10 @@ class TrainPricing(object):
     def __init__(self, json_data):
         self.origin_code = json_data.get('OriginCode', None)
         self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
         self.destination_code = json_data.get('DestinationCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
         self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
         self.departure_time_description = json_data.get('DepartureTimeDescription', None)
         self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
@@ -88,7 +90,9 @@ class TrainPricing(object):
 class CarPricing(object):
     def __init__(self, json_data):
         self.origin_code = json_data.get('OriginCode', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
         self.destination_code = json_data.get('DestinationCode', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
         self.cars = get_array(json_data.get('Cars', None), CarPriceInfo)
         self.route_policy = json_data.get('RoutePolicy', None)
         self.train_info = get_item(json_data.get('TrainInfo', None), TrainInfo)
@@ -104,7 +108,9 @@ class CarPricing(object):
 class Schedule(object):
     def __init__(self, json_data):
         self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
         self.route_policy = json_data.get('RoutePolicy', None)
         self.schedules = get_array(json_data.get('Schedules', None), ScheduleInfo)
         self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)

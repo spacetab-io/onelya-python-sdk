@@ -2,8 +2,10 @@
   "RoutePolicy": "Internal",
   "OriginCode": null,
   "OriginStationCode": "2000000",
+  "OriginTimeZoneDifference": 0,
   "DestinationCode": null,
   "DestinationStationCode": "2004000",
+  "DestinationTimeZoneDifference": 0,
   "Trains": [
     {
       "HasElectronicRegistration": true,
@@ -27,11 +29,14 @@
           "MixedCabinQuantity": 0,
           "MinPrice": 5380.9,
           "MaxPrice": 11080.2,
+          "IsSaleForbidden": false,
+          "AvailabilityIndication": "Available",
           "Carriers": [
             "ГРАНД"
           ],
           "CarDescriptions": null,
           "ServiceClasses": null,
+          "InternationalServiceClasses": null,
           "ServiceCosts": null,
           "IsBeddingSelectionPossible": false,
           "HasElectronicRegistration": false,
@@ -45,7 +50,13 @@
           "TotalPlaceQuantity": 0,
           "PlaceReservationTypes": [
             "TwoPlacesAtOnce"
-          ]
+          ],
+          "IsThreeHoursReservationAvailable": false,
+          "IsMealOptionPossible": false,
+          "IsAdditionalMealOptionPossible": false,
+          "IsTransitDocumentRequired": false,
+          "ClientFeeCalculation": null,
+          "AgentFeeCalculation": null
         },
         {
           "CarType": "Compartment",
@@ -61,11 +72,14 @@
           "MixedCabinQuantity": 0,
           "MinPrice": 2899.0,
           "MaxPrice": 3628.5,
+          "IsSaleForbidden": false,
+          "AvailabilityIndication": "Available",
           "Carriers": [
             "ГРАНД"
           ],
           "CarDescriptions": null,
           "ServiceClasses": null,
+          "InternationalServiceClasses": null,
           "ServiceCosts": null,
           "IsBeddingSelectionPossible": false,
           "HasElectronicRegistration": false,
@@ -79,7 +93,13 @@
           "TotalPlaceQuantity": 0,
           "PlaceReservationTypes": [
             "Usual"
-          ]
+          ],
+          "IsThreeHoursReservationAvailable": false,
+          "IsMealOptionPossible": false,
+          "IsAdditionalMealOptionPossible": false,
+          "IsTransitDocumentRequired": false,
+          "ClientFeeCalculation": null,
+          "AgentFeeCalculation": null
         }
       ],
       "Id": 1,
@@ -101,7 +121,7 @@
       "ArrivalDateTimes": [
         "2016-11-02T08:36:00"
       ],
-      "DepartureDateFromFormingStation": "1976-10-12T00:00:00",
+      "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
       "DepartureStopTime": 0,
       "ArrivalStopTime": 0,
       "TripDuration": 536,

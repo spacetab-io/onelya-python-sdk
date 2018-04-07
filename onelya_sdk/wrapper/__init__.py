@@ -94,7 +94,14 @@ class CarGroupPriceInfo(object):
         self.car_descriptions = json_data.get('CarDescriptions', None)
         self.service_classes = json_data.get('ServiceClasses', None)
         self.service_costs = json_data.get('ServiceCosts', None)
+        self.international_service_classes = json_data.get('InternationalServiceClasses', None)
+        self.availability_indication = json_data.get('AvailabilityIndication', None)
+        self.is_three_hours_reservation_available = json_data.get('IsThreeHoursReservationAvailable', None)
+        self.is_meal_option_possible = json_data.get('IsMealOptionPossible', None)
+        self.is_additional_meal_option_possible = json_data.get('IsAdditionalMealOptionPossible', None)
+        self.is_transit_document_required = json_data.get('IsTransitDocumentRequired', None)
         self.is_bedding_selection_possible = json_data.get('IsBeddingSelectionPossible', None)
+        self.is_sale_forbidden = json_data.get('IsSaleForbidden', None)
         self.has_electronic_registration = json_data.get('HasElectronicRegistration', None)
         self.has_gender_cabins = json_data.get('HasGenderCabins', None)
         self.has_place_numeration = json_data.get('HasPlaceNumeration', None)
@@ -105,6 +112,8 @@ class CarGroupPriceInfo(object):
         self.info_request_schema = json_data.get('InfoRequestSchema', None)
         self.total_place_quantity = json_data.get('TotalPlaceQuantity', None)
         self.place_reservation_types = json_data.get('PlaceReservationTypes', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
 
         self.json_data = json_data
 
@@ -126,7 +135,9 @@ class CarPriceInfo(object):
         self.min_price = json_data.get('MinPrice', None)
         self.max_price = json_data.get('MaxPrice', None)
         self.service_cost = json_data.get('ServiceCost', None)
+        self.free_places_by_compartments = json_data.get('FreePlacesByCompartments', None)
         self.place_reservation_type = json_data.get('PlaceReservationType', None)
+        self.availability_indication = json_data.get('AvailabilityIndication', None)
         self.carrier = json_data.get('Carrier', None)
         self.has_gender_cabins = json_data.get('HasGenderCabins', None)
         self.rzhd_card_types = json_data.get('RzhdCardTypes', None)
@@ -141,6 +152,9 @@ class CarPriceInfo(object):
         self.has_places_near_playground = json_data.get('HasPlacesNearPlayground', None)
         self.has_places_near_pets = json_data.get('HasPlacesNearPets', None)
         self.is_additional_passenger_allowed = json_data.get('IsAdditionalPassengerAllowed', None)
+        self.is_meal_option_possible = json_data.get('IsMealOptionPossible', None)
+        self.is_additional_meal_option_possible = json_data.get('IsAdditionalMealOptionPossible', None)
+        self.is_transit_document_required = json_data.get('IsTransitDocumentRequired', None)
         self.is_child_tariff_type_allowed = json_data.get('IsChildTariffTypeAllowed', None)
         self.car_place_type = json_data.get('CarPlaceType', None)
         self.discounts = get_array(json_data.get('Discounts', None), Discount)
@@ -148,6 +162,8 @@ class CarPriceInfo(object):
         self.is_three_hours_reservation_available = json_data.get('IsThreeHoursReservationAvailable', None)
         self.road = json_data.get('Road', None)
         self.passenger_specifying_rules = json_data.get('PassengerSpecifyingRules', None)
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
 
         self.json_data = json_data
 
@@ -235,6 +251,7 @@ class Route(object):
         self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.travel_time = json_data.get('TravelTime', None)
+        self.travel_distance = json_data.get('TravelDistance', None)
         self.change_time = json_data.get('ChangeTime', None)
         self.route_parts = get_array(json_data.get('RouteParts', None), RoutePart)
 
@@ -258,8 +275,10 @@ class TrainPricingResponse(object):
     def __init__(self, json_data):
         self.origin_code = json_data.get('OriginCode', None)
         self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
         self.destination_code = json_data.get('DestinationCode', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
         self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
         self.departure_time_description = json_data.get('DepartureTimeDescription', None)
         self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
@@ -294,6 +313,7 @@ class MealOption(object):
     def __init__(self, json_data):
         self.meal_option_code = json_data.get('MealOptionCode', None)
         self.description = json_data.get('Description', None)
+        self.meal_type = json_data.get('MealType', None)
 
         self.json_data = json_data
 
@@ -316,7 +336,7 @@ class PassengerResponse(object):
         self.first_name = json_data.get('FirstName', None)
         self.middle_name = json_data.get('MiddleName', None)
         self.last_name = json_data.get('LastName', None)
-        self.birth_date = get_datetime(json_data.get('BirthDate', None))
+        self.birthday = get_datetime(json_data.get('BirthDay', None))
         self.sex = json_data.get('Sex', None)
         self.citizenship = json_data.get('Citizenship', None)
         self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
@@ -358,6 +378,8 @@ class ReservationBlankResponse(object):
         self.base_fare = json_data.get('BaseFare', None)
         self.additional_price = json_data.get('AdditionalPrice', None)
         self.tariff_info = get_item(json_data.get('TariffInfo', None), TicketTariffInfo)
+        self.tariff_additional_info = json_data.get('TariffAdditionalInfo', None)
+        self.prepaid_meal_info = json_data.get('PrepaidMealInfo', None)
         self.service_price = json_data.get('ServicePrice', None)
 
         self.json_data = json_data
@@ -366,15 +388,22 @@ class ReservationBlankResponse(object):
 class ReservationResponse(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type', None)
-        self.blanks = get_array(json_data.get('Blanks', None), ReservationBlankResponse)
+        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
+        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.origin_station = json_data.get('OriginStation', None)
-        self.destination_station = json_data.get('DestinationStation', None)
         self.origin_station_code = json_data.get('OriginStationCode', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
+        self.destination_station = json_data.get('DestinationStation', None)
         self.destination_station_code = json_data.get('DestinationStationCode', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
+        self.blanks = get_array(json_data.get('Blanks', None), ReservationBlankResponse)
         self.train_number = json_data.get('TrainNumber', None)
         self.booking_train_number = json_data.get('BookingTrainNumber', None)
         self.train_number_to_get_route = json_data.get('TrainNumberToGetRoute', None)
         self.car_number = json_data.get('CarNumber', None)
+        self.car_type = json_data.get('CarType', None)
+        self.lower_place_quantity = json_data.get('LowerPlaceQuantity', None)
+        self.upper_place_quantity = json_data.get('UpperPlaceQuantity', None)
         self.service_class = json_data.get('ServiceClass', None)
         self.international_service_class = json_data.get('InternationalServiceClass', None)
         self.time_description = json_data.get('TimeDescription', None)
@@ -385,6 +414,7 @@ class ReservationResponse(object):
         self.carrier_tin = json_data.get('CarrierTin', None)
         self.country_code = json_data.get('CountryCode', None)
         self.is_meal_option_possible = json_data.get('IsMealOptionPossible', None)
+        self.is_additional_meal_option_possible = json_data.get('IsAdditionalMealOptionPossible', None)
         self.meal_group = json_data.get('MealGroup', None)
         self.booking_system = json_data.get('BookingSystem', None)
         self.is_three_hours_reservation_available = json_data.get('IsThreeHoursReservationAvailable', None)
@@ -392,6 +422,8 @@ class ReservationResponse(object):
         self.train_description = json_data.get('TrainDescription', None)
         self.car_description = json_data.get('CarDescription', None)
         self.is_suburban = json_data.get('IsSuburban', None)
+        self.cabin_gender_description = json_data.get('CabinGenderDescription', None)
+        self.is_only_full_return_possible = json_data.get('IsOnlyFullReturnPossible', None)
         self.passengers = get_array(json_data.get('Passengers', None), PassengerResponse)
         self.index = json_data.get('Index', None)
         self.order_item_id = json_data.get('OrderItemId', None)
@@ -404,14 +436,13 @@ class ReservationResponse(object):
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
         self.error_result = json_data.get('ErrorResult', None)
-        self.departure_date_time = get_datetime(json_data.get('DepartureDateTime', None))
-        self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
 
         self.json_data = json_data
 
 
 class OrderCreateReservationCustomerResponse(object):
     def __init__(self, json_data):
+        self.type = json_data.get('$type', None)
         self.index = json_data.get('Index', None)
         self.order_customer_id = json_data.get('OrderCustomerId', None)
         self.first_name = json_data.get('FirstName', None)
@@ -424,6 +455,7 @@ class OrderCreateReservationCustomerResponse(object):
         self.document_type = json_data.get('DocumentType', None)
         self.citizenship_code = json_data.get('CitizenshipCode', None)
         self.birth_place = json_data.get('BirthPlace', None)
+        self.birthday = get_datetime(json_data.get('Birthday', None))
 
         self.json_data = json_data
 
@@ -560,6 +592,8 @@ class RailwayOrderItemCustomerInfo(object):
         self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
         self.places = json_data.get('Places', None)
         self.place_quantity = json_data.get('PlaceQuantity', None)
+        self.transit_document = json_data.get('TransitDocument', None)
+        self.category = json_data.get('Category', None)
         self.order_customer_id = json_data.get('OrderCustomerId', None)
         self.order_item_customer_id = json_data.get('OrderItemCustomerId', None)
         self.amount = json_data.get('Amount', None)
@@ -584,6 +618,8 @@ class RailwayOrderItemBlankInfo(object):
         self.electronic_registration_set_date_time = get_datetime(json_data.get('ElectronicRegistrationSetDateTime', None))
         self.sign_sequence = json_data.get('SignSequence', None)
         self.tariff_info = get_item(json_data.get('TariffInfo', None), TicketTariffInfo)
+        self.prepaid_meal_info = json_data.get('PrepaidMealInfo', None)
+        self.transit_permission_approval_status = json_data.get('TransitPermissionApprovalStatus', None)
         self.place_quantity = json_data.get('PlaceQuantity', None)
         self.order_item_blank_id = json_data.get('OrderItemBlankId', None)
         self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId', None)
@@ -599,7 +635,9 @@ class RailwayFullOrderItemInfo(object):
         self.service_type = json_data.get('ServiceType', None)
         self.place_quantity = json_data.get('PlaceQuantity', None)
         self.origin_station_name = json_data.get('OriginStationName', None)
+        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
         self.destination_station_name = json_data.get('DestinationStationName', None)
+        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
         self.train_number = json_data.get('TrainNumber', None)
         self.booking_train_number = json_data.get('BookingTrainNumber', None)
         self.train_number_to_get_route = json_data.get('TrainNumberToGetRoute', None)
@@ -610,9 +648,9 @@ class RailwayFullOrderItemInfo(object):
         self.service_class = json_data.get('ServiceClass', None)
         self.additional_information = json_data.get('AdditionalInformation', None)
         self.carrier_description = json_data.get('CarrierDescription', None)
+        self.is_only_full_return_possible = json_data.get('IsOnlyFullReturnPossible', None)
         self.order_item_customers = get_array(json_data.get('OrderItemCustomers', None), RailwayOrderItemCustomerInfo)
         self.order_item_blanks = get_array(json_data.get('OrderItemBlanks', None), RailwayOrderItemBlankInfo)
-
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime', None))
         self.origin_location_code = json_data.get('OriginLocationCode', None)
         self.origin_location_name = json_data.get('OriginLocationName', None)
@@ -730,6 +768,7 @@ class TransportNode(object):
         self.popularity_index = json_data.get('PopularityIndex', None)
         self.description = json_data.get('Description', None)
         self.is_active = json_data.get('IsActive', None)
+        self.is_visible = json_data.get('IsVisible', None)
         self.updated = get_datetime(json_data.get('Updated', None))
         self.utc_time_offset = json_data.get('UtcTimeOffset', None)
         self.location = get_item(json_data.get('Location', None), GeoPoint)
@@ -743,6 +782,7 @@ class City(object):
         self.country_id = json_data.get('CountryId', None)
         self.region_id = json_data.get('RegionId', None)
         self.sys_code = json_data.get('SysCode', None)
+        self.express_code = json_data.get('ExpressCode', None)
         self.code = json_data.get('Code', None)
         self.name_ru = json_data.get('NameRu', None)
         self.name_en = json_data.get('NameEn', None)

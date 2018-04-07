@@ -111,6 +111,8 @@ class CreateReservation(object):
     def __init__(self, json_data):
         self.order_id = json_data.get('OrderId', None)
         self.amount = json_data.get('Amount', None)
+        self.contact_phone = json_data.get('ContactPhone', None)
+        self.contact_emails = json_data.get('ContactEmails', None)
         self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
         self.customers = get_array(json_data.get('Customers', None), OrderCreateReservationCustomerResponse)
         self.reservation_results = get_array(json_data.get('ReservationResults', None), ReservationResponse)
