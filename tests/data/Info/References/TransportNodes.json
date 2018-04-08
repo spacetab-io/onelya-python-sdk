@@ -12,6 +12,7 @@
       "PopularityIndex": 40,
       "Description": "",
       "IsActive": true,
+      "IsVisible": false,
       "Updated": "2016-11-12T00:00:00",
       "UtcTimeOffset": 3,
       "Location": null
@@ -28,6 +29,7 @@
       "PopularityIndex": 55,
       "Description": "",
       "IsActive": true,
+      "IsVisible": false,
       "Updated": "2016-11-12T00:00:00",
       "UtcTimeOffset": 3,
       "Location": {

@@ -8,12 +8,11 @@ import mock
 from onelya_sdk.api import API
 from onelya_sdk.exceptions import OnelyaAPIError
 from onelya_sdk.railway import (OrderFullCustomerRequest, RailwayReservationRequest,
-                                RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest)
+                                RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest, AdditionalMeal)
 from onelya_sdk.aeroexpress import (AeroexpressReservationRequest)
 from onelya_sdk.wrapper.types import (CarType, DocumentType, Sex, CabinGenderKind, AdditionalPlaceRequirements,
                                       CarGrouping, CarStorey, CabinPlaceDemands, ProviderPaymentForm,
-                                      PricingTariffType, RailwayPassengerCategory, OperationType)
-
+                                      PricingTariffType, RailwayPassengerCategory, OperationType, MealTime)
 PDF_PATH = 'tests/data/Order/Reservation/Blank.pdf'
 HTML_PATH = 'tests/data/Railway/Reservation/BlankAsHtml.html'
 
@@ -283,6 +282,33 @@ class TestAPI(unittest.TestCase):
         self.assertEquals(input_data, self.railway_api.last_request)
         self.assert_json_with_class(order_list)
 
+    def test_additional_meal_pricing(self):
+        meal_pricing = self.railway_api.additional_meal.pricing(66808)
+
+        input_data = json.loads(open('tests/data/Railway/AdditionalMeal/Pricing.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.railway_api.last_request)
+        self.assert_json_with_class(meal_pricing)
+
+    def test_additional_meal_purchase(self):
+        meal_options = [
+            AdditionalMeal(MealTime.BREAKFAST, 'В'),
+            AdditionalMeal(MealTime.LUNCH, 'С'),
+            AdditionalMeal(MealTime.DINNER, 'С')
+        ]
+        meal_purchase = self.railway_api.additional_meal.purchase(66808, 69447, meal_options, None, None,
+                                                                  ProviderPaymentForm.CASH)
+
+        input_data = json.loads(open('tests/data/Railway/AdditionalMeal/Purchase.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.railway_api.last_request)
+        self.assert_json_with_class(meal_purchase)
+
+    def test_additional_meal_return(self):
+        meal_return = self.railway_api.additional_meal.return_(67298, None)
+
+        input_data = json.loads(open('tests/data/Railway/AdditionalMeal/Return.in.json', 'r', encoding='utf8').read())
+        self.assertEquals(input_data, self.railway_api.last_request)
+        self.assert_json_with_class(meal_return)
+
     def test_references_transport_nodes(self):
         transport_nodes = self.railway_api.references.transport_nodes()
 
@@ -448,6 +474,10 @@ class TestAPI(unittest.TestCase):
         var_name = json_key
         var_name = (var_name[0].lower() if var_name[0].isupper() else var_name[0]) + var_name[1:]
         var_name = ''.join([item if not item.isupper() else ('_%s' % item.lower()) for item in var_name])
+
+        if var_name == 'from':
+            return 'from_'
+
         return var_name.replace('$', '')
 
     @staticmethod

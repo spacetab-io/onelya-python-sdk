@@ -1,11 +1,13 @@
 {
-  "TrainPricings": [
+    "TrainPricings": [
     {
       "RoutePolicy": "Internal",
       "OriginCode": "2000000",
       "OriginStationCode": "2000000",
+      "OriginTimeZoneDifference": 0,
       "DestinationCode": "2064788",
       "DestinationStationCode": "2064788",
+      "DestinationTimeZoneDifference": 0,
       "Trains": [
         {
           "HasElectronicRegistration": true,
@@ -59,8 +61,10 @@
       "RoutePolicy": "Internal",
       "OriginCode": "2064188",
       "OriginStationCode": "2064188",
+      "OriginTimeZoneDifference": 0,
       "DestinationCode": "2078750",
       "DestinationStationCode": "2078750",
+      "DestinationTimeZoneDifference": 0,
       "Trains": [
         {
           "HasElectronicRegistration": true,

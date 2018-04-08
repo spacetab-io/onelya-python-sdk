@@ -32,28 +32,27 @@ class References(object):
 
 class TransportNodes(object):
     def __init__(self, json_data):
-        self.transport_nodes = get_array(json_data.get('TransportNodes', None), TransportNode)
+        self.transport_nodes = get_array(json_data.get('TransportNodes'), TransportNode)
 
         self.json_data = json_data
 
 
 class Cities(object):
     def __init__(self, json_data):
-        self.cities = get_array(json_data.get('Cities', None), City)
+        self.cities = get_array(json_data.get('Cities'), City)
 
         self.json_data = json_data
 
 
 class Countries(object):
     def __init__(self, json_data):
-        self.countries = get_array(json_data.get('Countries', None), Country)
+        self.countries = get_array(json_data.get('Countries'), Country)
 
         self.json_data = json_data
 
 
 class Regions(object):
     def __init__(self, json_data):
-        self.regions = get_array(json_data.get('Regions', None), Region)
+        self.regions = get_array(json_data.get('Regions'), Region)
 
         self.json_data = json_data
-

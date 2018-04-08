@@ -26,7 +26,7 @@ class Reservation(object):
 
     def confirm(self, order_id: int, provider_payment_form: ProviderPaymentForm,
                 order_customer_ids: 'list of int'=None,
-                order_customer_documents: 'lisf of OrderCustomerDocuments'=None):
+                order_customer_documents: 'list of OrderCustomerDocuments'=None):
         response = self.request_wrapper.make_request(CONFIRM_METHOD, order_id=order_id, order_customer_ids=order_customer_ids,
                                                      order_customer_documents=order_customer_documents,
                                                      provider_payment_form=provider_payment_form)
@@ -58,28 +58,28 @@ class Reservation(object):
 
 class CreateReservation(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.amount = json_data.get('Amount', None)
-        self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
-        self.customers = get_array(json_data.get('Customers', None), OrderCreateReservationCustomerResponse)
-        self.reservation_results = get_array(json_data.get('ReservationResults', None), ReservationResponse)
+        self.order_id = json_data.get('OrderId')
+        self.amount = json_data.get('Amount')
+        self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
+        self.customers = get_array(json_data.get('Customers'), OrderCreateReservationCustomerResponse)
+        self.reservation_results = get_array(json_data.get('ReservationResults'), ReservationResponse)
 
         self.json_data = json_data
 
 
 class ProlongReservation(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
+        self.order_id = json_data.get('OrderId')
+        self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
 
         self.json_data = json_data
 
 
 class Confirm(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.customers = get_array(json_data.get('Customers', None),  OrderCustomerResponse)
-        self.confirm_results = get_array(json_data.get('ConfirmResults', None), AeroexpressConfirmResponse)
+        self.order_id = json_data.get('OrderId')
+        self.customers = get_array(json_data.get('Customers'),  OrderCustomerResponse)
+        self.confirm_results = get_array(json_data.get('ConfirmResults'), AeroexpressConfirmResponse)
 
         self.json_data = json_data
 
@@ -98,13 +98,13 @@ class Blank(object):
 
 class Void(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
+        self.order_id = json_data.get('OrderId')
 
         self.json_data = json_data
 
 
 class AutoReturn(object):
     def __init__(self, json_data):
-        self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), AeroexpressAutoReturnResponse)
+        self.service_return_response = get_item(json_data.get('ServiceReturnResponse'), AeroexpressAutoReturnResponse)
 
         self.json_data = json_data

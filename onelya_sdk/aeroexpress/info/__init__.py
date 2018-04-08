@@ -26,22 +26,22 @@ class Info(object):
 
 class OrderInfo(object):
     def __init__(self, json_data):
-        self.order_customers = get_array(json_data.get('OrderCustomers', None), OrderCustomerInfo)
-        self.order_items = get_array(json_data.get('OrderItems', None), AeroexpressFullOrderItemInfo)
+        self.order_customers = get_array(json_data.get('OrderCustomers'), OrderCustomerInfo)
+        self.order_items = get_array(json_data.get('OrderItems'), AeroexpressFullOrderItemInfo)
 
-        self.order_id = json_data.get('OrderId', None)
-        self.amount = json_data.get('Amount', None)
-        self.contact_phone = json_data.get('ContactPhone', None)
-        self.contact_emails = json_data.get('ContactEmails', None)
-        self.created = get_datetime(json_data.get('Created', None))
-        self.confirmed = get_datetime(json_data.get('Confirmed', None))
-        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.order_id = json_data.get('OrderId')
+        self.amount = json_data.get('Amount')
+        self.contact_phone = json_data.get('ContactPhone')
+        self.contact_emails = json_data.get('ContactEmails')
+        self.created = get_datetime(json_data.get('Created'))
+        self.confirmed = get_datetime(json_data.get('Confirmed'))
+        self.pos_sys_name = json_data.get('PosSysName')
 
         self.json_data = json_data
 
 
 class OrderList(object):
     def __init__(self, json_data):
-        self.orders = get_array(json_data.get('Orders', None), AeroexpressShortOrderInfo)
+        self.orders = get_array(json_data.get('Orders'), AeroexpressShortOrderInfo)
 
         self.json_data = json_data

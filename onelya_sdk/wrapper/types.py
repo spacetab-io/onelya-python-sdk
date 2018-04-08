@@ -1,3 +1,14 @@
+class TariffType:
+    STANDART = 'Standard'
+    ROUND_TRIP = 'RoundTrip'
+    BUSINESS = 'Business'
+    CHILD = 'Child'
+
+
+class MealTime:
+    BREAKFAST = 'Breakfast'
+    LUNCH = 'Lunch'
+    DINNER = 'Dinner'
 
 
 class ProlongReservationType:

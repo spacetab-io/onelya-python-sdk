@@ -1,6 +1,8 @@
 {
-  "OriginCode": null,
-  "DestinationCode": null,
+  "OriginCode": "2000000",
+  "DestinationCode": "2004000",
+  "OriginTimeZoneDifference": 0,
+  "DestinationTimeZoneDifference": 0,
   "Cars": [
     {
       "CarType": "Luxury",
@@ -12,6 +14,7 @@
       "CarDescription": "У1",
       "ServiceClassTranscript": null,
       "FreePlaces": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 17, 18",
+      "FreePlacesByCompartments": null,
       "PlaceQuantity": 16,
       "IsTwoStorey": false,
       "Services": [
@@ -39,9 +42,15 @@
       "CarPlaceType": "Lower",
       "Discounts": [],
       "IsSaleForbidden": false,
+      "AvailabilityIndication": "Available",
       "IsThreeHoursReservationAvailable": false,
       "Road": null,
-      "PassengerSpecifyingRules": "Standard"
+      "PassengerSpecifyingRules": "Standard",
+      "IsMealOptionPossible": false,
+      "IsAdditionalMealOptionPossible": false,
+      "IsTransitDocumentRequired": false,
+      "ClientFeeCalculation": null,
+      "AgentFeeCalculation": null
     }
   ],
   "RoutePolicy": "Internal",
@@ -64,7 +73,7 @@
     "ArrivalDateTimes": [
       "2016-11-02T08:36:00"
     ],
-    "DepartureDateFromFormingStation": "1970-01-01T03:00:00",
+    "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
     "DepartureStopTime": 0,
     "ArrivalStopTime": 0,
     "TripDuration": 536,
@@ -81,7 +90,8 @@
     "ForeignPassport",
     "RussianForeignPassport",
     "MilitaryCard",
-    "SailorPassport"
+    "SailorPassport",
+    "UssrPassport"
   ],
   "ClientFeeCalculation": {
     "Charge": 100.0,

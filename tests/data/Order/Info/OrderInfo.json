@@ -20,6 +20,8 @@
       "PlaceQuantity": 1,
       "OriginStationName": "МОСКВА ОКТЯБРЬСКАЯ",
       "DestinationStationName": "САНКТ-ПЕТЕРБУРГ-ГЛАВН.",
+      "OriginTimeZoneDifference": 0,
+      "DestinationTimeZoneDifference": 0,
       "TrainNumber": "054ЧА",
       "BookingTrainNumber": null,
       "TrainNumberToGetRoute": null,
@@ -30,12 +32,15 @@
       "ServiceClass": "1Б",
       "AdditionalInformation": "",
       "CarrierDescription": "ЗАО ТК \"ГСЭ\"",
+      "IsOnlyFullReturnPossible": false,
       "OrderItemCustomers": [
         {
           "$type": "ApiContracts.Order.V1.Info.OrderItem.Railway.RailwayOrderItemCustomerInfo, ApiContracts",
           "OrderItemBlankId": 51946,
           "Places": "001",
           "PlaceQuantity": 1,
+          "TransitDocument": "NoValue",
+          "Category": "Adult",
           "OrderCustomerId": 66650,
           "OrderItemCustomerId": 51445,
           "Amount": 9481.7,
@@ -61,6 +66,8 @@
           "ElectronicRegistrationSetDateTime": null,
           "SignSequence": null,
           "TariffInfo": null,
+          "PrepaidMealInfo": null,
+          "TransitPermissionApprovalStatus": "NoValue",
           "PlaceQuantity": 1,
           "OrderItemBlankId": 51946,
           "PreviousOrderItemBlankId": 0,
@@ -104,7 +111,7 @@
   "ContactEmails": [
     "test@test.ru"
   ],
-  "Created": "1970-01-01T03:00:00",
-  "Confirmed": "1970-01-01T03:00:00",
-  "PosSysName": null
+  "Created": "0001-01-01T00:00:00",
+  "Confirmed": "0001-01-01T00:00:00",
+  "PosSysName": "ThePos"
 }

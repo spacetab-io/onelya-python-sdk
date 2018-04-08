@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array, get_datetime
+from onelya_sdk.utils import get_array, get_datetime, get_item
 from onelya_sdk.wrapper.types import OperationType, ProviderPaymentForm
 from onelya_sdk.wrapper import OrderCustomerInfo, RailwayFullOrderItemInfo, RailwayShortOrderInfo
 
@@ -26,22 +26,21 @@ class Info(object):
 
 class OrderInfo(object):
     def __init__(self, json_data):
-        self.order_customers = get_array(json_data.get('OrderCustomers', None), OrderCustomerInfo)
-        self.order_items = get_array(json_data.get('OrderItems', None), RailwayFullOrderItemInfo)
-
-        self.order_id = json_data.get('OrderId', None)
-        self.amount = json_data.get('Amount', None)
-        self.contact_phone = json_data.get('ContactPhone', None)
-        self.contact_emails = json_data.get('ContactEmails', None)
-        self.created = get_datetime(json_data.get('Created', None))
-        self.confirmed = get_datetime(json_data.get('Confirmed', None))
-        self.pos_sys_name = json_data.get('PosSysName', None)
+        self.order_customers = get_array(json_data.get('OrderCustomers'), OrderCustomerInfo)
+        self.order_items = get_array(json_data.get('OrderItems'), RailwayFullOrderItemInfo)
+        self.order_id = get_item(json_data.get('OrderId'), int)
+        self.amount = get_item(json_data.get('Amount'), float)
+        self.contact_phone = json_data.get('ContactPhone')
+        self.contact_emails = json_data.get('ContactEmails')
+        self.created = get_datetime(json_data.get('Created'))
+        self.confirmed = get_datetime(json_data.get('Confirmed'))
+        self.pos_sys_name = json_data.get('PosSysName')
 
         self.json_data = json_data
 
 
 class OrderList(object):
     def __init__(self, json_data):
-        self.orders = get_array(json_data.get('Orders', None), RailwayShortOrderInfo)
+        self.orders = get_array(json_data.get('Orders'), RailwayShortOrderInfo)
 
         self.json_data = json_data

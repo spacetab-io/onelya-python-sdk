@@ -4,6 +4,7 @@ from .wrapper.requests import RequestWrapper
 from .railway.info import Info as RailwayInfo
 from .references import References as References
 from .railway.search import Search as RailwaySearch
+from .railway.additional_meal import AdditionalMeal
 from .aeroexpress.info import Info as AeroexpressInfo
 from .wrapper import AgentAccount, RailwayPricingResponse
 from .aeroexpress.search import Search as AeroexpressSearch
@@ -24,6 +25,7 @@ class API(object):
         self.railway_search = RailwaySearch(self.__request_wrapper)
         self.railway_reservation = RailwayReservation(self.__request_wrapper)
         self.railway_info = RailwayInfo(self.__request_wrapper)
+        self.additional_meal = AdditionalMeal(self.__request_wrapper)
 
         self.aeroexpress_search = AeroexpressSearch(self.__request_wrapper)
         self.aeroexpress_reservation = AeroexpressReservation(self.__request_wrapper)

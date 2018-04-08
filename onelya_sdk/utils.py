@@ -29,3 +29,9 @@ def set_datetime(item):
     if item is not None:
         return item.strftime('%Y-%m-%dT%X')
     return None
+
+
+def get_bool_item(item):
+    if item is not None:
+        return bool(item)
+    return False

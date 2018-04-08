@@ -2,9 +2,10 @@
   "Cities": [
     {
       "CityId": 1,
-      "CountryId": 1,
+      "CountryId": 127,
       "RegionId": 0,
-      "SysCode": null,
+      "SysCode": "CRUMOWE6EB3",
+      "ExpressCode": "2000000",
       "Code": "MOW",
       "NameRu": "Москва",
       "NameEn": "Moscow",

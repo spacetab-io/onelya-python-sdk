@@ -2,11 +2,13 @@
   "MealOptions": [
     {
       "MealOptionCode": "sample string 1",
-      "Description": "sample string 2"
+      "Description": "sample string 2",
+      "MealType": "sample string 3"
     },
     {
       "MealOptionCode": "sample string 1",
-      "Description": "sample string 2"
+      "Description": "sample string 2",
+      "MealType": "sample string 3"
     }
   ]
 }

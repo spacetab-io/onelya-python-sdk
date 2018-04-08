@@ -22,23 +22,24 @@ class Search(object):
 
 class TariffPricing(object):
     def __init__(self, json_data):
-        self.tariffs = get_array(json_data.get('Tariffs', None), TariffPriceInfoResponse)
+        self.tariffs = get_array(json_data.get('Tariffs'), TariffPriceInfoResponse)
 
         self.json_data = json_data
 
 
 class TariffPriceInfo(object):
     def __init__(self, json_data):
-        self.document_types = json_data.get('DocumentTypes', None)
-        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
-        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
-        self.tariff_id = json_data.get('TariffId', None)
-        self.tariff_name = json_data.get('TariffName', None)
-        self.route_name = json_data.get('RouteName', None)
-        self.description = json_data.get('Description', None)
-        self.price = json_data.get('Price', None)
-        self.max_tickets_quantity_allowed_for_booking = json_data.get('MaxTicketsQuantityAllowedForBooking', None)
-        self.is_for_guaranteed_seats = json_data.get('IsForGuaranteedSeats', None)
-        self.races = get_array(json_data.get('Races', None), RaceInfo)
+        self.document_types = json_data.get('DocumentTypes')
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
+        self.tariff_id = json_data.get('TariffId')
+        self.tariff_name = json_data.get('TariffName')
+        self.tariff_type = json_data.get('TariffType')
+        self.route_name = json_data.get('RouteName')
+        self.description = json_data.get('Description')
+        self.price = json_data.get('Price')
+        self.max_tickets_quantity_allowed_for_booking = json_data.get('MaxTicketsQuantityAllowedForBooking')
+        self.is_for_guaranteed_seats = json_data.get('IsForGuaranteedSeats')
+        self.races = get_array(json_data.get('Races'), RaceInfo)
 
         self.json_data = json_data
