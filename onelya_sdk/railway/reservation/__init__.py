@@ -1,5 +1,5 @@
 from .requests import ServiceReturnAmountRequest
-from onelya_sdk.utils import get_datetime, get_array, get_item
+from onelya_sdk.utils import get_datetime, get_array, get_item, get_bool_item
 from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm
 from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
@@ -109,30 +109,30 @@ class Reservation(object):
 
 class CreateReservation(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.amount = json_data.get('Amount', None)
-        self.contact_phone = json_data.get('ContactPhone', None)
-        self.contact_emails = json_data.get('ContactEmails', None)
-        self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
-        self.customers = get_array(json_data.get('Customers', None), OrderCreateReservationCustomerResponse)
-        self.reservation_results = get_array(json_data.get('ReservationResults', None), ReservationResponse)
+        self.order_id = get_item(json_data.get('OrderId'), int)
+        self.amount = get_item(json_data.get('Amount'), float)
+        self.contact_phone = json_data.get('ContactPhone')
+        self.contact_emails = json_data.get('ContactEmails')
+        self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
+        self.customers = get_array(json_data.get('Customers'), OrderCreateReservationCustomerResponse)
+        self.reservation_results = get_array(json_data.get('ReservationResults'), ReservationResponse)
 
         self.json_data = json_data
 
 
 class ProlongReservation(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.confirm_till = get_datetime(json_data.get('ConfirmTill', None))
+        self.order_id = get_item(json_data.get('OrderId'), int)
+        self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
 
         self.json_data = json_data
 
 
 class Confirm(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.customers = get_array(json_data.get('Customers', None),  OrderCustomerResponse)
-        self.confirm_results = get_array(json_data.get('ConfirmResults', None), RailwayConfirmResponse)
+        self.order_id = get_item(json_data.get('OrderId'), int)
+        self.customers = get_array(json_data.get('Customers'),  OrderCustomerResponse)
+        self.confirm_results = get_array(json_data.get('ConfirmResults'), RailwayConfirmResponse)
 
         self.json_data = json_data
 
@@ -151,52 +151,52 @@ class Blank(object):
 
 class ReturnAmount(object):
     def __init__(self, json_data):
-        self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), RailwayReturnAmountResponse)
+        self.service_return_response = get_item(json_data.get('ServiceReturnResponse'), RailwayReturnAmountResponse)
 
         self.json_data = json_data
 
 
 class AutoReturn(object):
     def __init__(self, json_data):
-        self.service_return_response = get_item(json_data.get('ServiceReturnResponse', None), RailwayAutoReturnResponse)
+        self.service_return_response = get_item(json_data.get('ServiceReturnResponse'), RailwayAutoReturnResponse)
 
         self.json_data = json_data
 
 
 class AddUpsale(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
-        self.upsale_results = get_array(json_data.get('UpsaleResults', None), CustomerUpsaleOperationResult)
+        self.order_id = get_item(json_data.get('OrderId'), int)
+        self.upsale_results = get_array(json_data.get('UpsaleResults'), CustomerUpsaleOperationResult)
 
         self.json_data = json_data
 
 
 class RefuseUpsale(object):
     def __init__(self, json_data):
-        self.order_id = json_data.get('OrderId', None)
+        self.order_id = get_item(json_data.get('OrderId'), int)
 
         self.json_data = json_data
 
 
 class UpdateBlanks(object):
     def __init__(self, json_data):
-        self.blanks = get_array(json_data.get('Blanks', None), RailwayBlankInfo)
-        self.is_modified = json_data.get('IsModified', None)
+        self.blanks = get_array(json_data.get('Blanks'), RailwayBlankInfo)
+        self.is_modified = get_bool_item(json_data.get('IsModified'))
 
         self.json_data = json_data
 
 
 class ElectronicRegistration(object):
     def __init__(self, json_data):
-        self.expiration_electronic_registration_date_time = get_datetime(json_data.get('ExpirationElectronicRegistrationDateTime', None))
-        self.blanks = get_array(json_data.get('Blanks', None), RailwayBlankInfo)
+        self.expiration_electronic_registration_date_time = get_datetime(json_data.get('ExpirationElectronicRegistrationDateTime'))
+        self.blanks = get_array(json_data.get('Blanks'), RailwayBlankInfo)
 
         self.json_data = json_data
 
 
 class MealOption(object):
     def __init__(self, json_data):
-        self.meal_option_code = json_data.get('MealOptionCode', None)
+        self.meal_option_code = json_data.get('MealOptionCode')
 
         self.json_data = json_data
 

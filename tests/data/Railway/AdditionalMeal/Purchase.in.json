@@ -1,0 +1,21 @@
+{
+  "OrderItemId": 66808,
+  "OrderItemBlankId": 69447,
+  "AgentPaymentId": null,
+  "AgentReferenceId": null,
+  "ProviderPaymentForm": "Cash",
+  "MealTimes": [
+    {
+      "MealTime": "Breakfast",
+      "MealOptionCode": "В"
+    },
+    {
+      "MealTime": "Lunch",
+      "MealOptionCode": "С"
+    },
+    {
+      "MealTime": "Dinner",
+      "MealOptionCode": "С"
+    }
+  ]
+}

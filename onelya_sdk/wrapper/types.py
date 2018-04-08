@@ -5,6 +5,12 @@ class TariffType:
     CHILD = 'Child'
 
 
+class MealTime:
+    BREAKFAST = 'Breakfast'
+    LUNCH = 'Lunch'
+    DINNER = 'Dinner'
+
+
 class ProlongReservationType:
     RAILWAY_THREE_HOURS_RESERVATION = 'RailwayThreeHoursReservation'
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array, get_item
+from onelya_sdk.utils import get_array, get_item, get_bool_item
 from onelya_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
 from onelya_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
                                 CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
@@ -66,84 +66,84 @@ class Search(object):
 
 class TrainPricing(object):
     def __init__(self, json_data):
-        self.origin_code = json_data.get('OriginCode', None)
-        self.origin_station_code = json_data.get('OriginStationCode', None)
-        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
-        self.destination_code = json_data.get('DestinationCode', None)
-        self.destination_station_code = json_data.get('DestinationStationCode', None)
-        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
-        self.trains = get_array(json_data.get('Trains', None), TrainPriceInfo)
-        self.departure_time_description = json_data.get('DepartureTimeDescription', None)
-        self.arrival_time_description = json_data.get('ArrivalTimeDescription', None)
-        self.is_from_ukrain = json_data.get('IsFromUkrain', None)
-        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
-        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
-        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
-        self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
-        self.booking_system = json_data.get('BookingSystem', None)
-        self.id = json_data.get('Id', None)
-        self.route_policy = json_data.get('RoutePolicy', None)
+        self.origin_code = json_data.get('OriginCode')
+        self.origin_station_code = json_data.get('OriginStationCode')
+        self.origin_time_zone_difference = get_item(json_data.get('OriginTimeZoneDifference'), int)
+        self.destination_code = json_data.get('DestinationCode')
+        self.destination_station_code = json_data.get('DestinationStationCode')
+        self.destination_time_zone_difference = get_item(json_data.get('DestinationTimeZoneDifference'), int)
+        self.trains = get_array(json_data.get('Trains'), TrainPriceInfo)
+        self.departure_time_description = json_data.get('DepartureTimeDescription')
+        self.arrival_time_description = json_data.get('ArrivalTimeDescription')
+        self.is_from_ukrain = get_bool_item(json_data.get('IsFromUkrain'))
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
+        self.not_all_trains_returned = get_bool_item(json_data.get('NotAllTrainsReturned'))
+        self.station_clarifying = get_item(json_data.get('StationClarifying'), StationClarifying)
+        self.booking_system = json_data.get('BookingSystem')
+        self.id = get_item(json_data.get('Id'), int)
+        self.route_policy = json_data.get('RoutePolicy')
 
         self.json_data = json_data
 
 
 class CarPricing(object):
     def __init__(self, json_data):
-        self.origin_code = json_data.get('OriginCode', None)
-        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
-        self.destination_code = json_data.get('DestinationCode', None)
-        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
-        self.cars = get_array(json_data.get('Cars', None), CarPriceInfo)
-        self.route_policy = json_data.get('RoutePolicy', None)
-        self.train_info = get_item(json_data.get('TrainInfo', None), TrainInfo)
-        self.is_from_ukrain = json_data.get('IsFromUkrain', None)
-        self.allowed_document_types = json_data.get('AllowedDocumentTypes', None)
-        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation', None), FeeCalculation)
-        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation', None), FeeCalculation)
-        self.booking_system = json_data.get('BookingSystem', None)
+        self.origin_code = json_data.get('OriginCode')
+        self.origin_time_zone_difference = get_item(json_data.get('OriginTimeZoneDifference'), int)
+        self.destination_code = json_data.get('DestinationCode')
+        self.destination_time_zone_difference = get_item(json_data.get('DestinationTimeZoneDifference'), int)
+        self.cars = get_array(json_data.get('Cars'), CarPriceInfo)
+        self.route_policy = json_data.get('RoutePolicy')
+        self.train_info = get_item(json_data.get('TrainInfo'), TrainInfo)
+        self.is_from_ukrain = get_bool_item(json_data.get('IsFromUkrain'))
+        self.allowed_document_types = json_data.get('AllowedDocumentTypes')
+        self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
+        self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
+        self.booking_system = json_data.get('BookingSystem')
 
         self.json_data = json_data
 
 
 class Schedule(object):
     def __init__(self, json_data):
-        self.origin_station_code = json_data.get('OriginStationCode', None)
-        self.origin_time_zone_difference = json_data.get('OriginTimeZoneDifference', None)
-        self.destination_station_code = json_data.get('DestinationStationCode', None)
-        self.destination_time_zone_difference = json_data.get('DestinationTimeZoneDifference', None)
-        self.route_policy = json_data.get('RoutePolicy', None)
-        self.schedules = get_array(json_data.get('Schedules', None), ScheduleInfo)
-        self.station_clarifying = get_item(json_data.get('StationClarifying', None), StationClarifying)
-        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned', None)
+        self.origin_station_code = json_data.get('OriginStationCode')
+        self.origin_time_zone_difference = get_item(json_data.get('OriginTimeZoneDifference'), int)
+        self.destination_station_code = json_data.get('DestinationStationCode')
+        self.destination_time_zone_difference = get_item(json_data.get('DestinationTimeZoneDifference'), int)
+        self.route_policy = json_data.get('RoutePolicy')
+        self.schedules = get_array(json_data.get('Schedules'), ScheduleInfo)
+        self.station_clarifying = get_item(json_data.get('StationClarifying'), StationClarifying)
+        self.not_all_trains_returned = get_bool_item(json_data.get('NotAllTrainsReturned'))
 
         self.json_data = json_data
 
 
 class TrainRoute(object):
     def __init__(self, json_data):
-        self.routes = get_array(json_data.get('Routes', None), TrainRouteRoute)
+        self.routes = get_array(json_data.get('Routes'), TrainRouteRoute)
 
         self.json_data = json_data
 
 
 class Routes(object):
     def __init__(self, json_data):
-        self.routes = get_array(json_data.get('Routes', None), Route)
+        self.routes = get_array(json_data.get('Routes'), Route)
 
         self.json_data = json_data
 
 
 class RoutePricing(object):
     def __init__(self, json_data):
-        self.train_pricings = get_array(json_data.get('TrainPricings', None), TrainPricingResponse)
-        self.routes = get_array(json_data.get('Routes', None), RouteReferenced)
-        self.not_all_train_pricings_returned = json_data.get('NotAllTrainPricingsReturned', None)
+        self.train_pricings = get_array(json_data.get('TrainPricings'), TrainPricingResponse)
+        self.routes = get_array(json_data.get('Routes'), RouteReferenced)
+        self.not_all_train_pricings_returned = json_data.get('NotAllTrainPricingsReturned')
 
         self.json_data = json_data
 
 
 class SearchMeal(object):
     def __init__(self, json_data):
-        self.meal_options = get_array(json_data.get('MealOptions', None), MealOption)
+        self.meal_options = get_array(json_data.get('MealOptions'), MealOption)
 
         self.json_data = json_data
