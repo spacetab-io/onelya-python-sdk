@@ -235,7 +235,7 @@ class RouteStopInfo(object):
         self.departure_time = json_data.get('DepartureTime')
         self.arrival_time = json_data.get('ArrivalTime')
         self.route_stop_type = json_data.get('RouteStopType')
-        self.stop_duration = json_data.get('StopDuration')
+        self.stop_duration = get_item(json_data.get('StopDuration'), int)
         self.time_description = json_data.get('TimeDescription')
         self.station_time_description = json_data.get('StationTimeDescription')
 
@@ -250,9 +250,9 @@ class Route(object):
         self.destination_station_code = json_data.get('DestinationStationCode')
         self.departure_date_time = get_datetime(json_data.get('DepartureDateTime'))
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime'))
-        self.travel_time = json_data.get('TravelTime')
-        self.travel_distance = json_data.get('TravelDistance')
-        self.change_time = json_data.get('ChangeTime')
+        self.travel_time = get_item(json_data.get('TravelTime'), int)
+        self.travel_distance = get_item(json_data.get('TravelDistance'), int)
+        self.change_time = get_item(json_data.get('ChangeTime'), int)
         self.route_parts = get_array(json_data.get('RouteParts'), RoutePart)
 
         self.json_data = json_data
@@ -282,13 +282,13 @@ class TrainPricingResponse(object):
         self.trains = get_array(json_data.get('Trains'), TrainPriceInfo)
         self.departure_time_description = json_data.get('DepartureTimeDescription')
         self.arrival_time_description = json_data.get('ArrivalTimeDescription')
-        self.is_from_ukrain = json_data.get('IsFromUkrain')
+        self.is_from_ukrain = get_bool_item(json_data.get('IsFromUkrain'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
-        self.not_all_trains_returned = json_data.get('NotAllTrainsReturned')
+        self.not_all_trains_returned = get_bool_item(json_data.get('NotAllTrainsReturned'))
         self.station_clarifying = get_item(json_data.get('StationClarifying'), StationClarifying)
         self.booking_system = json_data.get('BookingSystem')
-        self.id = json_data.get('Id')
+        self.id = get_item(json_data.get('Id'), int)
         self.route_policy = json_data.get('RoutePolicy')
 
         self.json_data = json_data
@@ -303,8 +303,8 @@ class RouteReferenced(object):
 
 class RoutePartReferenced(object):
     def __init__(self, json_data):
-        self.pricing_id = json_data.get('PricingId')
-        self.train_id = json_data.get('TrainId')
+        self.pricing_id = get_item(json_data.get('PricingId'), int)
+        self.train_id = get_item(json_data.get('TrainId'), int)
 
         self.json_data = json_data
 
