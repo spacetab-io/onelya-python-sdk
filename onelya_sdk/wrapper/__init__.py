@@ -97,6 +97,7 @@ class CarGroupPriceInfo(object):
         self.international_service_classes = json_data.get('InternationalServiceClasses')
         self.availability_indication = json_data.get('AvailabilityIndication')
         self.is_three_hours_reservation_available = get_bool_item(json_data.get('IsThreeHoursReservationAvailable'))
+        self.is_deferred_payment_available = get_bool_item(json_data.get('IsDeferredPaymentAvailable'))
         self.is_meal_option_possible = get_bool_item(json_data.get('IsMealOptionPossible'))
         self.is_additional_meal_option_possible = get_bool_item(json_data.get('IsAdditionalMealOptionPossible'))
         self.is_transit_document_required = get_bool_item(json_data.get('IsTransitDocumentRequired'))
@@ -118,6 +119,12 @@ class CarGroupPriceInfo(object):
         self.json_data = json_data
 
 
+class FreePlacesByCompartments(object):
+    def __init__(self, json_data):
+        self.compartment_number = get_array(json_data.get('CompartmentNumber'), int)
+        self.places = json_data.get('Places')
+
+
 class CarPriceInfo(object):
     def __init__(self, json_data):
         self.car_type = json_data.get('CarType')
@@ -135,7 +142,7 @@ class CarPriceInfo(object):
         self.min_price = get_item(json_data.get('MinPrice'), float)
         self.max_price = get_item(json_data.get('MaxPrice'), float)
         self.service_cost = get_item(json_data.get('ServiceCost'), float)
-        self.free_places_by_compartments = json_data.get('FreePlacesByCompartments')
+        self.free_places_by_compartments = get_item(json_data.get('FreePlacesByCompartments'), FreePlacesByCompartments)
         self.place_reservation_type = json_data.get('PlaceReservationType')
         self.availability_indication = json_data.get('AvailabilityIndication')
         self.carrier = json_data.get('Carrier')
