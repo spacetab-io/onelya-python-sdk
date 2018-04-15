@@ -349,8 +349,8 @@ class PlaceWithType(object):
 class PassengerResponse(object):
     def __init__(self, json_data):
         self.category = json_data.get('Category')
-        self.places = json_data.get('Places')
-        self.place_tiers = json_data.get('PlaceTiers')
+        self.places = get_array(json_data.get('Places'), int)
+        self.place_tiers = get_array(json_data.get('PlaceTiers'), str)
         self.places_with_type = get_item(json_data.get('PlacesWithType'), PlaceWithType)
         self.tariff_type = json_data.get('TariffType')
         self.first_name = json_data.get('FirstName')
@@ -387,6 +387,15 @@ class TicketTariffInfo(object):
         self.json_data = json_data
 
 
+class PrepaidMealInfo(object):
+    def __init__(self, json_data):
+        self.v = json_data.get('MealOptionCode')
+        self.v = json_data.get('MealName')
+        self.v = json_data.get('Description')
+
+        self.json_data = json_data
+
+
 class ReservationBlankResponse(object):
     def __init__(self, json_data):
         self.order_item_blank_id = get_item(json_data.get('OrderItemBlankId'), int)
@@ -399,7 +408,7 @@ class ReservationBlankResponse(object):
         self.additional_price = get_item(json_data.get('AdditionalPrice'), float)
         self.tariff_info = get_item(json_data.get('TariffInfo'), TicketTariffInfo)
         self.tariff_additional_info = json_data.get('TariffAdditionalInfo')
-        self.prepaid_meal_info = json_data.get('PrepaidMealInfo')
+        self.prepaid_meal_info = get_item(json_data.get('PrepaidMealInfo'), PrepaidMealInfo)
         self.service_price = get_item(json_data.get('ServicePrice'), float)
 
         self.json_data = json_data
@@ -637,7 +646,7 @@ class RailwayOrderItemBlankInfo(object):
         self.electronic_registration_set_date_time = get_datetime(json_data.get('ElectronicRegistrationSetDateTime'))
         self.sign_sequence = json_data.get('SignSequence')
         self.tariff_info = get_item(json_data.get('TariffInfo'), TicketTariffInfo)
-        self.prepaid_meal_info = json_data.get('PrepaidMealInfo')
+        self.prepaid_meal_info = get_item(json_data.get('PrepaidMealInfo'), PrepaidMealInfo)
         self.transit_permission_approval_status = json_data.get('TransitPermissionApprovalStatus')
         self.place_quantity = json_data.get('PlaceQuantity')
         self.order_item_blank_id = json_data.get('OrderItemBlankId')
