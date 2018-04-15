@@ -1,6 +1,10 @@
 {
-  "OrderId": 1,
-  "OrderItemId": 2,
+  "OrderId": 52157,
+  "OrderItemId": null,
+  "OrderItemIds": [
+    55234,
+    55238
+  ],
   "RetrieveMainServices": true,
   "RetrieveUpsales": true
 }

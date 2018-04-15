@@ -49,9 +49,11 @@ class Reservation(object):
                                                      provider_payment_form=provider_payment_form)
         return Confirm(response)
 
-    def blank(self, order_id: int, order_item_id: int, retrieve_main_services: bool=True, retrieve_upsales: bool=True):
+    def blank(self, order_id: int, order_item_id: int, order_item_ids: 'list of int', retrieve_main_services: bool=True,
+              retrieve_upsales: bool=True):
 
         response = self.request_wrapper.make_request(BLANK_METHOD, order_id=order_id, order_item_id=order_item_id,
+                                                     order_item_ids=order_item_ids,
                                                      retrieve_main_services=retrieve_main_services,
                                                      retrieve_upsales=retrieve_upsales)
         return Blank(response)

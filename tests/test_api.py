@@ -191,7 +191,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockFileSession)
     def test_reservation_blank(self):
         api = API(self.username, self.password, self.pos)
-        blank = api.railway_reservation.blank(1, 2)
+        blank = api.railway_reservation.blank(52157, None, [55234, 55238])
 
         input_data = json.loads(open('tests/data/Order/Reservation/Blank.in.json', 'r', encoding='utf8').read())
         pdf_file = open(PDF_PATH, 'rb').read()
@@ -387,7 +387,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockFileSession)
     def test_aeroexpress_reservation_blank(self):
         api = API(self.username, self.password, self.pos)
-        blank = api.railway_reservation.blank(1, 2)
+        blank = api.aeroexpress_reservation.blank(1, 2)
 
         input_data = json.loads(open('tests/data/Aeroexpress/Order/Reservation/Blank.in.json', 'r', encoding='utf8').read())
         pdf_file = open(PDF_PATH, 'rb').read()

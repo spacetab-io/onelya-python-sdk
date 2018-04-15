@@ -10,7 +10,10 @@ class OnelyaAPIError(Exception):
 
         self.code = error_data.get('Code')
         self.message = error_data.get('Message').replace('request.', '')
-        self.message_params = self.__prettify_message_params(error_data, request_data)
+        try:
+            self.message_params = self.__prettify_message_params(error_data, request_data)
+        except:
+            self.message_params = 'Can\'t prettify message'
 
     @staticmethod
     def __prettify_message_params(error_data, request_data):
