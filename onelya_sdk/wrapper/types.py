@@ -5,6 +5,12 @@ class TariffType:
     CHILD = 'Child'
 
 
+class RailwayTransitPermissionApprovalStatus:
+    NO_VALUE = 'NoValue'
+    ACCEPTED = 'Accepted'
+    REJECTED = 'Rejected'
+
+
 class MealTime:
     BREAKFAST = 'Breakfast'
     LUNCH = 'Lunch'
