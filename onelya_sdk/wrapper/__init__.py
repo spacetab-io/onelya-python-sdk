@@ -19,15 +19,8 @@ class FeeCalculation(object):
 
 class StationClarifying(object):
     def __init__(self, json_data):
-        self.station_type = StationType(json_data.get('StationType'))
-
-        self.json_data = json_data
-
-
-class StationType(object):
-    def __init__(self, json_data):
-        self.origin = json_data.get('Origin')
-        self.destination = [StationInfo(station_info) for station_info in json_data.get('Destination')]
+        self.station_type = json_data.get('StationType')
+        self.station_options = get_array(json_data.get('StationOptions'), StationInfo)
 
         self.json_data = json_data
 
