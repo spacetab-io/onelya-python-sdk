@@ -14,6 +14,14 @@ class RailwayPassengerRequest(object):
         self.railway_bonus_cards = railway_bonus_cards
         self.is_invalid = is_invalid
 
+        self.json_data = {
+            'category': self.category,
+            'order_customer_index': self.order_customer_index,
+            'preferred_adult_tariff_type': self.preferred_adult_tariff_type,
+            'railway_bonus_cards': self.railway_bonus_cards,
+            'is_invalid': self.is_invalid
+        }
+
 
 class RailwayBonusCardInfo(object):
     def __init__(self, card_number: str, car_type: RzhdCardTypes=None):
@@ -37,6 +45,21 @@ class OrderFullCustomerRequest(object):
         self.citizenship_code = citizenship_code
         self.birth_place = birth_place
         self.birthday = birthday
+
+        self.json_data = {
+            'type': self.type,
+            'document_number': self.document_number,
+            'document_type': self.document_type,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'sex': self.sex,
+            'index': self.index,
+            'middle_name': self.middle_name,
+            'document_valid_till': self.document_valid_till,
+            'citizenship_code': self.citizenship_code,
+            'birth_place': self.birth_place,
+            'birthday': self.birthday
+        }
 
 
 class RailwayReservationRequest(object):
@@ -71,6 +94,32 @@ class RailwayReservationRequest(object):
         self.provider_payment_form = provider_payment_form
         self.agent_reference_id = agent_reference_id
         self.agent_payment_id = agent_payment_id
+
+        self.json_data = {
+            'type': self.type,
+            'origin_code': self.origin_code,
+            'destination_code': self.destination_code,
+            'departure_date': self.departure_date,
+            'train_number': self.train_number,
+            'car_type': self.car_type,
+            'passengers': [item.json_data for item in self.passengers],
+            'index': self.index,
+            'car_number': self.car_number,
+            'lower_place_quantity': self.lower_place_quantity,
+            'upper_place_quantity': self.upper_place_quantity,
+            'cabin_gender_kind': self.cabin_gender_kind,
+            'car_storey': self.car_storey,
+            'place_range': self.place_range,
+            'cabin_place_demands': self.cabin_place_demands,
+            'set_electronic_registration': self.set_electronic_registration,
+            'bedding': self.bedding,
+            'service_class': self.service_class,
+            'international_service_class': self.international_service_class,
+            'additional_place_requirements': self.additional_place_requirements,
+            'provider_payment_form': self.provider_payment_form,
+            'agent_reference_id': self.agent_reference_id,
+            'agent_payment_id': self.agent_payment_id
+        }
 
 
 class OrderCustomerDocuments(object):

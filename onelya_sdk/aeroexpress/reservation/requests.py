@@ -27,6 +27,21 @@ class OrderFullCustomerRequest(object):
         self.birth_place = birth_place
         self.birthday = birthday
 
+        self.json_data = {
+            'type': self.type,
+            'document_number': self.document_number,
+            'document_type': self.document_type,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'sex': self.sex,
+            'index': self.index,
+            'middle_name': self.middle_name,
+            'document_valid_till': self.document_valid_till,
+            'citizenship_code': self.citizenship_code,
+            'birth_place': self.birth_place,
+            'birthday': self.birthday
+        }
+
 
 class AeroexpressReservationRequest(object):
     def __init__(self, tariff_id: str, departure_date: datetime, passengers: 'list of int', index: int,
@@ -41,6 +56,18 @@ class AeroexpressReservationRequest(object):
         self.provider_payment_form = provider_payment_form
         self.agent_reference_id = agent_reference_id
         self.agent_payment_id = agent_payment_id
+
+        self.json_data = {
+            'type': self.type,
+            'tariff_id': self.tariff_id,
+            'departure_date': self.departure_date,
+            'passengers': [item.order_customer_index for item in self.passengers],
+            'index': self.index,
+            'schedule_id': self.schedule_id,
+            'provider_payment_form': self.provider_payment_form,
+            'agent_reference_id': self.agent_reference_id,
+            'agent_payment_id': self.agent_payment_id
+        }
 
 
 class OrderCustomerDocuments(object):
