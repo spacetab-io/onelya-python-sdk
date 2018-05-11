@@ -114,8 +114,8 @@ class CarGroupPriceInfo(object):
 
 class FreePlacesByCompartments(object):
     def __init__(self, json_data):
-        self.compartment_number = get_array(json_data.get('CompartmentNumber'), int)
-        self.places = json_data.get('Places')
+        self.compartment_number = json_data.get('CompartmentNumber')
+        self.places = get_array(json_data.get('Places'), int)
 
 
 class CarPriceInfo(object):
@@ -135,7 +135,7 @@ class CarPriceInfo(object):
         self.min_price = get_item(json_data.get('MinPrice'), float)
         self.max_price = get_item(json_data.get('MaxPrice'), float)
         self.service_cost = get_item(json_data.get('ServiceCost'), float)
-        self.free_places_by_compartments = get_item(json_data.get('FreePlacesByCompartments'), FreePlacesByCompartments)
+        self.free_places_by_compartments = get_array(json_data.get('FreePlacesByCompartments'), FreePlacesByCompartments)
         self.place_reservation_type = json_data.get('PlaceReservationType')
         self.availability_indication = json_data.get('AvailabilityIndication')
         self.carrier = json_data.get('Carrier')
