@@ -344,7 +344,7 @@ class PassengerResponse(object):
         self.category = json_data.get('Category')
         self.places = get_array(json_data.get('Places'), int)
         self.place_tiers = get_array(json_data.get('PlaceTiers'), str)
-        self.places_with_type = get_item(json_data.get('PlacesWithType'), PlaceWithType)
+        self.places_with_type = get_array(json_data.get('PlacesWithType'), PlaceWithType)
         self.tariff_type = json_data.get('TariffType')
         self.first_name = json_data.get('FirstName')
         self.middle_name = json_data.get('MiddleName')

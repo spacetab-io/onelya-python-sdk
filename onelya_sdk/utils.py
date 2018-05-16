@@ -2,8 +2,10 @@ from datetime import datetime
 
 
 def get_array(items, item_class):
-    if items is not None:
+    if type(items) is list:
         return [item_class(item) for item in items]
+    elif type(items) is str:
+        return [item_class(item) for item in items.split(',')]
     return None
 
 
