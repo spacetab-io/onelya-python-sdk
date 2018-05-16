@@ -19,7 +19,7 @@ class RailwayPassengerRequest(object):
             'category': self.category,
             'order_customer_index': self.order_customer_index,
             'preferred_adult_tariff_type': self.preferred_adult_tariff_type,
-            'railway_bonus_cards': self.railway_bonus_cards,
+            'railway_bonus_cards': [item.json_data for item in self.railway_bonus_cards] if self.railway_bonus_cards is not None else [],
             'is_invalid': self.is_invalid
         }
 
@@ -28,6 +28,11 @@ class RailwayBonusCardInfo(object):
     def __init__(self, card_number: str, car_type: RzhdCardTypes=None):
         self.card_number = card_number
         self.car_type = car_type
+
+        self.json_data = {
+            'card_number': self.card_number,
+            'car_type': self.car_type
+        }
 
 
 class OrderFullCustomerRequest(object):
