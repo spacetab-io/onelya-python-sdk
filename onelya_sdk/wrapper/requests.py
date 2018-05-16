@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..utils import set_datetime
+from ..utils import str_datetime
 
 
 class RequestWrapper(object):
@@ -24,15 +24,16 @@ class RequestWrapper(object):
             elif type(item) is list:
                 json_data[onelya_key] = [self.__get_json_data(True, **{'Key': list_item}) for list_item in item]
             elif type(item) is datetime:
-                json_data[onelya_key] = set_datetime(item)
+                json_data[onelya_key] = str_datetime(item)
             else:
                 object_name = self.__get_onelya_key(key)
                 if json_data.get(object_name, None) is None:
                     json_data[object_name] = {}
                 for object_attribute in item.__dict__.keys():
-                    object_attribute_name = self.__get_onelya_key(object_attribute)
-                    json_data[object_name][object_attribute_name] = \
-                        self.__get_json_data(True, **{object_attribute_name: item.__getattribute__(object_attribute)})
+                    if object_attribute != 'json_data':
+                        object_attribute_name = self.__get_onelya_key(object_attribute)
+                        json_data[object_name][object_attribute_name] = \
+                            self.__get_json_data(True, **{object_attribute_name: item.__getattribute__(object_attribute)})
             if recursive:
                 return json_data[key]
         return json_data

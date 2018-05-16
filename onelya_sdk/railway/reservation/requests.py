@@ -1,3 +1,4 @@
+from onelya_sdk import utils
 from datetime import datetime
 from onelya_sdk.wrapper.types import (RailwayPassengerCategory, PreferredAdultTariffType, CarType, CarStorey,
                                       RzhdCardTypes, CabinGenderKind, CabinPlaceDemands, ProviderPaymentForm,
@@ -55,10 +56,10 @@ class OrderFullCustomerRequest(object):
             'sex': self.sex,
             'index': self.index,
             'middle_name': self.middle_name,
-            'document_valid_till': self.document_valid_till,
+            'document_valid_till': utils.str_datetime(self.document_valid_till),
             'citizenship_code': self.citizenship_code,
             'birth_place': self.birth_place,
-            'birthday': self.birthday
+            'birthday': utils.str_datetime(self.birthday)
         }
 
 
@@ -99,7 +100,7 @@ class RailwayReservationRequest(object):
             'type': self.type,
             'origin_code': self.origin_code,
             'destination_code': self.destination_code,
-            'departure_date': self.departure_date,
+            'departure_date': utils.str_datetime(self.departure_date),
             'train_number': self.train_number,
             'car_type': self.car_type,
             'passengers': [item.json_data for item in self.passengers],
