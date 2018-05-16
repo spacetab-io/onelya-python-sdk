@@ -25,7 +25,7 @@ def get_datetime_array(items):
     return None
 
 
-def set_datetime(item):
+def str_datetime(item):
     if item is not None:
         return item.strftime('%Y-%m-%dT%X')
     return None

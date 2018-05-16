@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array
+from onelya_sdk import utils
 from onelya_sdk.wrapper.types import (RailwayPassengerCategory, PreferredAdultTariffType, CarType, CarStorey,
                                       RzhdCardTypes, CabinGenderKind, CabinPlaceDemands, ProviderPaymentForm,
                                       AdditionalPlaceRequirements, DocumentType, Sex)
@@ -36,10 +36,10 @@ class OrderFullCustomerRequest(object):
             'sex': self.sex,
             'index': self.index,
             'middle_name': self.middle_name,
-            'document_valid_till': self.document_valid_till,
+            'document_valid_till': utils.str_datetime(self.document_valid_till),
             'citizenship_code': self.citizenship_code,
             'birth_place': self.birth_place,
-            'birthday': self.birthday
+            'birthday': utils.str_datetime(self.birthday)
         }
 
 
@@ -50,7 +50,7 @@ class AeroexpressReservationRequest(object):
         self.type = 'ApiContracts.Aeroexpress.V1.Messages.Reservation.AeroexpressReservationRequest, ApiContracts'
         self.tariff_id = tariff_id
         self.departure_date = departure_date
-        self.passengers = get_array(passengers, AeroexpressPassengerRequest)
+        self.passengers = utils.get_array(passengers, AeroexpressPassengerRequest)
         self.index = index
         self.schedule_id = schedule_id
         self.provider_payment_form = provider_payment_form
@@ -60,7 +60,7 @@ class AeroexpressReservationRequest(object):
         self.json_data = {
             'type': self.type,
             'tariff_id': self.tariff_id,
-            'departure_date': self.departure_date,
+            'departure_date': utils.str_datetime(self.departure_date),
             'passengers': [item.order_customer_index for item in self.passengers],
             'index': self.index,
             'schedule_id': self.schedule_id,
