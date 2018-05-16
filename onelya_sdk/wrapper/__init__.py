@@ -382,9 +382,9 @@ class TicketTariffInfo(object):
 
 class PrepaidMealInfo(object):
     def __init__(self, json_data):
-        self.v = json_data.get('MealOptionCode')
-        self.v = json_data.get('MealName')
-        self.v = json_data.get('Description')
+        self.meal_option_code = json_data.get('MealOptionCode')
+        self.meal_name = json_data.get('MealName')
+        self.description = json_data.get('Description')
 
         self.json_data = json_data
 
