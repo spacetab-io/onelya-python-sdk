@@ -6,6 +6,7 @@ from datetime import datetime
 import mock
 
 from onelya_sdk.api import API
+from onelya_sdk import utils
 from onelya_sdk.exceptions import OnelyaAPIError
 from onelya_sdk.railway import (OrderFullCustomerRequest, RailwayReservationRequest,
                                 RailwayPassengerRequest, ServiceAddUpsaleRequest, ProductRequest, AdditionalMeal)
@@ -105,14 +106,14 @@ class TestAPI(unittest.TestCase):
     def aeroexpress_api(self):
         return API(self.username, self.password, self.pos)
 
-    def test_json_railway_train_pricing(self):
+    def test_railway_train_pricing(self):
         train_pricing = self.railway_api.railway_search.train_pricing('Москва', '2004000', self.datetime, 12, 24, CarGrouping.GROUP)
 
         input_data = json.loads(open('tests/data/Railway/Search/TrainPricing.in.json', 'r', encoding='utf8').read())
         self.assertEquals(input_data, self.railway_api.last_request)
         self.assert_json_with_class(train_pricing)
 
-    def test_json_railway_car_pricing(self):
+    def test_railway_car_pricing(self):
         car_pricing = self.railway_api.railway_search.car_pricing('2000000', '2004000', self.datetime, '054Ч', None, PricingTariffType.FULL)
 
         input_data = json.loads(open('tests/data/Railway/Search/CarPricing.in.json', 'r', encoding='utf8').read())
@@ -433,6 +434,13 @@ class TestAPI(unittest.TestCase):
     def test_empty_message_params(self):
         error_data = {'Code': 1, 'Message': 'Message'}
         self.assertTrue(OnelyaAPIError('Test/Test', error_data, {}).message_params is None)
+
+    def test_get_array(self):
+        self.assertEqual(['1L', '2P'], utils.get_array_from_str('1L, 2P'))
+        self.assertEqual(['1L', '2P'], utils.get_array_from_str('1L,2P'))
+
+        self.assertEqual([1, 2], utils.get_array_from_str('1, 2'))
+        self.assertEqual([1, 2], utils.get_array_from_str('1,2'))
 
     def assert_json_with_class(self, wrapper):
         for key in wrapper.json_data.keys():

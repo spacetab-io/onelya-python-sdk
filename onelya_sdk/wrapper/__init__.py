@@ -1,4 +1,4 @@
-from ..utils import get_array, get_item, get_datetime, get_datetime_array, get_bool_item
+from ..utils import get_array, get_item, get_datetime, get_datetime_array, get_bool_item, get_array_from_str
 
 
 class Discount(object):
@@ -115,7 +115,7 @@ class CarGroupPriceInfo(object):
 class FreePlacesByCompartments(object):
     def __init__(self, json_data):
         self.compartment_number = json_data.get('CompartmentNumber')
-        self.places = get_array(json_data.get('Places'), int)
+        self.places = get_array_from_str(json_data.get('Places'))
 
 
 class CarPriceInfo(object):
@@ -128,7 +128,7 @@ class CarPriceInfo(object):
         self.international_service_class = json_data.get('InternationalServiceClass')
         self.car_description = json_data.get('CarDescription')
         self.service_class_transcript = json_data.get('ServiceClassTranscript')
-        self.free_places = json_data.get('FreePlaces')
+        self.free_places = get_array_from_str(json_data.get('FreePlaces'))
         self.place_quantity = get_item(json_data.get('PlaceQuantity'), int)
         self.is_two_storey = json_data.get('IsTwoStorey')
         self.services = json_data.get('Services')
@@ -342,8 +342,8 @@ class PlaceWithType(object):
 class PassengerResponse(object):
     def __init__(self, json_data):
         self.category = json_data.get('Category')
-        self.places = get_array(json_data.get('Places'), int)
-        self.place_tiers = get_array(json_data.get('PlaceTiers'), str)
+        self.places = get_array_from_str(json_data.get('Places'))
+        self.place_tiers = get_array_from_str(json_data.get('PlaceTiers'))
         self.places_with_type = get_array(json_data.get('PlacesWithType'), PlaceWithType)
         self.tariff_type = json_data.get('TariffType')
         self.first_name = json_data.get('FirstName')
@@ -611,7 +611,7 @@ class RailwayOrderItemCustomerInfo(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.order_item_blank_id = json_data.get('OrderItemBlankId')
-        self.places = json_data.get('Places')
+        self.places = get_array_from_str(json_data.get('Places'))
         self.place_quantity = json_data.get('PlaceQuantity')
         self.transit_document = json_data.get('TransitDocument')
         self.category = json_data.get('Category')
