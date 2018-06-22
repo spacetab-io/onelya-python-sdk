@@ -44,6 +44,7 @@ class RzhdCardTypes:
 class RailwayServiceType:
     TICKETS = 'Tickets'
     TALONS = 'Talons'
+    CRIMEA_TALONS = 'CrimeaTalons'
 
 
 class SimpleOperationStatus:
@@ -153,6 +154,20 @@ class InsuranceSupplier:
     RENESSANS = 'Renessans'
     ROSGOSSTRAH = 'Rosgosstrah'
     BLAGOSOSTOYANIE = 'Blagosostoyanie'
+
+
+class PassengerSpecifyingRule:
+    Standard = 'Standard'
+    HELSINKI_WARSAW_CLASS11 = 'HelsinkiWarsawWithClass11'
+    HELSINKI_WARSAW_CLASS12 = 'HelsinkiWarsawWithClass12'
+    BERLIN_CLASS11 = 'BerlinWithClass11'
+    BERLIN_CLASS12 = 'BerlinWithClass12'
+    PARIS_PRAGUE_NIVE_CLASS11 = 'ParisPragueNiceWithClass11'
+    PARIS_PRAGUE_NIVE_CLASS12 = 'ParisPragueNiceWithClass12'
+    TWO_PLACE_AT_ONCE = 'TwoPlacesAtOnce'
+    TWO_PLACE_AT_ONCE__ADDITIONAL_CHILD = 'TwoPlacesAtOnceWithAdditionalChild'
+    FOUR_PLACE_AT_ONCE = 'FourPlacesAtOnce'
+    KUPEK_TARIFF = 'KupekTariff'
 
 
 class CarType:
