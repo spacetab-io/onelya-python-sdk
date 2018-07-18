@@ -46,7 +46,7 @@ class OrderFullCustomerRequest(object):
         self.last_name = last_name
         self.sex = sex
         self.index = index
-        self.middle_name = middle_name
+        self.middle_name = middle_name if middle_name is not None else '-'
         self.document_valid_till = document_valid_till
         self.citizenship_code = citizenship_code
         self.birth_place = birth_place
