@@ -1,12 +1,13 @@
 
 
 class OnelyaAPIError(Exception):
-    __slots__ = ['code', 'message', 'message_params']
+    __slots__ = ['code', 'message', 'message_params', 'request_data']
 
     def __init__(self, method, error_data, request_data):
         super(OnelyaAPIError, self).__init__()
         self.method = method.replace("/", "-")
         self.error_data = error_data
+        self.request_data = request_data
 
         self.code = error_data.get('Code')
         self.message = error_data.get('Message').replace('request.', '')
