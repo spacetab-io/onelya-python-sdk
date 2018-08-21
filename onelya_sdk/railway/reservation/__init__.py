@@ -1,6 +1,6 @@
 from .requests import ServiceReturnAmountRequest
 from onelya_sdk.utils import get_datetime, get_array, get_item, get_bool_item
-from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm
+from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm, ReturnTarget
 from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
 from onelya_sdk.wrapper import (OrderCreateReservationCustomerResponse, ReservationResponse, OrderCustomerResponse,
@@ -63,10 +63,12 @@ class Reservation(object):
                                           order_customer_ids=order_customer_ids)
         return True
 
-    def return_amount(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None):
+    def return_amount(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None,
+                      return_target: ReturnTarget=None):
         response = self.request_wrapper.make_request(RETURN_AMOUNT_METHOD,
                                                      service_return_amount_request=ServiceReturnAmountRequest(
-                                                         check_document_number, order_item_id, order_item_blank_ids))
+                                                         check_document_number, order_item_id, order_item_blank_ids,
+                                                         return_target))
         return ReturnAmount(response)
 
     def auto_return(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None,

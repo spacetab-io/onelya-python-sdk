@@ -2,7 +2,7 @@ from onelya_sdk import utils
 from datetime import datetime
 from onelya_sdk.wrapper.types import (RailwayPassengerCategory, PreferredAdultTariffType, CarType, CarStorey,
                                       RzhdCardTypes, CabinGenderKind, CabinPlaceDemands, ProviderPaymentForm,
-                                      AdditionalPlaceRequirements, DocumentType, Sex)
+                                      AdditionalPlaceRequirements, DocumentType, Sex, ReturnTarget)
 
 
 class RailwayPassengerRequest(object):
@@ -139,11 +139,13 @@ class OrderCustomerDocuments(object):
 
 
 class ServiceReturnAmountRequest(object):
-    def __init__(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None):
+    def __init__(self, check_document_number: str, order_item_id: int, order_item_blank_ids: 'list of int'=None,
+                 return_target: ReturnTarget=None):
         self.type = 'ApiContracts.Railway.V1.Messages.Return.RailwayReturnAmountRequest, ApiContracts'
         self.check_document_number = check_document_number
         self.order_item_id = order_item_id
         self.order_item_blank_ids = order_item_blank_ids
+        self.return_target = return_target
 
 
 class ServiceAutoReturnRequest(object):

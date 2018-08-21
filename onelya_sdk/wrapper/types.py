@@ -1,3 +1,8 @@
+class ReturnTarget:
+    RETURN = 'Return'
+    EXCHANGE = 'Exchange'
+
+
 class TariffType:
     STANDART = 'Standard'
     ROUND_TRIP = 'RoundTrip'
