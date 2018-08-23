@@ -1,3 +1,4 @@
 {
-  "OrderItemId": 1
+  "OrderItemId": 0,
+  "OrderItemIds": [1]
 }

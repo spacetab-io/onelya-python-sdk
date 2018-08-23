@@ -106,8 +106,9 @@ class Reservation(object):
                                                      order_item_blank_id=order_item_blank_id)
         return MealOption(response)
 
-    def blank_as_html(self, order_item_id: int):
-        response = self.request_wrapper.make_request(BLANK_AS_HTML_METHOD, order_item_id=order_item_id)
+    def blank_as_html(self, order_item_id: int, order_item_ids: 'list of int'=None):
+        response = self.request_wrapper.make_request(BLANK_AS_HTML_METHOD, order_item_id=order_item_id,
+                                                     order_item_ids=order_item_ids)
         return BlankAsHtml(response)
 
 
