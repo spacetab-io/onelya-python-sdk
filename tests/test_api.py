@@ -261,7 +261,7 @@ class TestAPI(unittest.TestCase):
     @mock.patch('requests.Session', MockHTMLSession)
     def test_reservation_blank_as_html(self):
         api = API(self.username, self.password, self.pos)
-        blank_as_html = api.railway_reservation.blank_as_html(1)
+        blank_as_html = api.railway_reservation.blank_as_html(0, [1])
 
         input_data = json.loads(open('tests/data/Railway/Reservation/BlankAsHtml.in.json', 'r', encoding='utf8').read())
         html_file = open(HTML_PATH, 'r').read()
