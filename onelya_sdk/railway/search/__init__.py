@@ -1,6 +1,6 @@
 from datetime import datetime
 from onelya_sdk.utils import get_array, get_item, get_bool_item
-from onelya_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType
+from onelya_sdk.wrapper.types import CarGrouping, PricingTariffType, CarType, SpecialPlacesDemand
 from onelya_sdk.wrapper import (FeeCalculation, TrainPriceInfo, StationClarifying, TrainInfo, Route,
                                 CarPriceInfo, ScheduleInfo, TrainRouteRoute, TrainPricingResponse,
                                 RouteReferenced, MealOption)
@@ -19,18 +19,22 @@ class Search(object):
         self.__request_wrapper = request_wrapper
 
     def train_pricing(self, origin: str, destination: str, departure_date: datetime, time_from: int=12,
-                      time_to: int=24, car_grouping: CarGrouping=CarGrouping.GROUP):
+                      time_to: int=24, car_grouping: CarGrouping=CarGrouping.GROUP,
+                      special_places_demand: SpecialPlacesDemand=SpecialPlacesDemand.NO_VALUE):
         response = self.__request_wrapper.make_request(TRAIN_PRICING_METHOD, origin=origin, destination=destination,
                                                        car_grouping=car_grouping, time_from=time_from, time_to=time_to,
-                                                       departure_date=departure_date)
+                                                       departure_date=departure_date,
+                                                       special_places_demand=special_places_demand)
         return TrainPricing(response)
 
     def car_pricing(self, origin_code: str, destination_code: str, departure_date: datetime, train_number: str,
-                    car_type: CarType=None, tariff_type: PricingTariffType=None):
+                    car_type: CarType=None, tariff_type: PricingTariffType=None,
+                    special_places_demand: SpecialPlacesDemand = SpecialPlacesDemand.NO_VALUE):
         response = self.__request_wrapper.make_request(CAR_PRICING_METHOD, origin_code=origin_code,
                                                        destination_code=destination_code, departure_date=departure_date,
                                                        train_number=train_number, car_type=car_type,
-                                                       tariff_type=tariff_type)
+                                                       tariff_type=tariff_type,
+                                                       special_places_demand=special_places_demand)
         return CarPricing(response)
 
     def schedule(self, origin: str, destination: str, time_from: int=12, time_to: int=24, departure_date: datetime=None):
