@@ -3,6 +3,12 @@ class ReturnTarget:
     EXCHANGE = 'Exchange'
 
 
+class SpecialPlacesDemand:
+    NO_VALUE = 'NoValue'
+    INVALID = 'PlacesForDisabledPersons'
+    VIP = 'PlacesForVipPersons'
+
+
 class TariffType:
     STANDART = 'Standard'
     ROUND_TRIP = 'RoundTrip'

@@ -4,5 +4,6 @@
   "DepartureDate": "1970-01-01T03:00:00",
   "TrainNumber": "054Ч",
   "CarType": null,
-  "TariffType": "Full"
+  "TariffType": "Full",
+  "SpecialPlacesDemand": "NoValue"
 }
