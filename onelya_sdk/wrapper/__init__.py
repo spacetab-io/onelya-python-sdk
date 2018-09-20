@@ -678,6 +678,7 @@ class RailwayFullOrderItemInfo(object):
         self.destination_location_code = json_data.get('DestinationLocationCode')
         self.destination_location_name = json_data.get('DestinationLocationName')
         self.order_id = get_item(json_data.get('OrderId'), int)
+        self.previous_order_item_id = get_item(json_data.get('PreviousOrderItemId'), int)
         self.agent_reference_id = json_data.get('AgentReferenceId')
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
         self.pos_sys_name = json_data.get('PosSysName')

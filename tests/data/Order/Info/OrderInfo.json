@@ -83,6 +83,7 @@
       "OrderId": 51978,
       "AgentReferenceId": null,
       "OrderItemId": 52157,
+      "PreviousOrderItemId": 0,
       "PosSysName": "ThePos",
       "Amount": 9481.7,
       "ReservationNumber": "71234567890000",
