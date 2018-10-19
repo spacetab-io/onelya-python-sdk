@@ -28,6 +28,7 @@
       "HasGenderCabins": false,
       "RzhdCardTypes": [],
       "TrainNumber": "054Ч",
+      "LocalArrivalDateTime": "2016-11-02T08:36:00",
       "ArrivalDateTime": "2016-11-02T08:36:00",
       "HasNoInterchange": false,
       "HasPlaceNumeration": true,
@@ -68,12 +69,14 @@
     "DestinationNames": [
       "С-ПЕТЕР-ГЛ"
     ],
+    "LocalDepartureDateTime": "2016-11-01T23:40:00",
     "DepartureDateTime": "2016-11-01T23:40:00",
+    "LocalArrivalDateTime": "2016-11-02T08:36:00",
     "ArrivalDateTime": "2016-11-02T08:36:00",
     "ArrivalDateTimes": [
       "2016-11-02T08:36:00"
     ],
-    "DepartureDateFromFormingStation": "0001-01-01T00:00:00",
+    "DepartureDateFromFormingStation": "2005-01-01T00:00:00",
     "DepartureStopTime": 0,
     "ArrivalStopTime": 0,
     "TripDuration": 536,
