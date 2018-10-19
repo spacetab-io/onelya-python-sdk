@@ -38,8 +38,8 @@
       "ContactEmails": [
         "test@test.ru"
       ],
-      "Created": "0001-01-01T00:00:00",
-      "Confirmed": "0001-01-01T00:00:00",
+      "Created": "2005-01-01T00:00:00",
+      "Confirmed": "2005-01-01T00:00:00",
       "PosSysName": null
     }
   ]
