@@ -76,6 +76,7 @@
         }
       ],
       "ArrivalDateTime": "2016-11-02T08:36:00",
+      "LocalArrivalDateTime": "2016-11-02T08:36:00",
       "OriginLocationCode": "2006004",
       "OriginLocationName": "МОСКВА",
       "DestinationLocationCode": "2004001",
@@ -91,6 +92,7 @@
       "SimpleOperationStatus": "Succeeded",
       "DetailedOperationStatus": "Error",
       "DepartureDateTime": "2016-11-01T23:40:00",
+      "LocalDepartureDateTime": "2016-11-01T23:40:00",
       "CreateDateTime": "2016-10-27T18:50:04",
       "ConfirmTimeLimit": "2016-10-27T19:04:04",
       "ConfirmDateTime": "2016-10-27T19:00:15",
