@@ -18,8 +18,8 @@ PRICING_METHOD = 'Insurance/V1/Search/Pricing'
 
 
 class API(object):
-    def __init__(self, username: str, password: str, pos: str):
-        self.__session = Session(username, password, pos)
+    def __init__(self, username: str, password: str, pos: str, ssl_verify: bool=True):
+        self.__session = Session(username, password, pos, ssl_verify)
         self.__request_wrapper = RequestWrapper(self.__session)
 
         self.railway_search = RailwaySearch(self.__request_wrapper)
