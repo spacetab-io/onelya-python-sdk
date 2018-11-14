@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array, get_item
+from onelya_sdk.utils import get_array, get_item, get_money
 from onelya_sdk.wrapper.types import ProviderPaymentForm
 from onelya_sdk.wrapper import (AdditionalMealOption, RateValue, AdditionalMealOption)
 
@@ -52,7 +52,7 @@ class Purchase(object):
 class Return(object):
     def __init__(self, json_data):
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.agent_reference_id = json_data.get('AgentReferenceId')
 
         self.json_data = json_data

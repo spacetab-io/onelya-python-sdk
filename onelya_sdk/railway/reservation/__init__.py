@@ -1,5 +1,5 @@
 from .requests import ServiceReturnAmountRequest
-from onelya_sdk.utils import get_datetime, get_array, get_item, get_bool_item
+from onelya_sdk.utils import get_datetime, get_array, get_item, get_bool_item, get_money
 from onelya_sdk.wrapper.types import ProlongReservationType, ProviderPaymentForm, ReturnTarget
 from .requests import (OrderFullCustomerRequest, RailwayReservationRequest, OrderCustomerDocuments,
                        ServiceAutoReturnRequest, ServiceAddUpsaleRequest)
@@ -115,7 +115,7 @@ class Reservation(object):
 class CreateReservation(object):
     def __init__(self, json_data):
         self.order_id = get_item(json_data.get('OrderId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.contact_phone = json_data.get('ContactPhone')
         self.contact_emails = json_data.get('ContactEmails')
         self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
