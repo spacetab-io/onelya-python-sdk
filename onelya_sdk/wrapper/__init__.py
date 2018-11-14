@@ -89,7 +89,7 @@ class CarGroupPriceInfo(object):
         self.carriers = json_data.get('Carriers')
         self.car_descriptions = json_data.get('CarDescriptions')
         self.service_classes = json_data.get('ServiceClasses')
-        self.service_costs = get_money(json_data.get('ServiceCosts'))
+        self.service_costs = get_array(json_data.get('ServiceCosts'), get_money)
         self.international_service_classes = json_data.get('InternationalServiceClasses')
         self.availability_indication = json_data.get('AvailabilityIndication')
         self.is_three_hours_reservation_available = get_bool_item(json_data.get('IsThreeHoursReservationAvailable'))
