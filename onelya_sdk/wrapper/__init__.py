@@ -380,7 +380,7 @@ class PassengerResponse(object):
 class RateValue(object):
     def __init__(self, json_data):
         self.rate = get_item(json_data.get('Rate'), float)
-        self.value = get_item(json_data.get('Value'), float)
+        self.value = get_money(json_data.get('Value'))
 
         self.json_data = json_data
 
