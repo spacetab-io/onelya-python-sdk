@@ -9,7 +9,7 @@ def get_money(item):
 def get_array(items, item_class=str):
     if type(items) is list:
         return [item_class(item) for item in items]
-    return None
+    return []
 
 
 def get_array_from_str(items):
