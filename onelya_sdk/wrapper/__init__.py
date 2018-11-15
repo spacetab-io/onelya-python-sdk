@@ -640,9 +640,9 @@ class RailwayOrderItemBlankInfo(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.voucher_number = json_data.get('VoucherNumber')
-        self.base_fare = json_data.get('BaseFare')
-        self.additional_price = json_data.get('AdditionalPrice')
-        self.service_price = json_data.get('ServicePrice')
+        self.base_fare = get_money(json_data.get('BaseFare'))
+        self.additional_price = get_money(json_data.get('AdditionalPrice'))
+        self.service_price = get_money(json_data.get('ServicePrice'))
         self.vat_rate_values = get_array(json_data.get('VatRateValues'), RateValue)
         self.tariff_type = json_data.get('TariffType')
         self.blank_status = json_data.get('BlankStatus')
@@ -658,7 +658,7 @@ class RailwayOrderItemBlankInfo(object):
         self.order_item_blank_id = json_data.get('OrderItemBlankId')
         self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId')
         self.blank_number = json_data.get('BlankNumber')
-        self.amount = json_data.get('Amount')
+        self.amount = get_money(json_data.get('Amount'))
 
         self.json_data = json_data
 
