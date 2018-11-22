@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array, get_item
+from onelya_sdk.utils import get_array, get_item, get_money
 from onelya_sdk.wrapper import FeeCalculation, RaceInfo, TariffPriceInfoResponse
 
 TARIFF_PRICING_METHOD = 'Aeroexpress/V1/Search/TariffPricing'
@@ -37,7 +37,7 @@ class TariffPriceInfo(object):
         self.tariff_type = json_data.get('TariffType')
         self.route_name = json_data.get('RouteName')
         self.description = json_data.get('Description')
-        self.price = json_data.get('Price')
+        self.price = get_money(json_data.get('Price'))
         self.max_tickets_quantity_allowed_for_booking = json_data.get('MaxTicketsQuantityAllowedForBooking')
         self.is_for_guaranteed_seats = json_data.get('IsForGuaranteedSeats')
         self.races = get_array(json_data.get('Races'), RaceInfo)

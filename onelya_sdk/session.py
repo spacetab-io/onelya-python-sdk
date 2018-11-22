@@ -7,13 +7,15 @@ from .exceptions import OnelyaAPIError
 class Session(object):
     API_URL = 'https://api-test.onelya.ru/'
 
-    def __init__(self, username, password, pos):
+    def __init__(self, username, password, pos, ssl_verify):
         self.pos = pos
 
         self.username = username
         self.password = password
 
         self.requests_session = requests.Session()
+        self.requests_session.verify = ssl_verify
+
         self.requests_session.headers['Pos'] = self.pos
         self.requests_session.headers['Content-Encoding'] = 'gzip'
         self.requests_session.headers['Content-Type'] = 'application/json; charset=utf-8'

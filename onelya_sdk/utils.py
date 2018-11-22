@@ -1,10 +1,15 @@
 from datetime import datetime
 
 
+def get_money(item):
+    if item not in ['', 'Unknown', 'NoValue', None]:
+        return int(item * 100)
+    return None
+
 def get_array(items, item_class=str):
     if type(items) is list:
         return [item_class(item) for item in items]
-    return None
+    return []
 
 
 def get_array_from_str(items):

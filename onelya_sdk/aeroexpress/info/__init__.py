@@ -1,5 +1,5 @@
 from datetime import datetime
-from onelya_sdk.utils import get_array, get_datetime
+from onelya_sdk.utils import get_array, get_datetime, get_money
 from onelya_sdk.wrapper.types import OperationType, ProviderPaymentForm
 from onelya_sdk.wrapper import OrderCustomerInfo, AeroexpressFullOrderItemInfo, AeroexpressShortOrderInfo
 
@@ -30,7 +30,7 @@ class OrderInfo(object):
         self.order_items = get_array(json_data.get('OrderItems'), AeroexpressFullOrderItemInfo)
 
         self.order_id = json_data.get('OrderId')
-        self.amount = json_data.get('Amount')
+        self.amount = get_money(json_data.get('Amount'))
         self.contact_phone = json_data.get('ContactPhone')
         self.contact_emails = json_data.get('ContactEmails')
         self.created = get_datetime(json_data.get('Created'))

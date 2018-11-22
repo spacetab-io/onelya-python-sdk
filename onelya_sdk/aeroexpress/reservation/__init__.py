@@ -1,4 +1,4 @@
-from onelya_sdk.utils import get_datetime, get_array, get_item
+from onelya_sdk.utils import get_datetime, get_array, get_item, get_money
 from onelya_sdk.wrapper.types import ProviderPaymentForm
 from .requests import (OrderFullCustomerRequest, OrderCustomerDocuments, AeroexpressReservationRequest,
                        AeroexpressAutoReturnRequest)
@@ -59,7 +59,7 @@ class Reservation(object):
 class CreateReservation(object):
     def __init__(self, json_data):
         self.order_id = json_data.get('OrderId')
-        self.amount = json_data.get('Amount')
+        self.amount = get_money(json_data.get('Amount'))
         self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
         self.customers = get_array(json_data.get('Customers'), OrderCreateReservationCustomerResponse)
         self.reservation_results = get_array(json_data.get('ReservationResults'), ReservationResponse)

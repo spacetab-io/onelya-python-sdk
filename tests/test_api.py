@@ -455,7 +455,10 @@ class TestAPI(unittest.TestCase):
                     self.assert_json_with_class(var)
             else:
                 value = self.get_value(var)
-                self.assertTrue(wrapper.json_data[key] == value)
+                if type(wrapper.json_data[key]) is float and type(value) is int:
+                    self.assertTrue(wrapper.json_data[key] == value / 100.0)
+                else:
+                    self.assertTrue(wrapper.json_data[key] == value)
 
     def check_data_with_list(self, wrapper_array, data):
         for var_item, data_item in zip(wrapper_array, data):
@@ -475,7 +478,11 @@ class TestAPI(unittest.TestCase):
                             self.assert_json_with_class(var)
                     else:
                         value = self.get_value(var)
-                        self.assertTrue(data_item[key] == value)
+                        if type(data_item[key]) is float and type(value) is int:
+                            self.assertTrue(data_item[key] == value / 100.0)
+                        else:
+                            self.assertTrue(data_item[key] == value)
+                
 
     @staticmethod
     def get_var_name(json_key):

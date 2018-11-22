@@ -5,7 +5,9 @@
         {
           "StationName": "МОСКВА (МОСКВА ОКТ)",
           "CityName": "МОСКВА",
+          "LocalDepartureTime": "23:40",
           "DepartureTime": "23:40",
+          "LocalArrivalTime": "",
           "ArrivalTime": "",
           "RouteStopType": "Departure",
           "StopDuration": 0,
@@ -14,7 +16,9 @@
         {
           "StationName": "С-ПЕТЕРБУР (С-ПЕТЕР-ГЛ)",
           "CityName": "С-ПЕТЕРБУР",
+          "LocalDepartureTime": "",
           "DepartureTime": "",
+          "LocalArrivalTime": "08:36",
           "ArrivalTime": "08:36",
           "RouteStopType": "Arrival",
           "StopDuration": 0,

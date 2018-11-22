@@ -124,6 +124,9 @@
       "ArrivalDateTimes": [
         "2016-11-02T08:36:00"
       ],
+      "LocalArrivalDateTimes": [
+        "2016-11-02T08:36:00"
+      ],
       "DepartureDateFromFormingStation": "2005-01-01T00:00:00",
       "DepartureStopTime": 0,
       "ArrivalStopTime": 0,

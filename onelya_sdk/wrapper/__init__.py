@@ -1,4 +1,4 @@
-from ..utils import get_array, get_item, get_datetime, get_datetime_array, get_bool_item, get_array_from_str
+from ..utils import get_array, get_item, get_datetime, get_datetime_array, get_bool_item, get_array_from_str, get_money
 
 
 class Discount(object):
@@ -11,8 +11,8 @@ class Discount(object):
 
 class FeeCalculation(object):
     def __init__(self, json_data):
-        self.charge = get_item(json_data.get('Charge'), float)
-        self.profit = get_item(json_data.get('Profit'), float)
+        self.charge = get_money(json_data.get('Charge'))
+        self.profit = get_money(json_data.get('Profit'))
 
         self.json_data = json_data
 
@@ -54,6 +54,7 @@ class TrainPriceInfo(object):
         self.destination_names = json_data.get('DestinationNames')
         self.local_arrival_date_time = get_datetime(json_data.get('LocalArrivalDateTime'))
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime'))
+        self.local_arrival_date_times = get_datetime_array(json_data.get('LocalArrivalDateTimes'))
         self.arrival_date_times = get_datetime_array(json_data.get('ArrivalDateTimes'))
         self.local_departure_date_time = get_datetime(json_data.get('LocalDepartureDateTime'))
         self.departure_date_time = get_datetime(json_data.get('DepartureDateTime'))
@@ -83,12 +84,12 @@ class CarGroupPriceInfo(object):
         self.female_place_quantity = get_item(json_data.get('FemalePlaceQuantity'), int)
         self.empty_cabin_quantity = get_item(json_data.get('EmptyCabinQuantity'), int)
         self.mixed_cabin_quantity = get_item(json_data.get('MixedCabinQuantity'), int)
-        self.min_price = get_item(json_data.get('MinPrice'), float)
-        self.max_price = get_item(json_data.get('MaxPrice'), float)
+        self.min_price = get_money(json_data.get('MinPrice'))
+        self.max_price = get_money(json_data.get('MaxPrice'))
         self.carriers = json_data.get('Carriers')
         self.car_descriptions = json_data.get('CarDescriptions')
         self.service_classes = json_data.get('ServiceClasses')
-        self.service_costs = get_array(json_data.get('ServiceCosts'), float)
+        self.service_costs = get_array(json_data.get('ServiceCosts'), get_money)
         self.international_service_classes = json_data.get('InternationalServiceClasses')
         self.availability_indication = json_data.get('AvailabilityIndication')
         self.is_three_hours_reservation_available = get_bool_item(json_data.get('IsThreeHoursReservationAvailable'))
@@ -134,9 +135,9 @@ class CarPriceInfo(object):
         self.place_quantity = get_item(json_data.get('PlaceQuantity'), int)
         self.is_two_storey = json_data.get('IsTwoStorey')
         self.services = json_data.get('Services')
-        self.min_price = get_item(json_data.get('MinPrice'), float)
-        self.max_price = get_item(json_data.get('MaxPrice'), float)
-        self.service_cost = get_item(json_data.get('ServiceCost'), float)
+        self.min_price = get_money(json_data.get('MinPrice'))
+        self.max_price = get_money(json_data.get('MaxPrice'))
+        self.service_cost = get_money(json_data.get('ServiceCost'))
         self.free_places_by_compartments = get_array(json_data.get('FreePlacesByCompartments'), FreePlacesByCompartments)
         self.place_reservation_type = json_data.get('PlaceReservationType')
         self.availability_indication = json_data.get('AvailabilityIndication')
@@ -188,6 +189,7 @@ class TrainInfo(object):
         self.departure_date_time = get_datetime(json_data.get('DepartureDateTime'))
         self.local_arrival_date_time = get_datetime(json_data.get('LocalArrivalDateTime'))
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime'))
+        self.local_arrival_date_times = get_datetime_array(json_data.get('LocalArrivalDateTimes'))
         self.arrival_date_times = get_datetime_array(json_data.get('ArrivalDateTimes'))
         self.departure_date_from_forming_station = get_datetime(json_data.get('DepartureDateFromFormingStation'))
         self.departure_stop_time = get_item(json_data.get('DepartureStopTime'), int)
@@ -211,8 +213,10 @@ class ScheduleInfo(object):
         self.origin_station_code = json_data.get('OriginStationCode')
         self.destination_name = json_data.get('DestinationName')
         self.destination_station_code = json_data.get('DestinationStationCode')
+        self.local_departure_time = json_data.get('LocalDepartureTime')
         self.departure_time = json_data.get('DepartureTime')
         self.departure_stop_time = get_item(json_data.get('DepartureStopTime'), int)
+        self.local_arrival_time = json_data.get('LocalArrivalTime')
         self.arrival_time = json_data.get('ArrivalTime')
         self.arrival_stop_time = get_item(json_data.get('ArrivalStopTime'), int)
         self.trip_duration = get_item(json_data.get('TripDuration'), int)
@@ -237,8 +241,12 @@ class RouteStopInfo(object):
     def __init__(self, json_data):
         self.station_name = json_data.get('StationName')
         self.city_name = json_data.get('CityName')
+        self.local_departure_time = json_data.get('LocalDepartureTime')
         self.departure_time = json_data.get('DepartureTime')
         self.arrival_time = json_data.get('ArrivalTime')
+        self.local_arrival_times = json_data.get('LocalArrivalTimes')
+        self.arrival_times = json_data.get('ArrivalTimes')
+        self.local_arrival_time = json_data.get('LocalArrivalTime')
         self.route_stop_type = json_data.get('RouteStopType')
         self.stop_duration = get_item(json_data.get('StopDuration'), int)
         self.time_description = json_data.get('TimeDescription')
@@ -316,8 +324,8 @@ class RoutePartReferenced(object):
 
 class AdditionalMealOption(object):
     def __init__(self, json_data):
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.price_per_unit = get_item(json_data.get('PricePerUnit'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.price_per_unit = get_money(json_data.get('PricePerUnit'))
         self.quantity = get_item(json_data.get('Quantity'), int)
         self.meal_time = json_data.get('MealTime')
         self.meal_name = json_data.get('MealName')
@@ -360,9 +368,9 @@ class PassengerResponse(object):
         self.order_item_blank_id = get_item(json_data.get('OrderItemBlankId'), int)
         self.order_customer_id = get_item(json_data.get('OrderCustomerId'), int)
         self.order_customer_reference_index = get_item(json_data.get('OrderCustomerReferenceIndex'), int)
-        self.amount = json_data.get('Amount')
-        self.fare = json_data.get('Fare')
-        self.tax = json_data.get('Tax')
+        self.amount = get_money(json_data.get('Amount'))
+        self.fare = get_money(json_data.get('Fare'))
+        self.tax = get_money(json_data.get('Tax'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
 
@@ -372,7 +380,7 @@ class PassengerResponse(object):
 class RateValue(object):
     def __init__(self, json_data):
         self.rate = get_item(json_data.get('Rate'), float)
-        self.value = get_item(json_data.get('Value'), float)
+        self.value = get_money(json_data.get('Value'))
 
         self.json_data = json_data
 
@@ -397,17 +405,17 @@ class PrepaidMealInfo(object):
 class ReservationBlankResponse(object):
     def __init__(self, json_data):
         self.order_item_blank_id = get_item(json_data.get('OrderItemBlankId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.number = json_data.get('Number')
         self.tariff_type = json_data.get('TariffType')
         self.is_meal_option_possible = get_bool_item(json_data.get('IsMealOptionPossible'))
         self.vat_rate_values = get_array(json_data.get('VatRateValues'), RateValue)
-        self.base_fare = get_item(json_data.get('BaseFare'), float)
-        self.additional_price = get_item(json_data.get('AdditionalPrice'), float)
+        self.base_fare = get_money(json_data.get('BaseFare'))
+        self.additional_price = get_money(json_data.get('AdditionalPrice'))
         self.tariff_info = get_item(json_data.get('TariffInfo'), TicketTariffInfo)
         self.tariff_additional_info = json_data.get('TariffAdditionalInfo')
         self.prepaid_meal_info = get_item(json_data.get('PrepaidMealInfo'), PrepaidMealInfo)
-        self.service_price = get_item(json_data.get('ServicePrice'), float)
+        self.service_price = get_money(json_data.get('ServicePrice'))
 
         self.json_data = json_data
 
@@ -455,9 +463,9 @@ class ReservationResponse(object):
         self.index = get_item(json_data.get('Index'), int)
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
         self.agent_reference_id = json_data.get('AgentReferenceId')
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.fare = get_item(json_data.get('Fare'), float)
-        self.tax = get_item(json_data.get('Tax'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.fare = get_money(json_data.get('Fare'))
+        self.tax = get_money(json_data.get('Tax'))
         self.reservation_number = json_data.get('ReservationNumber')
         self.confirm_till = get_datetime(json_data.get('ConfirmTill'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
@@ -518,9 +526,9 @@ class RailwayBlankInfo(object):
 class OrderItemCustomerResponseBase(object):
     def __init__(self, json_data):
         self.order_customer_id = get_item(json_data.get('OrderCustomerId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.fare = get_item(json_data.get('Fare'), float)
-        self.tax = get_item(json_data.get('Tax'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.fare = get_money(json_data.get('Fare'))
+        self.tax = get_money(json_data.get('Tax'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
 
@@ -543,9 +551,9 @@ class RailwayConfirmResponse(object):
         self.blanks = get_array(json_data.get('Blanks'), RailwayBlankInfo)
         self.expiration_electronic_registration_date_time = get_datetime(json_data.get('ExpirationElectronicRegistrationDateTime'))
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.fare = get_item(json_data.get('Fare'), float)
-        self.tax = get_item(json_data.get('Tax'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.fare = get_money(json_data.get('Fare'))
+        self.tax = get_money(json_data.get('Tax'))
         self.confirmed = get_datetime(json_data.get('Confirmed'))
         self.void_till = get_datetime(json_data.get('VoidTill'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
@@ -561,10 +569,10 @@ class RailwayReturnBlankResponse(object):
     def __init__(self, json_data):
         self.purchase_order_item_blank_id = get_item(json_data.get('PurchaseOrderItemBlankId'), int)
         self.return_order_item_blank_id = get_item(json_data.get('ReturnOrderItemBlankId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.penalty = get_item(json_data.get('Penalty'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.penalty = get_money(json_data.get('Penalty'))
         self.vat_rate_values = get_array(json_data.get('VatRateValues'), RateValue)
-        self.service_price = get_item(json_data.get('ServicePrice'), float)
+        self.service_price = get_money(json_data.get('ServicePrice'))
 
         self.json_data = json_data
 
@@ -573,7 +581,7 @@ class RailwayReturnAmountResponse(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.blanks = get_array(json_data.get('Blanks'), RailwayReturnBlankResponse)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
 
@@ -584,9 +592,9 @@ class RailwayAutoReturnResponse(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.blanks = get_array(json_data.get('Blanks'), RailwayReturnBlankResponse)
-        self.amount = get_item(json_data.get('Amount'), float)
-        self.fare = get_item(json_data.get('Fare'), float)
-        self.tax = get_item(json_data.get('Tax'), float)
+        self.amount = get_money(json_data.get('Amount'))
+        self.fare = get_money(json_data.get('Fare'))
+        self.tax = get_money(json_data.get('Tax'))
         self.confirmed = get_datetime(json_data.get('Confirmed'))
         self.return_order_item_id = get_item(json_data.get('ReturnOrderItemId'), int)
         self.agent_reference_id = json_data.get('AgentReferenceId')
@@ -632,9 +640,9 @@ class RailwayOrderItemBlankInfo(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.voucher_number = json_data.get('VoucherNumber')
-        self.base_fare = json_data.get('BaseFare')
-        self.additional_price = json_data.get('AdditionalPrice')
-        self.service_price = json_data.get('ServicePrice')
+        self.base_fare = get_money(json_data.get('BaseFare'))
+        self.additional_price = get_money(json_data.get('AdditionalPrice'))
+        self.service_price = get_money(json_data.get('ServicePrice'))
         self.vat_rate_values = get_array(json_data.get('VatRateValues'), RateValue)
         self.tariff_type = json_data.get('TariffType')
         self.blank_status = json_data.get('BlankStatus')
@@ -650,7 +658,7 @@ class RailwayOrderItemBlankInfo(object):
         self.order_item_blank_id = json_data.get('OrderItemBlankId')
         self.previous_order_item_blank_id = json_data.get('PreviousOrderItemBlankId')
         self.blank_number = json_data.get('BlankNumber')
-        self.amount = json_data.get('Amount')
+        self.amount = get_money(json_data.get('Amount'))
 
         self.json_data = json_data
 
@@ -678,6 +686,7 @@ class RailwayFullOrderItemInfo(object):
         self.order_item_customers = get_array(json_data.get('OrderItemCustomers'), RailwayOrderItemCustomerInfo)
         self.order_item_blanks = get_array(json_data.get('OrderItemBlanks'), RailwayOrderItemBlankInfo)
         self.arrival_date_time = get_datetime(json_data.get('ArrivalDateTime'))
+        self.local_arrival_date_time = get_datetime(json_data.get('LocalArrivalDateTime'))
         self.origin_location_code = json_data.get('OriginLocationCode')
         self.origin_location_name = json_data.get('OriginLocationName')
         self.destination_location_code = json_data.get('DestinationLocationCode')
@@ -687,12 +696,13 @@ class RailwayFullOrderItemInfo(object):
         self.agent_reference_id = json_data.get('AgentReferenceId')
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
         self.pos_sys_name = json_data.get('PosSysName')
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.reservation_number = json_data.get('ReservationNumber')
         self.operation_type = json_data.get('OperationType')
         self.simple_operation_status = json_data.get('SimpleOperationStatus')
         self.detailed_operation_status = json_data.get('DetailedOperationStatus')
         self.departure_date_time = get_datetime(json_data.get('DepartureDateTime'))
+        self.local_departure_date_time = get_datetime(json_data.get('LocalDepartureDateTime'))
         self.create_date_time = get_datetime(json_data.get('CreateDateTime'))
         self.confirm_time_limit = get_datetime(json_data.get('ConfirmTimeLimit'))
         self.confirm_date_time = get_datetime(json_data.get('ConfirmDateTime'))
@@ -710,7 +720,7 @@ class RailwayShortOrderItemBlankInfo(object):
         self.order_item_blank_id = get_item(json_data.get('OrderItemBlankId'), int)
         self.previous_order_item_blank_id = get_item(json_data.get('PreviousOrderItemBlankId'), int)
         self.blank_number = json_data.get('BlankNumber')
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
 
         self.json_data = json_data
 
@@ -725,7 +735,7 @@ class RailwayShortOrderItemInfo(object):
         self.agent_reference_id = json_data.get('AgentReferenceId')
         self.order_item_id = get_item(json_data.get('OrderItemId'), int)
         self.pos_sys_name = json_data.get('PosSysName')
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.reservation_number = json_data.get('ReservationNumber')
         self.operation_type = json_data.get('OperationType')
         self.simple_operation_status = json_data.get('SimpleOperationStatus')
@@ -746,7 +756,7 @@ class RailwayShortOrderInfo(object):
     def __init__(self, json_data):
         self.order_items = get_array(json_data.get('OrderItems'), RailwayShortOrderItemInfo)
         self.order_id = get_item(json_data.get('OrderId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.contact_phone = json_data.get('ContactPhone')
         self.contact_emails = json_data.get('ContactEmails')
         self.created = get_datetime(json_data.get('Created'))
@@ -760,7 +770,7 @@ class ServiceUpsaleOperationItemResult(object):
     def __init__(self, json_data):
         self.type = json_data.get('$type')
         self.upsale_order_item_id = get_item(json_data.get('UpsaleOrderItemId'), int)
-        self.amount = get_item(json_data.get('Amount'), float)
+        self.amount = get_money(json_data.get('Amount'))
         self.is_succeeded = get_bool_item(json_data.get('IsSucceeded'))
 
         self.json_data = json_data
