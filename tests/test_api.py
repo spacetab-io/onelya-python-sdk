@@ -461,6 +461,9 @@ class TestAPI(unittest.TestCase):
                     self.assertTrue(wrapper.json_data[key] == value)
 
     def check_data_with_list(self, wrapper_array, data):
+        if wrapper_array == [] and data is None:
+            return
+
         for var_item, data_item in zip(wrapper_array, data):
             if type(data_item) not in [dict, list]:
                 value = self.get_value(data_item)

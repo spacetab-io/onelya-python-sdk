@@ -19,7 +19,7 @@
     {
       "$type": "ApiContracts.Aeroexpress.V1.Messages.Reservation.AeroexpressConfirmResponse, ApiContracts",
       "ReservationNumber": "1234567",
-      "ReturnTill": "0001-01-01T00:00:00",
+      "ReturnTill": "1999-01-01T00:00:00",
       "OrderItemId": 58506,
       "Amount": 540.0,
       "Fare": 540.0,
