@@ -18,27 +18,30 @@ PRICING_METHOD = 'Insurance/V1/Search/Pricing'
 
 
 class API(object):
-    def __init__(self, username: str, password: str, pos: str, ssl_verify: bool=True):
-        self.__session = Session(username, password, pos, ssl_verify)
-        self.__request_wrapper = RequestWrapper(self.__session)
+    def __init__(self, username: str, password: str, pos: str, ssl_verify: bool=True,
+                 mock_data_path: str=None):
+        self.__session = Session(username, password, pos, ssl_verify, mock_data_path)
 
-        self.railway_search = RailwaySearch(self.__request_wrapper)
-        self.railway_reservation = RailwayReservation(self.__request_wrapper)
-        self.railway_info = RailwayInfo(self.__request_wrapper)
-        self.additional_meal = AdditionalMeal(self.__request_wrapper)
+        self.__railways_request_wrapper = RequestWrapper(self.__session, 'railways')
+        self.__aeroexpress_request_wrapper = RequestWrapper(self.__session, 'aeroexpress')
 
-        self.aeroexpress_search = AeroexpressSearch(self.__request_wrapper)
-        self.aeroexpress_reservation = AeroexpressReservation(self.__request_wrapper)
-        self.aeroexpress_info = AeroexpressInfo(self.__request_wrapper)
+        self.railway_search = RailwaySearch(self.__railways_request_wrapper)
+        self.railway_reservation = RailwayReservation(self.__railways_request_wrapper)
+        self.railway_info = RailwayInfo(self.__railways_request_wrapper)
+        self.additional_meal = AdditionalMeal(self.__railways_request_wrapper)
 
-        self.references = References(self.__request_wrapper)
+        self.aeroexpress_search = AeroexpressSearch(self.__aeroexpress_request_wrapper)
+        self.aeroexpress_reservation = AeroexpressReservation(self.__aeroexpress_request_wrapper)
+        self.aeroexpress_info = AeroexpressInfo(self.__aeroexpress_request_wrapper)
+
+        self.references = References(self.__aeroexpress_request_wrapper)
 
     def partner_balances(self):
-        response = self.__request_wrapper.make_request(BALANCES_METHOD)
+        response = self.__railways_request_wrapper.make_request(BALANCES_METHOD)
         return Balances(response)
 
     def railway_search_pricing(self):
-        response = self.__request_wrapper.make_request(PRICING_METHOD, json={
+        response = self.__railways_request_wrapper.make_request(PRICING_METHOD, json={
             'Product': {
                 '$type': 'ApiContracts.Insurance.V1.Products.Travel.Pricing.RailwayPricingRequest, ApiContracts'
             }
