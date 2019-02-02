@@ -31,7 +31,7 @@ class RailwayBonusCardInfo(object):
 
         self.json_data = {
             'card_number': self.card_number,
-            'car_type': self.car_type
+            'card_type': self.car_type
         }
 
 
