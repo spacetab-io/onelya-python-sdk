@@ -39,6 +39,12 @@
           "OrderItemBlankId": 51946,
           "Places": "001",
           "PlaceQuantity": 1,
+          "PlacesWithType": [
+            {
+              "Number": "1",
+              "Type": "lower"
+            }
+          ],
           "TransitDocument": "NoValue",
           "Category": "Adult",
           "OrderCustomerId": 66650,

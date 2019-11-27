@@ -379,7 +379,7 @@ class PassengerResponse(object):
 
 class RateValue(object):
     def __init__(self, json_data):
-        self.rate = get_item(json_data.get('Rate'), int)
+        self.rate = get_item(json_data.get('Rate'), float)
         self.value = get_money(json_data.get('Value'))
 
         self.json_data = json_data
@@ -625,6 +625,7 @@ class RailwayOrderItemCustomerInfo(object):
         self.type = json_data.get('$type')
         self.order_item_blank_id = json_data.get('OrderItemBlankId')
         self.places = get_array_from_str(json_data.get('Places'))
+        self.places_with_type = get_array(json_data.get('PlacesWithType'), PlaceWithType)
         self.place_quantity = json_data.get('PlaceQuantity')
         self.transit_document = json_data.get('TransitDocument')
         self.category = json_data.get('Category')
