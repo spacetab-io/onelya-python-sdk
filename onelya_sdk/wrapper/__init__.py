@@ -124,6 +124,7 @@ class FreePlacesByCompartments(object):
 class CarPriceInfo(object):
     def __init__(self, json_data):
         self.car_type = json_data.get('CarType')
+        self.schema_id = json_data.get('RailwayCarSchemeId')
         self.car_sub_type = json_data.get('CarSubType')
         self.car_type_name = json_data.get('CarTypeName')
         self.car_number = json_data.get('CarNumber')
@@ -168,6 +169,8 @@ class CarPriceInfo(object):
         self.passenger_specifying_rules = json_data.get('PassengerSpecifyingRules')
         self.client_fee_calculation = get_item(json_data.get('ClientFeeCalculation'), FeeCalculation)
         self.agent_fee_calculation = get_item(json_data.get('AgentFeeCalculation'), FeeCalculation)
+        self.is_branded = get_bool_item(json_data.get('IsBranded'))
+        self.is_buffet = get_bool_item(json_data.get('IsBuffet'))
 
         self.json_data = json_data
 
